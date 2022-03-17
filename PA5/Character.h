@@ -25,8 +25,11 @@ private:
 	int Level;
 public:
 	Character(map<string, Image>);
-	Character(int);
+	Character(string, string, string, int, int, int, int, int, int, int, int, int);
 	Character();
+
+	string GetName();
+	string GetArt();
 };
 
 #endif

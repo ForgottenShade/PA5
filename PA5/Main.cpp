@@ -22,6 +22,8 @@ string DIALOG_DIR = ASSET_DIR + "\\Dialogs";
 map<string, Image> IMAGES;
 map<string, Image> UIS;
 map<string, Image> DIALOGS;
+map<string, Character> ENEMIES;
+map<string, Character> NPCS;
 
 Character PC;
 
@@ -45,8 +47,41 @@ void LoadAssets() {
 	}
 }
 
+void LoadCharacters() {
+	//Enemies
+	Character* rat = new Character("Beast", "Rat", IMAGES.find("Rat01.txt")->second.GetImage(), 2, 11, 9, 2, 10, 4, 1, 10, 0);
+	Character* goblin = new Character("Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second.GetImage(), 8, 14, 10, 10, 8, 8, 7, 15, 1);
+	Character* stankrat = new Character("Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second.GetImage(), 10, 14, 10, 10, 8, 10, 21, 17, 2);
+
+	Character* wolf = new Character("Beast", "Wolf", IMAGES.find("Wolf01.txt")->second.GetImage(), 12, 15, 12, 3, 12, 6, 11, 13, 1);
+	Character* crab = new Character("Beast", "Crabbo", IMAGES.find("Wolf01.txt")->second.GetImage(), 14, 16, 18, 1, 10, 2, 25, 12, 2);
+	Character* awakened_tree = new Character("Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second.GetImage(), 19, 6, 15, 10, 10, 7, 30, 13, 3);
+
+	ENEMIES.insert(pair<string, Character>(rat[0].GetName(), rat[0]));
+	ENEMIES.insert(pair<string, Character>(goblin[0].GetName(), goblin[0]));
+	ENEMIES.insert(pair<string, Character>(stankrat[0].GetName(), stankrat[0]));
+
+	ENEMIES.insert(pair<string, Character>(wolf[0].GetName(), wolf[0]));
+	ENEMIES.insert(pair<string, Character>(crab[0].GetName(), crab[0]));
+	ENEMIES.insert(pair<string, Character>(awakened_tree[0].GetName(), awakened_tree[0]));
+
+	//NPCs
+}
+
+void Sewer() {
+
+}
+
+void Forest() {
+
+}
+
 void NewGame() {
+	//Character/story intro here
+
 	PC = Character(UIS);
+	//Tutorial/first combat
+
 }
 
 void LoadGame() {
@@ -58,7 +93,7 @@ void StartMenu() {
 
 	while (true) {
 		system("CLS");
-		cout << IMAGES.find("Mountains01.txt")->second.GetImage() << endl;
+		cout << IMAGES.find("Crab01.txt")->second.GetImage() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << UIS.find("Welcome.txt")->second.GetImage();
@@ -82,6 +117,7 @@ void StartMenu() {
 
 int main() {
 	LoadAssets();
+	//LoadCharacters();
 	StartMenu();
 	return 1;
 }

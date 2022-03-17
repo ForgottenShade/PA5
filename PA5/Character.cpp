@@ -9,6 +9,7 @@ class Character {
 private:
 	string Race;
 	string Name;
+	string Art;
 
 	int Str;	//Strength
 	int Dex;	//Dexterity
@@ -22,8 +23,11 @@ private:
 	int Level;
 public:
 	Character(map<string, Image>);
-	Character(int);
+	Character(string, string, string, int, int, int, int, int, int, int, int, int);
 	Character();
+
+	string GetName();
+	string GetArt();
 };
 
 Character::Character(){}
@@ -67,6 +71,23 @@ void ChangeStat(string incr_dcrs, int& current_val, int& points) {
 	}
 }
 
+Character::Character(string race, string name, string art, int str, int dex, int con, int intelligence, int wis, int cha, int hp, int ac, int level){
+	Race = race;
+	Name = name;
+	Art = art;
+	Str = str;
+	Dex = dex;
+	Con = con;
+	Int = intelligence;
+	Wis = wis;
+	Cha = cha;
+	Hp = hp;
+	AC = ac;
+	Level = level;
+}
+
+
+//Create the player character
 Character::Character(map<string, Image> UIS) {
 	string userInput;
 
@@ -177,7 +198,15 @@ Character::Character(map<string, Image> UIS) {
 
 
 		AC = 12 + Dex;
-		Hp = 8;
+		Hp = 10;
 		Level = 1;
 	}
+}
+
+string Character::GetName() {
+	return Name;
+}
+
+string Character::GetArt() {
+	return Art;
 }
