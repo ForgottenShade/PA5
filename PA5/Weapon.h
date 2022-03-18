@@ -8,7 +8,7 @@ private:
 	int DamageDice;
 	int NumberOfDice;
 public:
-	Weapon(string, int, int, int);
+	Weapon(string, int, int, int, int);
 	Weapon();
 
 	int GetDamageDice();
@@ -16,6 +16,7 @@ public:
 
 	string GetName();
 	int GetPrice();
+	int GetQuality();
 };
 
 #endif

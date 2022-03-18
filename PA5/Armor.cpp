@@ -9,7 +9,7 @@ private:
 	int BonusCeiling;
 	string ArmorType;
 public:
-	Armor(string, int, int, int, string);
+	Armor(string, int, int, int, int, string);
 	Armor();
 
 	int GetACBonus();
@@ -18,9 +18,10 @@ public:
 
 	string GetName();
 	int GetPrice();
+	int GetQuality();
 };
 
-Armor::Armor(string name, int price, int acBonus, int bonusCeiling, string armorType) :Item(name, price) {
+Armor::Armor(string name, int price, int quality, int acBonus, int bonusCeiling, string armorType) :Item(name, price, quality) {
 	ACBonus = acBonus;
 	BonusCeiling = bonusCeiling;
 	ArmorType = armorType;
@@ -46,4 +47,8 @@ string Armor::GetName() {
 
 int Armor::GetPrice() {
 	return Item::GetPrice();
+}
+
+int Armor::GetQuality() {
+	return Item::GetQuality();
 }

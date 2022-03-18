@@ -12,7 +12,7 @@ private:
 	int BonusCeiling;
 	string ArmorType;
 public:
-	Armor(string, int, int, int, string);
+	Armor(string, int, int, int, int, string);
 	Armor();
 
 	int GetACBonus();
@@ -21,6 +21,7 @@ public:
 
 	string GetName();
 	int GetPrice();
+	int GetQuality();
 };
 
 #endif

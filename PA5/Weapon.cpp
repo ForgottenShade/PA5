@@ -6,7 +6,7 @@ private:
 	int DamageDice;
 	int NumberOfDice;
 public:
-	Weapon(string, int, int, int);
+	Weapon(string, int, int, int, int);
 	Weapon();
 
 	int GetDamageDice();
@@ -14,9 +14,10 @@ public:
 
 	string GetName();
 	int GetPrice();
+	int GetQuality();
 };
 
-Weapon::Weapon(string name, int price, int damageDice, int numberOfDice):Item(name, price) {
+Weapon::Weapon(string name, int price, int quality, int damageDice, int numberOfDice):Item(name, price, quality) {
 	DamageDice = damageDice;
 	NumberOfDice = numberOfDice;
 }
@@ -37,4 +38,8 @@ string Weapon::GetName() {
 
 int Weapon::GetPrice() {
 	return Item::GetPrice();
+}
+
+int Weapon::GetQuality() {
+	return Item::GetQuality();
 }

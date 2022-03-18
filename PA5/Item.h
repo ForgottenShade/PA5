@@ -9,12 +9,19 @@ class Item {
 private:
 	string Name;
 	int Price;
+	int Quality;		//For generating loot tables
+		//1: Common
+		//2: Uncommon
+		//3: Rare
+		//4: Legendary
+
 public:
 	Item(string, int);
 	Item();
 
 	string GetName();
 	int GetPrice();
+	int GetQuality();
 };
 
 #endif
