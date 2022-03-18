@@ -26,6 +26,11 @@ string DIALOG_DIR = ASSET_DIR + "\\Dialogs";
 map<string, Image> IMAGES;
 map<string, Image> UIS;
 map<string, Image> DIALOGS;
+
+map<string, Weapon> WEAPON_TABLE;
+map<string, Armor> ARMOR_TABLE;
+map<string, Consumable> CONSUMABLE_TABLE;
+
 map<string, Character> ENEMIES;
 map<string, Character> NPCS;
 
@@ -51,7 +56,64 @@ void LoadAssets() {
 	}
 }
 
-void LoadItems(){}
+void LoadItems(){
+	//Weapons
+		//Generics
+			//Common
+	Weapon* Club = new Weapon();
+	Weapon* Axe = new Weapon();
+	Weapon* Shortbow = new Weapon();
+	Weapon* Shortsword = new Weapon();
+	Weapon* Dagger = new Weapon();
+	Weapon* Quarterstaff = new Weapon();
+
+			//Uncommon
+	Weapon* Crossbow = new Weapon();
+	Weapon* Longbow = new Weapon();
+	Weapon* Longsword = new Weapon();
+	Weapon* Mace = new Weapon();
+	Weapon* Spear = new Weapon();
+
+			//Rare
+	Weapon* Greatsword = new Weapon();
+	Weapon* Greataxe = new Weapon();
+	Weapon* Greathammer = new Weapon();
+	Weapon* Rapier = new Weapon();
+
+		//Uniques
+
+	//Armors
+		//Generics
+			//Common
+	Armor* Leather = new Armor();
+	Armor* Hide = new Armor();
+	Armor* RingMail = new Armor();
+			
+			//Uncommon
+	Armor* StuddedLeather = new Armor();
+	Armor* ScaleMail = new Armor();
+	Armor* ChainMail = new Armor();
+
+			//Rare
+	Armor* HalfPlate = new Armor();
+	Armor* Plate = new Armor();
+
+		//Uniques
+
+	//Consumables
+		//Generics
+			//Common
+	Consumable* HealingSalve = new Consumable();
+	
+			//Uncommon
+	Consumable* HealingPotion = new Consumable();
+
+			//Rare
+	Consumable* GreaterHealingPotion = new Consumable();
+
+		//Uniques
+
+}
 
 void LoadCharacters() {
 	//Enemies
