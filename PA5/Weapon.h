@@ -7,12 +7,16 @@ class Weapon :public Item {
 private:
 	int DamageDice;
 	int NumberOfDice;
+	bool DamageStat;
+		//true: Str
+		//false: Dex
 public:
-	Weapon(string, int, int, int, int);
+	Weapon(string, int, int, int, int, bool);
 	Weapon();
 
 	int GetDamageDice();
 	int GetNumberOfDice();
+	bool GetDamageStat();
 
 	string GetName();
 	int GetPrice();

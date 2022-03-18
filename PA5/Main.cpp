@@ -59,6 +59,7 @@ void LoadAssets() {
 void LoadItems(){
 	//Weapons
 		//Generics
+	Weapon* Fists = new Weapon();
 			//Common
 	Weapon* Club = new Weapon();
 	Weapon* Axe = new Weapon();
@@ -84,6 +85,7 @@ void LoadItems(){
 
 	//Armors
 		//Generics
+	Armor* Clothes = new Armor();
 			//Common
 	Armor* Leather = new Armor();
 	Armor* Hide = new Armor();
@@ -126,6 +128,10 @@ void LoadCharacters() {
 	Character* wolf = new Character("Beast", "Wolf", IMAGES.find("Wolf01.txt")->second.GetImage(), 12, 15, 12, 3, 12, 6, 11, 13, 1);
 	Character* crab = new Character("Beast", "Crabbo", IMAGES.find("Wolf01.txt")->second.GetImage(), 14, 16, 18, 1, 10, 2, 25, 12, 2);
 	Character* awakened_tree = new Character("Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second.GetImage(), 19, 6, 15, 10, 10, 7, 30, 13, 3);
+
+		//Town
+	Character* theif = new Character();
+	Character* gaurd = new Character();
 
 	ENEMIES.insert(pair<string, Character>(rat[0].GetName(), rat[0]));
 	ENEMIES.insert(pair<string, Character>(goblin[0].GetName(), goblin[0]));

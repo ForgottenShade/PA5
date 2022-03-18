@@ -43,6 +43,21 @@ public:
 
 	string GetName();
 	string GetArt();
+	int GetStr();
+	int GetDex();
+	int GetCon();
+	int GetInt();
+	int GetWis();
+	int GetCha();
+	int GetAC();
+
+	Weapon GetCurrentWeapon();
+	Armor GetCurrentArmor();
+
+	int GetCurrentGold();
+	vector<Weapon> GetWeaponInv();
+	vector<Armor> GetArmorInv();
+	vector<Consumable> GetConsumableInv();
 };
 
 #endif
