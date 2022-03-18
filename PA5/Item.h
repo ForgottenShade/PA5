@@ -16,7 +16,7 @@ private:
 		//4: Legendary
 
 public:
-	Item(string, int);
+	Item(string, int, int);
 	Item();
 
 	string GetName();
