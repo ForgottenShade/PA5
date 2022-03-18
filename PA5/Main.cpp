@@ -9,7 +9,9 @@
 #include<stdlib.h>
 
 #include"Image.h"
+#include"Weapon.h"
 #include"Character.h"
+#include"Encounter.h"
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -46,6 +48,8 @@ void LoadAssets() {
 		DIALOGS.insert(pair<string, Image>(newImage.GetFilename(), newImage));
 	}
 }
+
+void LoadItems(){}
 
 void LoadCharacters() {
 	//Enemies
@@ -117,6 +121,7 @@ void StartMenu() {
 
 int main() {
 	LoadAssets();
+	LoadItems();
 	//LoadCharacters();
 	StartMenu();
 	return 1;
