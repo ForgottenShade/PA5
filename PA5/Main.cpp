@@ -10,6 +10,8 @@
 
 #include"Image.h"
 #include"Weapon.h"
+#include"Armor.h"
+#include"Consumable.h"
 #include"Character.h"
 #include"Encounter.h"
 

@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="Encounter.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Asset.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Consumable.h" />
     <ClInclude Include="Encounter.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Item.h" />
