@@ -63,6 +63,8 @@ int Attack(Character a, Character b) {
 			dmg = Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice());
 		}
 	}
+
+	return dmg;
 }
 
 Encounter::Encounter(){}
