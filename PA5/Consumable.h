@@ -22,6 +22,9 @@ public:
 	string GetName();
 	int GetPrice();
 	int GetQuality();
+
+	string CombatInfo();
+	void SetUses(int);
 };
 
 #endif

@@ -1,3 +1,3 @@
 1.  Attack		2.  Defend		3.  Use Item
 
-4.  Flee		5.  Surrender			
+4.  Flee		5.  Surrender		6. View Character	

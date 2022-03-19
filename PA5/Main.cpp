@@ -120,14 +120,14 @@ void LoadItems(){
 void LoadCharacters() {
 	//Enemies
 		//Sewer
-	Character* rat = new Character("Beast", "Rat", IMAGES.find("Rat01.txt")->second.GetImage(), 2, 11, 9, 2, 10, 4, 1, 10, 0);
-	Character* goblin = new Character("Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second.GetImage(), 8, 14, 10, 10, 8, 8, 7, 15, 1);
-	Character* stankrat = new Character("Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second.GetImage(), 10, 14, 10, 10, 8, 10, 21, 17, 2);
+	Character* rat = new Character(false, "Beast", "Rat", IMAGES.find("Rat01.txt")->second.GetImage(), 2, 11, 9, 2, 10, 4, 1, 10, 0);
+	Character* goblin = new Character(false, "Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second.GetImage(), 8, 14, 10, 10, 8, 8, 7, 15, 1);
+	Character* stankrat = new Character(true, "Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second.GetImage(), 10, 14, 10, 10, 8, 10, 21, 17, 2);
 
 		//Forest
-	Character* wolf = new Character("Beast", "Wolf", IMAGES.find("Wolf01.txt")->second.GetImage(), 12, 15, 12, 3, 12, 6, 11, 13, 1);
-	Character* crab = new Character("Beast", "Crabbo", IMAGES.find("Wolf01.txt")->second.GetImage(), 14, 16, 18, 1, 10, 2, 25, 12, 2);
-	Character* awakened_tree = new Character("Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second.GetImage(), 19, 6, 15, 10, 10, 7, 30, 13, 3);
+	Character* wolf = new Character(false, "Beast", "Wolf", IMAGES.find("Wolf01.txt")->second.GetImage(), 12, 15, 12, 3, 12, 6, 11, 13, 1);
+	Character* crab = new Character(false, "Beast", "Crabbo", IMAGES.find("Crab01.txt")->second.GetImage(), 14, 16, 18, 1, 10, 2, 25, 12, 2);
+	Character* awakened_tree = new Character(true, "Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second.GetImage(), 19, 6, 15, 10, 10, 7, 30, 13, 3);
 
 		//Town
 	Character* theif = new Character();
@@ -144,12 +144,29 @@ void LoadCharacters() {
 	//NPCs
 }
 
-void Sewer() {
+//Game Structure
+void GameOver() {
 
 }
 
-void Forest() {
+	//Confrontation
+void Dungeon() {
+	GameOver();
+}
 
+	//Self Discovery
+void Town() {
+	Dungeon();
+}
+
+	//Orient yourself
+void Forest() {
+	Town();
+}
+
+	//Escape
+void Sewer() {
+	Forest();
 }
 
 void NewGame() {
@@ -158,6 +175,7 @@ void NewGame() {
 	PC = Character(UIS);
 	//Tutorial/first combat
 
+	Sewer();
 }
 
 void LoadGame() {
@@ -169,7 +187,7 @@ void StartMenu() {
 
 	while (true) {
 		system("CLS");
-		cout << IMAGES.find("Crab01.txt")->second.GetImage() << endl;
+		cout << IMAGES.find("Mountains01.txt")->second.GetImage() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << UIS.find("Welcome.txt")->second.GetImage();
@@ -194,7 +212,7 @@ void StartMenu() {
 int main() {
 	LoadAssets();
 	LoadItems();
-	//LoadCharacters();
+	LoadCharacters();
 	StartMenu();
 	return 1;
 }

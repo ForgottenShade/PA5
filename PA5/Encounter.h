@@ -6,7 +6,11 @@
 #include<iostream>
 #include<random>
 #include<time.h>
+#include<stdlib.h>
+
 #include"Image.h"
+#include"Weapon.h"
+#include"Armor.h"
 #include"Character.h"
 
 using std::chrono::duration_cast;

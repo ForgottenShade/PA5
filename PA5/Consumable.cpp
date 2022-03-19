@@ -19,6 +19,9 @@ public:
 	string GetName();
 	int GetPrice();
 	int GetQuality();
+
+	string CombatInfo();
+	void SetUses(int);
 };
 
 Consumable::Consumable(string name, int price, int quality, int uses, int damage, int healing) :Item(name, price, quality) {
@@ -51,4 +54,12 @@ int Consumable::GetPrice() {
 
 int Consumable::GetQuality() {
 	return Item::GetQuality();
+}
+
+string Consumable::CombatInfo() {
+	return Item::GetName() + "\t(Uses: " + to_string(Uses) + " Healing: " + to_string(Healing) + " Damage: " + to_string(Damage) + ")";
+}
+
+void Consumable::SetUses(int uses) {
+	Uses = uses;
 }
