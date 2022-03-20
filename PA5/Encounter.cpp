@@ -5,12 +5,14 @@
 #include<stdlib.h>
 #include<time.h>
 #include<algorithm>
+#include<cstring>
+#include<chrono>
 
 #include"Image.h"
 #include"Weapon.h"
 #include"Armor.h"
 #include"Character.h"
-
+#include"Clear.h"
 //Time used for random seed generation to ensure non-deterministic behavior
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -27,9 +29,9 @@ public:
 };
 
 //Check if string is number
-bool is_number(const std::string& s)
+bool is_number(const string& s)
 {
-	std::string::const_iterator it = s.begin();
+	string::const_iterator it = s.begin();
 	while (it != s.end() && std::isdigit(*it)) ++it;
 	return !s.empty() && it == s.end();
 }
@@ -129,7 +131,7 @@ void CombatItemMenu(Character a, Character b, map<string, Image> UIS) {
 	string userInput;
 
 	while (true) {
-		system("CLS");
+		clear();
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << "ITEMS" << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
@@ -178,7 +180,7 @@ Encounter::Encounter(Character& pc, Character& enemy, map<string, Image> IMAGES,
 
 	while (true) {
 		//Player Turn
-		system("CLS");
+		clear();
 		enemy.GetArt();
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << enemy.GetName() << "\tHealth: " << enemy.GetCurrentHp() << "/" << enemy.GetMaxHp() << "\tArmor Class: " << enemy.GetAC() << endl;

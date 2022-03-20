@@ -5,10 +5,12 @@
 #include<iostream>
 #include<map>
 #include<vector>
+#include<cstring>
 #include"Image.h"
 #include"Weapon.h"
 #include"Armor.h"
 #include"Consumable.h"
+#include"Clear.h"
 
 using namespace std;
 

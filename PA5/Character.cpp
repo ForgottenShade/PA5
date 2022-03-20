@@ -2,10 +2,12 @@
 #include<iostream>
 #include<map>
 #include<vector>
+#include<cstring>
 #include"Image.h"
 #include"Weapon.h"
 #include"Armor.h"
 #include"Consumable.h"
+#include"Clear.h"
 
 using namespace std;
 
@@ -139,17 +141,16 @@ Character::Character(bool unique, string race, string name, string art, int str,
 	Adv = 1;
 }
 
-
 //Create the player character
 Character::Character(map<string, Image> UIS) {
 	string userInput;
 
-	system("CLS");
+	clear();
 	cout << "Who are you?" << endl;
 	cin >> userInput;
 	Name = userInput;
 
-	system("CLS");
+	clear();
 	cout << "What is your race?" << endl;
 	cin >> userInput;
 	Race = userInput;
@@ -164,7 +165,7 @@ Character::Character(map<string, Image> UIS) {
 
 	//Build stat block
 	while (true) {
-		system("CLS");
+		clear();
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << "You have " << points << "/27 points" << endl;
 		cout << "1. Str: " << Str << endl;
@@ -181,7 +182,7 @@ Character::Character(map<string, Image> UIS) {
 
 		//Strength
 		if (strcmp(userInput.c_str(), "1") == 0) {
-			system("CLS");
+			clear();
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cout << "You have " << points << "/27 points" << endl;
 			cout << "Current Strength: " << Str << "/15" << endl;
@@ -194,7 +195,7 @@ Character::Character(map<string, Image> UIS) {
 			ChangeStat(userInput, Str, points);
 		}
 		else if (strcmp(userInput.c_str(), "2") == 0) {
-			system("CLS");
+			clear();
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cout << "You have " << points << "/27 points" << endl;
 			cout << "Current Dexterity: " << Dex << "/15" << endl;
@@ -208,7 +209,7 @@ Character::Character(map<string, Image> UIS) {
 
 		}
 		else if (strcmp(userInput.c_str(), "3") == 0) {
-			system("CLS");
+			clear();
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cout << "1. Add Constitution" << endl;
 			cout << "2. Decrease Constitution" << endl;
@@ -218,7 +219,7 @@ Character::Character(map<string, Image> UIS) {
 			ChangeStat(userInput, Con, points);
 		}
 		else if (strcmp(userInput.c_str(), "4") == 0) {
-			system("CLS");
+			clear();
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cout << "1. Add Intelligence" << endl;
 			cout << "2. Decrease Intelligence" << endl;
@@ -228,7 +229,7 @@ Character::Character(map<string, Image> UIS) {
 			ChangeStat(userInput, Int, points);
 		}
 		else if (strcmp(userInput.c_str(), "5") == 0) {
-			system("CLS");
+			clear();
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cout << "1. Add Wisdom" << endl;
 			cout << "2. Decrease Wisdom" << endl;
@@ -238,7 +239,7 @@ Character::Character(map<string, Image> UIS) {
 			ChangeStat(userInput, Wis, points);
 		}
 		else if (strcmp(userInput.c_str(), "6") == 0) {
-			system("CLS");
+			clear();
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cout << "1. Add Charisma" << endl;
 			cout << "2. Decrease Charisma" << endl;

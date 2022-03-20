@@ -14,14 +14,16 @@
 #include"Consumable.h"
 #include"Character.h"
 #include"Encounter.h"
+#include "Dialogue.h"
+#include "Clear.h"
 
 namespace fs = std::filesystem;
 using namespace std;
 
-string ASSET_DIR = fs::current_path().string() + "\\Assets";
-string IMAGE_DIR = ASSET_DIR + "\\Images";
-string UI_DIR = ASSET_DIR + "\\UI";
-string DIALOG_DIR = ASSET_DIR + "\\Dialogs";
+string ASSET_DIR = fs::current_path().string() + "/Assets";
+string IMAGE_DIR = ASSET_DIR + "/Images";
+string UI_DIR = ASSET_DIR + "/UI";
+string DIALOG_DIR = ASSET_DIR + "/Dialogs";
 
 map<string, Image> IMAGES;
 map<string, Image> UIS;
@@ -175,7 +177,7 @@ void NewGame() {
 	PC = Character(UIS);
 	//Tutorial/first combat
 
-	Sewer();
+	//Sewer();
 }
 
 void LoadGame() {
@@ -186,7 +188,7 @@ void StartMenu() {
 	string userInput;
 
 	while (true) {
-		system("CLS");
+		clear();
 		cout << IMAGES.find("Mountains01.txt")->second.GetImage() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << UIS.find("Border.txt")->second.GetImage();
@@ -197,6 +199,7 @@ void StartMenu() {
 		cout << UIS.find("Border.txt")->second.GetImage();
 
 		cin >> userInput;
+
 
 		if (strcmp(userInput.c_str(), "1") == 0) {
 			NewGame();
@@ -211,8 +214,8 @@ void StartMenu() {
 
 int main() {
 	LoadAssets();
-	LoadItems();
-	LoadCharacters();
+	// LoadItems();
+	// LoadCharacters();
 	StartMenu();
 	return 1;
 }

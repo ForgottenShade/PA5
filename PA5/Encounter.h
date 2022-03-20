@@ -7,11 +7,14 @@
 #include<random>
 #include<time.h>
 #include<stdlib.h>
+#include<cstring>
+#include<chrono>
 
 #include"Image.h"
 #include"Weapon.h"
 #include"Armor.h"
 #include"Character.h"
+#include"Clear.h"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
