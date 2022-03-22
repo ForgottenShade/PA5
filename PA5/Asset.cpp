@@ -4,9 +4,6 @@
 namespace fs = std::filesystem;
 using namespace std;
 
-Asset::Asset(){}
-Asset::~Asset(){}
-
 Asset::Asset(fs::path path) {
 	Path = path.string();
 	Filename = path.string().substr(path.string().find_last_of("/\\") + 1);

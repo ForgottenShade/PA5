@@ -15,8 +15,8 @@ private:
 	string Img;
 public:
 	Image(fs::path);
-	Image();
-	~Image();
+	Image() = default;
+	~Image() = default;
 
 	string GetFileContents(ifstream&);
 	string GetImage();

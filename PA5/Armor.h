@@ -13,13 +13,14 @@ private:
 	string ArmorType;
 public:
 	Armor(string, int, int, int, int, string);
-	Armor();
-	~Armor();
+	Armor() = default;
+	~Armor() = default;
 
 	int GetACBonus();
 	int GetBonusCeiling();
 	string GetArmorType();
 
+	string Info();
 	string GetName();
 	int GetPrice();
 	int GetQuality();

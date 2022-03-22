@@ -10,9 +10,6 @@ Armor::Armor(string name, int price, int quality, int acBonus, int bonusCeiling,
 	ArmorType = armorType;
 }
 
-Armor::Armor():Item(){}
-Armor::~Armor(){}
-
 int Armor::GetACBonus(){
 	return ACBonus;
 }
@@ -23,6 +20,10 @@ int Armor::GetBonusCeiling() {
 
 string Armor::GetArmorType() {
 	return ArmorType;
+}
+
+string Armor::Info() {
+	return Item::GetName() + " (" + ArmorType + ")";
 }
 
 string Armor::GetName() {

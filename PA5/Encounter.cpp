@@ -121,26 +121,32 @@ void Encounter::UseItem(Character a, Character b, Consumable c) {
 	c.SetUses(c.GetUses() - 1);
 }
 
-void Encounter::CombatItemMenu(Character a, Character b, map<string, Image> UIS) {
+//Returns whether an item was used 
+bool Encounter::CombatItemMenu(Character a, Character b, map<string, Image> UIS) {
 	vector<Consumable> items = a.GetConsumableInv();
 	string userInput;
 
 	while (true) {
 		clear();
 		cout << UIS.find("Border.txt")->second.GetImage();
-		cout << "ITEMS" << endl;
+		cout << "Select an item to use." << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 
 		//list all items
 		for (int i = 0; i < items.size(); i++) {
 			cout << i + 1 << ". " << items[i].CombatInfo() << endl;
 		}
+		cout << items.size() + 1 << ". Cancel" << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 
 		cin >> userInput;
 
 		if (is_number(userInput)) {
-			int index = atoi(userInput.c_str());
+			int index = atoi(userInput.c_str()) - 1;
+
+			if (index == items.size() + 1) {
+				return false;
+			}
 			Consumable item = items[index];
 			UseItem(a, b, item);
 
@@ -148,7 +154,7 @@ void Encounter::CombatItemMenu(Character a, Character b, map<string, Image> UIS)
 			if (item.GetUses() == 0) {
 				items.erase(items.begin() + index);
 			}
-			break;
+			return true;
 		}
 	}
 }
@@ -165,13 +171,12 @@ bool Encounter::Flee(Character a, Character b) {
 	return false;
 }
 
-Encounter::~Encounter(){}
-
 //1v1
-Encounter::Encounter(Character& pc, Character& enemy, map<string, Image> IMAGES, map<string, Image> UIS) {
+Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 	PC = pc;
 	Enemy = enemy;
 	string userInput;
+	bool player_turn = true;
 
 	while (true) {
 		//Player Turn
@@ -180,11 +185,13 @@ Encounter::Encounter(Character& pc, Character& enemy, map<string, Image> IMAGES,
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << enemy.GetName() << "\tHealth: " << enemy.GetCurrentHp() << "/" << enemy.GetMaxHp() << "\tArmor Class: " << enemy.GetAC() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
-		cout << UIS.find("CombatMenu.txt")->second.GetImage();
+		cout << "1. Attack [" + pc.GetCurrentWeapon().Info() + "]\t2. Defend\t3. Use Item" << endl;
+		cout << "4. Flee\t5. Inventory" << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << pc.GetName() << "\tHealth: " << pc.GetCurrentHp() << "/" << pc.GetMaxHp() << "\tArmor Class: " << pc.GetAC() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cin >> userInput;
+		clear();
 
 			//Attack
 		if (strcmp(userInput.c_str(), "1") == 0) {
@@ -198,75 +205,91 @@ Encounter::Encounter(Character& pc, Character& enemy, map<string, Image> IMAGES,
 				cout << "You deal " << dmg << " damage!" << endl;
 				enemy.TakeDamage(dmg);
 			}
+			player_turn = false;
+			cin >> userInput;
 		}
 			//Defend
 		else if (strcmp(userInput.c_str(), "2") == 0) {
 			cout << "You stand ready for the next attack." << endl;
 			enemy.GiveDisAdv();
+			player_turn = false;
+			cin >> userInput;
 		}
 			//Use Item
 		else if (strcmp(userInput.c_str(), "3") == 0) {
-			CombatItemMenu(pc, enemy, UIS);
+			player_turn = CombatItemMenu(pc, enemy, UIS);
 		}
 			//Flee
 		else if (strcmp(userInput.c_str(), "4") == 0) {
-
 				//Success
 			if (Flee(pc, enemy)) {
 				cout << "You evade " << enemy.GetName() << "!" << endl;
+				cin >> userInput;
 				break;
 			}
 				//Fail
 			else {
 				cout << "You fail to escape." << endl;
+				cin >> userInput;
 			}
+			player_turn = false;
 		}
-			//Surrender
+			//Inventory
 		else if (strcmp(userInput.c_str(), "5") == 0) {
-			cout << "Not Implemented" << endl;
-		}
-			//View Character
-		else if (strcmp(userInput.c_str(), "6") == 0) {
-
+			pc.ManageInventory(UIS);
+			cin >> userInput;
 		}
 
-		//Check if the enemy is dead to end the encounter
-		if (!enemy.IsAlive()) {
-			break;
-		}
 
-		//Enemy Turn
-			//Enemy tries to flee if not unique and at critical health
-		if(!enemy.IsUnique() && IsCriticalHealth(enemy)){
-			if (Flee(enemy, pc)) {
-				cout << enemy.GetName() << " fled!" << endl;
+		//Check if player turn over
+		if (!player_turn) {
+			clear();
+			//Check if the enemy is dead to end the encounter
+			if (!enemy.IsAlive()) {
+				cout << enemy.GetName() << " has been defeated!" << endl;
+				cin >> userInput;
 				break;
 			}
-			else {
-				cout << enemy.GetName() << " tries to escape and fails!" << endl;
-			}
-		}
-			//Randomly attack or defend for now
-		else {
-			srand(time(NULL));
-			int randAction = rand() % 2;
 
-				//Attack
-			if (randAction == 1) {
-				int dmg = Attack(enemy, pc);
-
-				if (dmg == 0) {
-					cout << enemy.GetName() << " attacked but missed!" << endl;
+			//Enemy Turn
+				//Enemy tries to flee if not unique and at critical health
+			if (!enemy.IsUnique() && IsCriticalHealth(enemy)) {
+				if (Flee(enemy, pc)) {
+					cout << enemy.GetName() << " fled!" << endl;
+					cin >> userInput;
+					break;
 				}
 				else {
-					pc.TakeDamage(dmg);
-					cout << enemy.GetName() << " attacks for " << dmg << " damage!" << endl;
+					cout << enemy.GetName() << " tries to escape and fails!" << endl;
+					cin >> userInput;
+					player_turn = true;
 				}
 			}
+			//Randomly attack or defend for now
+			else {
+				srand(time(NULL));
+				int randAction = rand() % 2;
+
+				//Attack
+				if (randAction == 1) {
+					int dmg = Attack(enemy, pc);
+
+					if (dmg == 0) {
+						cout << enemy.GetName() << " attacked but missed!" << endl;
+					}
+					else {
+						pc.TakeDamage(dmg);
+						cout << enemy.GetName() << " attacks for " << dmg << " damage!" << endl;
+					}
+					player_turn = true;
+				}
 				//Defend
-			else if (randAction == 2) {
-				cout << enemy.GetName() << " stands ready for your next attack." << endl;
-				pc.GiveDisAdv();
+				else if (randAction == 2) {
+					cout << enemy.GetName() << " stands ready for your next attack." << endl;
+					pc.GiveDisAdv();
+					player_turn = true;
+				}
+				cin >> userInput;
 			}
 		}
 	}

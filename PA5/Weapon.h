@@ -12,13 +12,14 @@ private:
 		//false: Dex
 public:
 	Weapon(string, int, int, int, int, bool);
-	Weapon();
-	~Weapon();
+	Weapon() = default;
+	~Weapon() = default;
 
 	int GetDamageDice();
 	int GetNumberOfDice();
 	bool GetDamageStat();
 
+	string Info();
 	string GetName();
 	int GetPrice();
 	int GetQuality();

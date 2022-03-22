@@ -53,7 +53,7 @@ public:
 	Character(bool, string, string, string, int, int, int, int, int, int, int, int, int);
 	Character(map<string, Image>);
 	Character() = default;
-	~Character();
+	~Character() = default;
 
 	bool IsUnique();
 	bool IsAlive();
@@ -78,6 +78,7 @@ public:
 	vector<Weapon> GetWeaponInv();
 	vector<Armor> GetArmorInv();
 	vector<Consumable> GetConsumableInv();
+	bool is_number(const string&);
 
 	void ChangeStat(string, int&, int&);
 	void TakeDamage(int);
@@ -85,6 +86,10 @@ public:
 	void GiveAdv();
 	void GiveDisAdv();
 	void ResetAdv();
+	void PrintCharacterStats(map<string, Image>);
+	void ManageInventory(map<string, Image>);
+	void SetWeapon(Weapon);
+	void SetArmor(Armor);
 };
 
 #endif

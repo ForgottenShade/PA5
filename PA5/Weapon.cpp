@@ -8,9 +8,6 @@ Weapon::Weapon(string name, int price, int quality, int damageDice, int numberOf
 	DamageStat = damageStat;
 }
 
-Weapon::Weapon():Item(){}
-Weapon::~Weapon(){}
-
 int Weapon::GetDamageDice() {
 	return DamageDice;
 }
@@ -21,6 +18,18 @@ int Weapon::GetNumberOfDice() {
 
 bool Weapon::GetDamageStat() {
 	return DamageStat;
+}
+
+string Weapon::Info() {
+	string stat;
+	if (DamageStat) {
+		stat = "Str";
+	}
+	else {
+		stat = "Dex";
+	}
+
+	return Item::GetName() + " (" + to_string(DamageDice) + "d" + to_string(NumberOfDice) + " " + stat + ")";
 }
 
 string Weapon::GetName() {

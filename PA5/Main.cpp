@@ -62,32 +62,32 @@ void LoadItems(){
 	//Weapons
 		//Generics
 	Weapon* Fists = new Weapon();
-			//Common
+			//Common: 1
 	Weapon* Club = new Weapon();
 	Weapon* Axe = new Weapon();
 	Weapon* Shortbow = new Weapon();
-	Weapon* Shortsword = new Weapon();
+	Weapon* Shortsword = new Weapon("Shortsword", 10, 1, 6, 1, false);
 	Weapon* Dagger = new Weapon();
 	Weapon* Quarterstaff = new Weapon();
 
-			//Uncommon
+			//Uncommon: 2
 	Weapon* Crossbow = new Weapon();
 	Weapon* Longbow = new Weapon();
 	Weapon* Longsword = new Weapon();
 	Weapon* Mace = new Weapon();
 	Weapon* Spear = new Weapon();
 
-			//Rare
+			//Rare: 3
 	Weapon* Greatsword = new Weapon();
 	Weapon* Greataxe = new Weapon();
 	Weapon* Greathammer = new Weapon();
 	Weapon* Rapier = new Weapon();
 
-		//Uniques
+		//Uniques: 4
 
 	//Armors
 		//Generics
-	Armor* Clothes = new Armor();
+	Armor* Clothes = new Armor("Clothes", 1, 1, 0, 999, "Not Armor");
 			//Common
 	Armor* Leather = new Armor();
 	Armor* Hide = new Armor();
@@ -117,6 +117,9 @@ void LoadItems(){
 
 		//Uniques
 
+	WEAPON_TABLE.insert(pair<string, Weapon>(Shortsword->GetName(), Shortsword[0]));
+
+	ARMOR_TABLE.insert(pair<string, Armor>(Clothes->GetName(), Clothes[0]));
 }
 
 void LoadCharacters() {
@@ -135,13 +138,13 @@ void LoadCharacters() {
 	Character* theif = new Character();
 	Character* gaurd = new Character();
 
-	ENEMIES.insert(pair<string, Character>(rat[0].GetName(), rat[0]));
-	ENEMIES.insert(pair<string, Character>(goblin[0].GetName(), goblin[0]));
-	ENEMIES.insert(pair<string, Character>(stankrat[0].GetName(), stankrat[0]));
+	ENEMIES.insert(pair<string, Character>(rat->GetName(), rat[0]));
+	ENEMIES.insert(pair<string, Character>(goblin->GetName(), goblin[0]));
+	ENEMIES.insert(pair<string, Character>(stankrat->GetName(), stankrat[0]));
 
-	ENEMIES.insert(pair<string, Character>(wolf[0].GetName(), wolf[0]));
-	ENEMIES.insert(pair<string, Character>(crab[0].GetName(), crab[0]));
-	ENEMIES.insert(pair<string, Character>(awakened_tree[0].GetName(), awakened_tree[0]));
+	ENEMIES.insert(pair<string, Character>(wolf->GetName(), wolf[0]));
+	ENEMIES.insert(pair<string, Character>(crab->GetName(), crab[0]));
+	ENEMIES.insert(pair<string, Character>(awakened_tree->GetName(), awakened_tree[0]));
 
 	//NPCs
 }
@@ -176,7 +179,9 @@ void NewGame() {
 
 	PC = Character(UIS);
 	//Tutorial/first combat
-
+	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
+	PC.SetWeapon(WEAPON_TABLE.find("Shortsword")->second);
+	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
 	//Sewer();
 }
 
@@ -214,8 +219,8 @@ void StartMenu() {
 
 int main() {
 	LoadAssets();
-	// LoadItems();
-	// LoadCharacters();
+	LoadItems();
+	LoadCharacters();
 	StartMenu();
 	return 1;
 }

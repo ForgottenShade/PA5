@@ -31,8 +31,8 @@ private:
 	Character Enemy;
 public:
 	Encounter() = default;
-	~Encounter();
-	Encounter(Character&, Character&, map<string, Image>, map<string, Image>);
+	~Encounter() = default;
+	Encounter(Character, Character, map<string, Image>);
 
 	bool is_number(const string&);
 	int GetBonus(int);
@@ -41,7 +41,7 @@ public:
 	int SavingThrow(int);
 	int Attack(Character, Character);
 	void UseItem(Character, Character, Consumable);
-	void CombatItemMenu(Character, Character, map<string, Image>);
+	bool CombatItemMenu(Character, Character, map<string, Image>);
 	bool Flee(Character, Character);
 };
 

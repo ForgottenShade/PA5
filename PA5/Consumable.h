@@ -13,8 +13,8 @@ private:
 	int Healing;
 public:
 	Consumable(string, int, int, int, int, int);
-	Consumable();
-	~Consumable();
+	Consumable() = default;
+	~Consumable() = default;
 
 	int GetUses();
 	int GetDamage();

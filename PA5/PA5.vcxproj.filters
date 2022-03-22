@@ -42,6 +42,9 @@
     <ClCompile Include="Consumable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Clear.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -66,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Consumable.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Clear.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
