@@ -2,23 +2,12 @@
 #include<fstream>
 #include<string>
 #include"Asset.h"
+#include"Image.h"
 
 namespace fs = std::filesystem;
 using namespace std;
 
-class Image:public Asset {
-private:
-	string Img;
-public:
-	Image(fs::path);
-	Image():Asset(){};
-
-	string GetImage();
-	string GetFilename();
-	string GetPath();
-};
-
-string GetFileContents(ifstream& file)
+string Image::GetFileContents(ifstream& file)
 {
 	string lines = "";								//All lines
 

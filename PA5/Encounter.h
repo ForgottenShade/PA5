@@ -5,8 +5,9 @@
 #include<map>
 #include<iostream>
 #include<random>
-#include<time.h>
 #include<stdlib.h>
+#include<time.h>
+#include<algorithm>
 #include<cstring>
 #include<chrono>
 
@@ -15,6 +16,7 @@
 #include"Armor.h"
 #include"Character.h"
 #include"Clear.h"
+
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;

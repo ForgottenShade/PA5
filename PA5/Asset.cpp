@@ -1,20 +1,9 @@
 #include <string>
-#include<filesystem>
-
+#include <filesystem>
+#include "Asset.h"
 namespace fs = std::filesystem;
 using namespace std;
 
-class Asset {
-private:
-	string Filename;
-	string Path;
-public:
-	Asset(fs::path);
-	Asset(){};
-	
-	string GetFilename();
-	string GetPath();
-};
 
 Asset::Asset(fs::path path) {
 	Path = path.string();

@@ -1,28 +1,8 @@
 #include<string>
 #include"Item.h"
+#include"Consumable.h"
 
 using namespace std;
-
-class Consumable :public Item {
-private:
-	int Uses;
-	int Damage;
-	int Healing;
-public:
-	Consumable(string, int, int, int, int, int);
-	Consumable();
-
-	int GetUses();
-	int GetDamage();
-	int GetHealing();
-
-	string GetName();
-	int GetPrice();
-	int GetQuality();
-
-	string CombatInfo();
-	void SetUses(int);
-};
 
 Consumable::Consumable(string name, int price, int quality, int uses, int damage, int healing) :Item(name, price, quality) {
 	Uses = uses;

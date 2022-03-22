@@ -13,20 +13,14 @@
 #include"Armor.h"
 #include"Character.h"
 #include"Clear.h"
+#include"Encounter.h"
 //Time used for random seed generation to ensure non-deterministic behavior
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
 using namespace std;
 
-class Encounter {
-private:
-	Character PC;
-	Character Enemy;
-public:
-	Encounter();
-	Encounter(Character&, Character&, map<string, Image>, map<string, Image>);
-};
+
 
 //Check if string is number
 bool is_number(const string& s)

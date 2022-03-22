@@ -8,82 +8,13 @@
 #include"Armor.h"
 #include"Consumable.h"
 #include"Clear.h"
+#include"Character.h"
 
 using namespace std;
 
-class Character {
-private:
-	bool Unique;	//Used for determining enemy actions (fleeing)
-	bool Alive;		//Used for pc death
-	string Race;
-	string Name;
-	string Art;
-
-	int Str;	//Strength
-	int Dex;	//Dexterity
-	int Con;	//Constitution
-	int Int;	//Intelligence
-	int Wis;	//Wisdom
-	int Cha;	//Charisma
-
-	//Combat
-	int MaxHp;		//Hit Points
-	int CurrentHp;
-	int AC;			//Armor Class
-	int Level;
-
-	Weapon CurrentWeapon;
-	Armor CurrentArmor;
-
-	int Adv;	//Advantage to hit
-		//0: Disadvantage
-		//1: No Advantage
-		//2: Advantage
-
-	//Inventory
-	int Gold;
-	vector<Weapon> Weapons;
-	vector<Armor> Armors;
-	vector<Consumable> Consumables;
-public:
-	Character(bool, string, string, string, int, int, int, int, int, int, int, int, int);
-	Character(map<string, Image>);
-	Character();
-
-	bool IsUnique();
-	bool IsAlive();
-	string GetName();
-	string GetArt();
-	int GetStr();
-	int GetDex();
-	int GetCon();
-	int GetInt();
-	int GetWis();
-	int GetCha();
-	int GetCurrentHp();
-	int GetMaxHp();
-	int GetAC();
-
-	Weapon GetCurrentWeapon();
-	Armor GetCurrentArmor();
-
-	int GetAdv();
-
-	int GetCurrentGold();
-	vector<Weapon> GetWeaponInv();
-	vector<Armor> GetArmorInv();
-	vector<Consumable> GetConsumableInv();
-
-	void TakeDamage(int);
-	void Heal(int);
-	void GiveAdv();
-	void GiveDisAdv();
-	void ResetAdv();
-};
-
 Character::Character(){}
 
-void ChangeStat(string incr_dcrs, int& current_val, int& points) {
+void Character::ChangeStat(string incr_dcrs, int& current_val, int& points) {
 	//Add
 	if (atoi(incr_dcrs.c_str()) == 1) {
 		if (current_val < 13) {
@@ -192,7 +123,7 @@ Character::Character(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 
 			cin >> userInput;
-			ChangeStat(userInput, Str, points);
+			Character::ChangeStat(userInput, Str, points);
 		}
 		else if (strcmp(userInput.c_str(), "2") == 0) {
 			clear();
@@ -205,7 +136,7 @@ Character::Character(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 
 			cin >> userInput;
-			ChangeStat(userInput, Dex, points);
+			Character::ChangeStat(userInput, Dex, points);
 
 		}
 		else if (strcmp(userInput.c_str(), "3") == 0) {
@@ -216,7 +147,7 @@ Character::Character(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 
 			cin >> userInput;
-			ChangeStat(userInput, Con, points);
+			Character::ChangeStat(userInput, Con, points);
 		}
 		else if (strcmp(userInput.c_str(), "4") == 0) {
 			clear();
@@ -226,7 +157,7 @@ Character::Character(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 
 			cin >> userInput;
-			ChangeStat(userInput, Int, points);
+			Character::ChangeStat(userInput, Int, points);
 		}
 		else if (strcmp(userInput.c_str(), "5") == 0) {
 			clear();
@@ -236,7 +167,7 @@ Character::Character(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 
 			cin >> userInput;
-			ChangeStat(userInput, Wis, points);
+			Character::ChangeStat(userInput, Wis, points);
 		}
 		else if (strcmp(userInput.c_str(), "6") == 0) {
 			clear();
@@ -246,7 +177,7 @@ Character::Character(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 
 			cin >> userInput;
-			ChangeStat(userInput, Cha, points);
+			Character::ChangeStat(userInput, Cha, points);
 		}
 		else if (strcmp(userInput.c_str(), "7") == 0) {
 			break;

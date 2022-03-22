@@ -18,6 +18,7 @@ class Character {
 private:
 	bool Unique;	//Used for determining enemy actions (fleeing)
 	bool Alive;		//Used for pc death
+	string Art;
 	string Race;
 	string Name;
 
@@ -76,6 +77,7 @@ public:
 	vector<Armor> GetArmorInv();
 	vector<Consumable> GetConsumableInv();
 
+	void ChangeStat(string, int&, int&);
 	void TakeDamage(int);
 	void Heal(int);
 	void GiveAdv();

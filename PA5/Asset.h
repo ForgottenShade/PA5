@@ -9,8 +9,8 @@ using namespace std;
 
 class Asset {
 private:
-	string filename;
-	string path;
+	string Filename;
+	string Path;
 
 public:
 	Asset(fs::path);
