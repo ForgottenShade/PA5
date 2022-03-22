@@ -181,12 +181,12 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 	while (true) {
 		//Player Turn
 		clear();
-		enemy.GetArt();
+		cout << enemy.GetArt();
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << enemy.GetName() << "\tHealth: " << enemy.GetCurrentHp() << "/" << enemy.GetMaxHp() << "\tArmor Class: " << enemy.GetAC() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << "1. Attack [" + pc.GetCurrentWeapon().Info() + "]\t2. Defend\t3. Use Item" << endl;
-		cout << "4. Flee\t5. Inventory" << endl;
+		cout << "4. Flee\t\t5. Inventory" << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << pc.GetName() << "\tHealth: " << pc.GetCurrentHp() << "/" << pc.GetMaxHp() << "\tArmor Class: " << pc.GetAC() << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
@@ -268,7 +268,7 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 			//Randomly attack or defend for now
 			else {
 				srand(time(NULL));
-				int randAction = rand() % 2;
+				int randAction = rand() % 2 + 1;
 
 				//Attack
 				if (randAction == 1) {
