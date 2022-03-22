@@ -31,86 +31,81 @@ bool Encounter::is_number(const string& s)
 	return !s.empty() && it == s.end();
 }
 
-//Returns the stat bonus or malice for a stat
-int Encounter::GetBonus(int stat) {
-	return (stat - 10) / 2;
-}
-
-//Returns true if the enemy is considered at critical health, threshold is 10%
-bool Encounter::IsCriticalHealth(Character x) {
-	if (x.GetCurrentHp() < 0.1 * x.GetMaxHp()) {
-		return true;
-	}
-	return false;
-}
-
-//Roll an x sided dice, count times, returns sum of roll(s)
-int Encounter::Roll(int count, int x) {
-	srand(time(NULL));
-	int roll = 0;
-	for (int i = 0; i < count; i++) {
-		roll += rand() % x;
-	}
-	return roll;
-}
-
-//Return saving throw for specific stat
-int Encounter::SavingThrow(int stat) {
-	int roll = Roll(1, 20);
-	int bonus = GetBonus(stat) * 2;
-	return roll + bonus;
-}
-
 //Character a attacks character b, returns damage to b
 int Encounter::Attack(Character a, Character b) {
 	Weapon attackerWeapon = a.GetCurrentWeapon();
 	int defenderAC = b.GetAC();
 	int adv = a.GetAdv();
 	int dmg = 0;
+	int bonus = 0;
+	int roll;
 
-	//true: Str
-	if (attackerWeapon.GetDamageStat()) {
-		int roll = Roll(1, 20) + GetBonus(a.GetStr());
+	//if no damage stat (NPC)
+	if (attackerWeapon.GetDamageStat() == NULL) {
+		roll = a.Roll(1, 20);
 
 		//handle advantage/disadvantage
 		if (adv == 0) {
-			int roll2 = Roll(1, 20) + GetBonus(a.GetStr());
+			int roll2 = a.Roll(1, 20);
 			roll = min(roll, roll2);
 		}
 		else if (adv == 2) {
-			int roll2 = Roll(1, 20) + GetBonus(a.GetStr());
+			int roll2 = a.Roll(1, 20);
+			roll = max(roll, roll2);
+		}
+
+		//check if hit
+		if (roll > defenderAC) {
+			dmg = a.Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice());
+		}
+	}
+	//true: Str
+	else if (attackerWeapon.GetDamageStat()) {
+		bonus = a.GetBonus(a.GetStr());
+		roll = a.Roll(1, 20) + bonus;
+
+		//handle advantage/disadvantage
+		if (adv == 0) {
+			int roll2 = a.Roll(1, 20) + bonus;
+			roll = min(roll, roll2);
+		}
+		else if (adv == 2) {
+			int roll2 = a.Roll(1, 20) + bonus;
 			roll = max(roll, roll2);
 		}
 		
 		//check if hit
 		if (roll > defenderAC) {
-			dmg = Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice());
+			dmg = a.Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice()) + bonus;
 		}
 	}
 	//false: Dex
 	else 
 	{
-		int roll = Roll(1, 20) + GetBonus(a.GetDex());
+		bonus = a.GetBonus(a.GetDex());
+		roll = a.Roll(1, 20) + bonus;
 
 		//handle advantage/disadvantage
 		if (adv == 0) {
-			int roll2 = Roll(1, 20) + GetBonus(a.GetStr());
+			int roll2 = a.Roll(1, 20) + bonus;
 			roll = min(roll, roll2);
 		}
 		else if (adv == 2) {
-			int roll2 = Roll(1, 20) + GetBonus(a.GetStr());
+			int roll2 = a.Roll(1, 20) + bonus;
 			roll = max(roll, roll2);
 		}
 
 		//check if hit
 		if (roll > defenderAC) {
-			dmg = Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice());
+			dmg = a.Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice()) + bonus;
 		}
 	}
 
 	//reset advantage
 	a.ResetAdv();
 
+	//print rolls
+	cout << a.GetName() << " rolled: " + to_string(roll) + " against " + b.GetName() + "'s AC of " + to_string(defenderAC) << endl;
 	return dmg;
 }
 
@@ -162,8 +157,8 @@ bool Encounter::CombatItemMenu(Character a, Character b, map<string, Image> UIS)
 //Returns true if character a succeeds in fleeing from character b, otherwise false
 //This is a Dex roll vs the Dex saving throw of the opponent
 bool Encounter::Flee(Character a, Character b) {
-	int rollA = Roll(1, 20) + GetBonus(a.GetDex());
-	int rollB = SavingThrow(b.GetDex());
+	int rollA = a.Roll(1, 20) + a.GetBonus(a.GetDex());
+	int rollB = b.SavingThrow(b.GetDex());
 
 	if (rollA > rollB) {
 		return true;
@@ -253,7 +248,7 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 
 			//Enemy Turn
 				//Enemy tries to flee if not unique and at critical health
-			if (!enemy.IsUnique() && IsCriticalHealth(enemy)) {
+			if (!enemy.IsUnique() && enemy.IsCriticalHealth()) {
 				if (Flee(enemy, pc)) {
 					cout << enemy.GetName() << " fled!" << endl;
 					cin >> userInput;

@@ -35,10 +35,6 @@ public:
 	Encounter(Character, Character, map<string, Image>);
 
 	bool is_number(const string&);
-	int GetBonus(int);
-	bool IsCriticalHealth(Character);
-	int Roll(int, int);
-	int SavingThrow(int);
 	int Attack(Character, Character);
 	void UseItem(Character, Character, Consumable);
 	bool CombatItemMenu(Character, Character, map<string, Image>);
