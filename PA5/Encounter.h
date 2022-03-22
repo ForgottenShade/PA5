@@ -10,6 +10,8 @@
 #include<algorithm>
 #include<cstring>
 #include<chrono>
+#include<vector>
+
 
 #include"Image.h"
 #include"Weapon.h"
@@ -28,8 +30,19 @@ private:
 	Character PC;
 	Character Enemy;
 public:
-	Encounter();
+	Encounter() = default;
+	~Encounter();
 	Encounter(Character&, Character&, map<string, Image>, map<string, Image>);
+
+	bool is_number(const string&);
+	int GetBonus(int);
+	bool IsCriticalHealth(Character);
+	int Roll(int, int);
+	int SavingThrow(int);
+	int Attack(Character, Character);
+	void UseItem(Character, Character, Consumable);
+	void CombatItemMenu(Character, Character, map<string, Image>);
+	bool Flee(Character, Character);
 };
 
 

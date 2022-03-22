@@ -11,6 +11,7 @@ Armor::Armor(string name, int price, int quality, int acBonus, int bonusCeiling,
 }
 
 Armor::Armor():Item(){}
+Armor::~Armor(){}
 
 int Armor::GetACBonus(){
 	return ACBonus;

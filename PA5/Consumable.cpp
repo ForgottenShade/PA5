@@ -11,6 +11,7 @@ Consumable::Consumable(string name, int price, int quality, int uses, int damage
 }
 
 Consumable::Consumable():Item(){}
+Consumable::~Consumable(){}
 
 int Consumable::GetUses() {
 	return Uses;

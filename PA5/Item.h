@@ -18,6 +18,7 @@ private:
 public:
 	Item(string, int, int);
 	Item();
+	~Item();
 
 	string GetName();
 	int GetPrice();

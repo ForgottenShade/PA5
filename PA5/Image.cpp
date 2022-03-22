@@ -7,6 +7,9 @@
 namespace fs = std::filesystem;
 using namespace std;
 
+Image::Image():Asset(){}
+Image::~Image(){}
+
 string Image::GetFileContents(ifstream& file)
 {
 	string lines = "";								//All lines

@@ -13,6 +13,7 @@ private:
 public:
 	Weapon(string, int, int, int, int, bool);
 	Weapon();
+	~Weapon();
 
 	int GetDamageDice();
 	int GetNumberOfDice();

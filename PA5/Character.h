@@ -6,6 +6,7 @@
 #include<map>
 #include<vector>
 #include<cstring>
+
 #include"Image.h"
 #include"Weapon.h"
 #include"Armor.h"
@@ -51,7 +52,8 @@ private:
 public:
 	Character(bool, string, string, string, int, int, int, int, int, int, int, int, int);
 	Character(map<string, Image>);
-	Character();
+	Character() = default;
+	~Character();
 
 	bool IsUnique();
 	bool IsAlive();

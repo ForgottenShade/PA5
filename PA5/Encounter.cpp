@@ -7,6 +7,7 @@
 #include<algorithm>
 #include<cstring>
 #include<chrono>
+#include<vector>
 
 #include"Image.h"
 #include"Weapon.h"
@@ -23,7 +24,7 @@ using namespace std;
 
 
 //Check if string is number
-bool is_number(const string& s)
+bool Encounter::is_number(const string& s)
 {
 	string::const_iterator it = s.begin();
 	while (it != s.end() && std::isdigit(*it)) ++it;
@@ -31,12 +32,12 @@ bool is_number(const string& s)
 }
 
 //Returns the stat bonus or malice for a stat
-int GetBonus(int stat) {
+int Encounter::GetBonus(int stat) {
 	return (stat - 10) / 2;
 }
 
 //Returns true if the enemy is considered at critical health, threshold is 10%
-bool IsCriticalHealth(Character x) {
+bool Encounter::IsCriticalHealth(Character x) {
 	if (x.GetCurrentHp() < 0.1 * x.GetMaxHp()) {
 		return true;
 	}
@@ -44,7 +45,7 @@ bool IsCriticalHealth(Character x) {
 }
 
 //Roll an x sided dice, count times, returns sum of roll(s)
-int Roll(int count, int x) {
+int Encounter::Roll(int count, int x) {
 	srand(time(NULL));
 	int roll = 0;
 	for (int i = 0; i < count; i++) {
@@ -54,14 +55,14 @@ int Roll(int count, int x) {
 }
 
 //Return saving throw for specific stat
-int SavingThrow(int stat) {
+int Encounter::SavingThrow(int stat) {
 	int roll = Roll(1, 20);
 	int bonus = GetBonus(stat) * 2;
 	return roll + bonus;
 }
 
 //Character a attacks character b, returns damage to b
-int Attack(Character a, Character b) {
+int Encounter::Attack(Character a, Character b) {
 	Weapon attackerWeapon = a.GetCurrentWeapon();
 	int defenderAC = b.GetAC();
 	int adv = a.GetAdv();
@@ -114,13 +115,13 @@ int Attack(Character a, Character b) {
 }
 
 //Character a uses item c (healing applied to self, damage to character b, handle uses)
-void UseItem(Character a, Character b, Consumable c) {
+void Encounter::UseItem(Character a, Character b, Consumable c) {
 	a.Heal(c.GetHealing());
 	b.TakeDamage(c.GetDamage());
 	c.SetUses(c.GetUses() - 1);
 }
 
-void CombatItemMenu(Character a, Character b, map<string, Image> UIS) {
+void Encounter::CombatItemMenu(Character a, Character b, map<string, Image> UIS) {
 	vector<Consumable> items = a.GetConsumableInv();
 	string userInput;
 
@@ -154,7 +155,7 @@ void CombatItemMenu(Character a, Character b, map<string, Image> UIS) {
 
 //Returns true if character a succeeds in fleeing from character b, otherwise false
 //This is a Dex roll vs the Dex saving throw of the opponent
-bool Flee(Character a, Character b) {
+bool Encounter::Flee(Character a, Character b) {
 	int rollA = Roll(1, 20) + GetBonus(a.GetDex());
 	int rollB = SavingThrow(b.GetDex());
 
@@ -164,7 +165,7 @@ bool Flee(Character a, Character b) {
 	return false;
 }
 
-Encounter::Encounter(){}
+Encounter::~Encounter(){}
 
 //1v1
 Encounter::Encounter(Character& pc, Character& enemy, map<string, Image> IMAGES, map<string, Image> UIS) {

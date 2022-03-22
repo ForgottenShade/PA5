@@ -9,6 +9,7 @@ Weapon::Weapon(string name, int price, int quality, int damageDice, int numberOf
 }
 
 Weapon::Weapon():Item(){}
+Weapon::~Weapon(){}
 
 int Weapon::GetDamageDice() {
 	return DamageDice;

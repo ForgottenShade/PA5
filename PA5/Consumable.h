@@ -14,6 +14,7 @@ private:
 public:
 	Consumable(string, int, int, int, int, int);
 	Consumable();
+	~Consumable();
 
 	int GetUses();
 	int GetDamage();

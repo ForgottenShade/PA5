@@ -4,6 +4,8 @@
 namespace fs = std::filesystem;
 using namespace std;
 
+Asset::Asset(){}
+Asset::~Asset(){}
 
 Asset::Asset(fs::path path) {
 	Path = path.string();

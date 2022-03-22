@@ -14,6 +14,7 @@ private:
 public:
 	Armor(string, int, int, int, int, string);
 	Armor();
+	~Armor();
 
 	int GetACBonus();
 	int GetBonusCeiling();

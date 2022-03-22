@@ -3,6 +3,7 @@
 #include<map>
 #include<vector>
 #include<cstring>
+
 #include"Image.h"
 #include"Weapon.h"
 #include"Armor.h"
@@ -12,7 +13,7 @@
 
 using namespace std;
 
-Character::Character(){}
+Character::~Character(){}
 
 void Character::ChangeStat(string incr_dcrs, int& current_val, int& points) {
 	//Add

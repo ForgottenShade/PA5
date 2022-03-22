@@ -10,6 +10,7 @@ Item::Item(string name, int price, int quality) {
 }
 
 Item::Item(){}
+Item::~Item(){}
 
 string Item::GetName() {
 	return Name;

@@ -15,6 +15,7 @@ private:
 public:
 	Asset(fs::path);
 	Asset();
+	~Asset();
 
 	string GetFilename();
 	string GetPath();
