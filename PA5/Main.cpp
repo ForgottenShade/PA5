@@ -14,7 +14,7 @@
 #include"Consumable.h"
 #include"Character.h"
 #include"Encounter.h"
-// #include "Dialogue.h"
+#include "Dialog.h"
 #include "Clear.h"
 
 namespace fs = std::filesystem;
@@ -178,6 +178,9 @@ void NewGame() {
 	//Character/story intro here
 
 	PC = Character(UIS);
+	
+	dialog(PC, DIALOGS.find("SewerToForest.txt")->second.GetImage(), UIS);
+	
 	//Tutorial/first combat
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
 	PC.SetWeapon(WEAPON_TABLE.find("Shortsword")->second);
@@ -202,6 +205,7 @@ void StartMenu() {
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << UIS.find("StartMenu.txt")->second.GetImage();
 		cout << UIS.find("Border.txt")->second.GetImage();
+
 
 		cin >> userInput;
 

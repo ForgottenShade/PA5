@@ -428,3 +428,36 @@ void Character::SetWeapon(Weapon weapon) {
 void Character::SetArmor(Armor armor) {
 	CurrentArmor = armor;
 }
+
+void Character::StatChange(char effect, string stat) {
+	if (effect == '+'){
+		if (stat == "Str"){
+			Str++;
+		} else if (stat == "Dex") {
+			Dex++;
+		} else if (stat == "Con") {
+			Con++;
+		} else if (stat == "Int") {
+			Int++;
+		} else if (stat == "Wis") {
+			Wis++;
+		} else if (stat == "Cha") {
+			Cha++;
+		}
+
+	} else if (effect == '-') {
+		if (stat == "Str"){
+			Str--;
+		} else if (stat == "Dex") {
+			Dex--;
+		} else if (stat == "Con") {
+			Con--;
+		} else if (stat == "Int") {
+			Int--;
+		} else if (stat == "Wis") {
+			Wis--;
+		} else if (stat == "Cha") {
+			Cha--;
+		}
+	}
+}
