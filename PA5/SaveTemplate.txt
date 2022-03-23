@@ -1,0 +1,28 @@
+Stage
+ArtName
+Race
+Name
+Str
+Dex
+Con
+Int
+Wis
+Cha
+CurrentHp
+MaxHp
+Level
+WeaponName
+ArmorName
+Gold
+WeaponInv:
+	x_name
+	x_name
+	x_name
+ArmorInv:
+	y_name
+	y_name
+	y_name
+ConsInv:
+	z_name
+	z_name
+	z_name

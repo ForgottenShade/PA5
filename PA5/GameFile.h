@@ -7,15 +7,15 @@
 namespace fs = std::filesystem;
 using namespace std;
 
-class Asset {
+class GameFile {
 private:
 	string Filename;
 	string Path;
 
 public:
-	Asset(fs::path);
-	Asset() = default;
-	~Asset() = default;
+	GameFile(fs::path);
+	GameFile() = default;
+	~GameFile() = default;
 
 	string GetFilename();
 	string GetPath();

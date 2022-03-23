@@ -9,6 +9,7 @@
 #include<stdlib.h>
 
 #include"Image.h"
+#include"SaveGame.h"
 #include"Weapon.h"
 #include"Armor.h"
 #include"Consumable.h"
@@ -20,10 +21,14 @@
 namespace fs = std::filesystem;
 using namespace std;
 
-string ASSET_DIR = fs::current_path().string() + "/Assets";
+string ROOT_DIR = fs::current_path().string();
+
+string ASSET_DIR = ROOT_DIR + "/Assets";
 string IMAGE_DIR = ASSET_DIR + "/Images";
 string UI_DIR = ASSET_DIR + "/UI";
 string DIALOG_DIR = ASSET_DIR + "/Dialogs";
+
+string SAVE_DIR = ROOT_DIR + "/Saves";
 
 map<string, Image> IMAGES;
 map<string, Image> UIS;
@@ -37,6 +42,15 @@ map<string, Character> ENEMIES;
 map<string, Character> NPCS;
 
 Character PC;
+SaveGame LAST_SAVE;
+
+//Check if string is number
+bool is_number(const string& s)
+{
+	string::const_iterator it = s.begin();
+	while (it != s.end() && std::isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
+}
 
 void LoadAssets() {
 	//Load Images
@@ -63,24 +77,16 @@ void LoadItems(){
 		//Generics
 	Weapon* Fists = new Weapon();
 			//Common: 1
-	Weapon* Club = new Weapon();
 	Weapon* Axe = new Weapon();
-	Weapon* Shortbow = new Weapon();
 	Weapon* Shortsword = new Weapon("Shortsword", 10, 1, 6, 1, false);
-	Weapon* Dagger = new Weapon();
-	Weapon* Quarterstaff = new Weapon();
 
 			//Uncommon: 2
-	Weapon* Crossbow = new Weapon();
-	Weapon* Longbow = new Weapon();
+
 	Weapon* Longsword = new Weapon();
 	Weapon* Mace = new Weapon();
-	Weapon* Spear = new Weapon();
 
 			//Rare: 3
 	Weapon* Greatsword = new Weapon();
-	Weapon* Greataxe = new Weapon();
-	Weapon* Greathammer = new Weapon();
 	Weapon* Rapier = new Weapon();
 
 		//Uniques: 4
@@ -131,17 +137,17 @@ void LoadItems(){
 void LoadCharacters() {
 	//Enemies
 		//Sewer
-	Character* rat = new Character(false, "Beast", "Rat", IMAGES.find("Rat01.txt")->second.GetImage(), 2, 11, 9, 2, 10, 4, 1, 10, 0);
-	Character* goblin = new Character(false, "Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second.GetImage(), 8, 14, 10, 10, 8, 8, 7, 12, 1);
-	Character* stankrat = new Character(true, "Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second.GetImage(), 10, 14, 10, 10, 8, 10, 21, 14, 2);
+	Character* rat = new Character(false, "Beast", "Rat", IMAGES.find("Rat01.txt")->second, 2, 11, 9, 2, 10, 4, 1, 10, 0);
+	Character* goblin = new Character(false, "Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second, 8, 14, 10, 10, 8, 8, 7, 12, 1);
+	Character* stankrat = new Character(true, "Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second, 10, 14, 10, 10, 8, 10, 21, 14, 2);
 
 	rat->SetWeapon(WEAPON_TABLE.find("Rat_Attack")->second);
 	goblin->SetWeapon(WEAPON_TABLE.find("Goblin_Attack")->second);
 
 		//Forest
-	Character* wolf = new Character(false, "Beast", "Wolf", IMAGES.find("Wolf01.txt")->second.GetImage(), 12, 15, 12, 3, 12, 6, 11, 13, 1);
-	Character* crab = new Character(false, "Beast", "Crabbo", IMAGES.find("Crab01.txt")->second.GetImage(), 14, 16, 18, 1, 10, 2, 25, 12, 2);
-	Character* awakened_tree = new Character(true, "Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second.GetImage(), 19, 6, 15, 10, 10, 7, 30, 13, 3);
+	Character* wolf = new Character(false, "Beast", "Wolf", IMAGES.find("Wolf01.txt")->second, 12, 15, 12, 3, 12, 6, 11, 13, 1);
+	Character* crab = new Character(false, "Beast", "Crabbo", IMAGES.find("Crab01.txt")->second, 14, 16, 18, 1, 10, 2, 25, 12, 2);
+	Character* awakened_tree = new Character(true, "Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second, 19, 6, 15, 10, 10, 7, 30, 13, 3);
 
 		//Town
 	Character* theif = new Character();
@@ -163,39 +169,91 @@ void GameOver() {
 
 }
 
-	//Confrontation
+	//Confrontation: stage 4
 void Dungeon() {
 	GameOver();
 }
 
-	//Self Discovery
+	//Self Discovery: stage 3
 void Town() {
 	Dungeon();
 }
 
-	//Orient yourself
+	//Orient yourself: stage 2
 void Forest() {
 	Town();
 }
 
-	//Escape
+	//Escape: stage 1
 void Sewer() {
+	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
 	Forest();
 }
 
 void NewGame() {
 	//Character/story intro here
+	
 
 	PC = Character(UIS);
 	//Tutorial/first combat
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
 	PC.SetWeapon(WEAPON_TABLE.find("Shortsword")->second);
-	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
-	//Sewer();
+	LAST_SAVE = SaveGame(PC, 1, SAVE_DIR);
+	Sewer();
 }
 
-void LoadGame() {
+void LoadGame(SaveGame save) {
+	PC = save.GetPC();
 
+	if (save.GetStage() == 1) {
+		Sewer();
+	}
+	else if (save.GetStage() == 2) {
+		Forest();
+	}
+	else if (save.GetStage() == 3) {
+		Town();
+	}
+	else if (save.GetStage() == 4) {
+		Dungeon();
+	}
+}
+
+void LoadGameMenu() {
+	string userInput;
+
+	while (true) {
+		int fileCount = 0;
+		vector<fs::path> filePaths;
+		
+		clear();
+		cout << UIS.find("Border.txt")->second.GetImage();
+		cout << "Select a save to load." << endl;
+		cout << UIS.find("Border.txt")->second.GetImage();
+		for (const auto& entry : fs::directory_iterator(SAVE_DIR)) {
+			fileCount++;
+			cout << fileCount << ". " << entry.path().string().substr(entry.path().string().find_last_of("/\\") + 1) << endl;
+			filePaths.push_back(entry.path());
+		}
+		cout << fileCount + 1 << ". Cancel" << endl;
+		cout << UIS.find("Border.txt")->second.GetImage();
+		cin >> userInput;
+
+		if (is_number(userInput)) {
+			int index = atoi(userInput.c_str()) - 1;
+
+			if (-1 < index < fileCount) {
+				if (index == fileCount) {
+					break;
+				}
+				else {
+					LAST_SAVE = SaveGame(filePaths[index], IMAGES, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					LoadGame(LAST_SAVE);
+					break;
+				}
+			}
+		}
+	}
 }
 
 void StartMenu() {
@@ -220,7 +278,7 @@ void StartMenu() {
 			break;
 		}
 		else if (strcmp(userInput.c_str(), "2") == 0) {
-			LoadGame();
+			LoadGameMenu();
 			break;
 		}
 	}

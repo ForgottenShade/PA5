@@ -1,7 +1,8 @@
 #include<iostream>
 #include<fstream>
+#include<filesystem>
 #include<string>
-#include"Asset.h"
+#include"GameFile.h"
 #include"Image.h"
 
 namespace fs = std::filesystem;
@@ -29,8 +30,8 @@ string Image::GetFileContents(ifstream& file)
 	}
 }
 
-Image::Image(fs::path path):Asset(path) {
-	ifstream reader(Asset::GetPath());
+Image::Image(fs::path path):GameFile(path) {
+	ifstream reader(GameFile::GetPath());
 	Img = GetFileContents(reader);
 	reader.close();
 }
@@ -40,9 +41,9 @@ string Image::GetImage() {
 }
 
 string Image::GetFilename() {
-	return Asset::GetFilename();
+	return GameFile::GetFilename();
 }
 
 string Image::GetPath() {
-	return Asset::GetPath();
+	return GameFile::GetPath();
 }

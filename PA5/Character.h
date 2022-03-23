@@ -19,7 +19,7 @@ class Character {
 private:
 	bool Unique;	//Used for determining enemy actions (fleeing)
 	bool Alive;		//Used for pc death
-	string Art;
+	Image Art;
 	string Race;
 	string Name;
 
@@ -50,7 +50,8 @@ private:
 	vector<Armor> Armors;
 	vector<Consumable> Consumables;
 public:
-	Character(bool, string, string, string, int, int, int, int, int, int, int, int, int);
+	Character(string, string, string, int, int, int, int, int, int, int, int, int, int, Weapon, Armor, vector<Weapon>, vector<Armor>, vector<Consumable>, map<string, Image>);
+	Character(bool, string, string, Image, int, int, int, int, int, int, int, int, int);
 	Character(map<string, Image>);
 	Character() = default;
 	~Character() = default;
@@ -58,7 +59,9 @@ public:
 	bool IsUnique();
 	bool IsAlive();
 	string GetName();
+	string GetRace();
 	string GetArt();
+	string GetArtFilename();
 	int GetStr();
 	int GetDex();
 	int GetCon();
@@ -68,13 +71,14 @@ public:
 	int GetCurrentHp();
 	int GetMaxHp();
 	int GetAC();
+	int GetLevel();
 
 	Weapon GetCurrentWeapon();
 	Armor GetCurrentArmor();
 
 	int GetAdv();
 
-	int GetCurrentGold();
+	int GetGold();
 	vector<Weapon> GetWeaponInv();
 	vector<Armor> GetArmorInv();
 	vector<Consumable> GetConsumableInv();

@@ -2,15 +2,15 @@
 #define _IMAGE_
 
 #include<iostream>
-#include<iostream>
 #include<fstream>
+#include<filesystem>
 #include<string>
-#include"Asset.h"
+#include"GameFile.h"
 
 namespace fs = std::filesystem;
 using namespace std;
 
-class Image:public Asset {
+class Image:public GameFile {
 private:
 	string Img;
 public:

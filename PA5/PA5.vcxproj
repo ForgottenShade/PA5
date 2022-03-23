@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
-    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="GameFile.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="Encounter.cpp" />
@@ -150,17 +150,19 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="SaveGame.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
-    <ClInclude Include="Asset.h" />
+    <ClInclude Include="GameFile.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Clear.h" />
     <ClInclude Include="Consumable.h" />
     <ClInclude Include="Encounter.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="SaveGame.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

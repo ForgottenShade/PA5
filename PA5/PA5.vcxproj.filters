@@ -21,7 +21,7 @@
     <ClCompile Include="Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Asset.cpp">
+    <ClCompile Include="GameFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">
@@ -45,12 +45,15 @@
     <ClCompile Include="Clear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SaveGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Asset.h">
+    <ClInclude Include="GameFile.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Clear.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveGame.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

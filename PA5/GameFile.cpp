@@ -1,18 +1,18 @@
 #include <string>
 #include <filesystem>
-#include "Asset.h"
+#include "GameFile.h"
 namespace fs = std::filesystem;
 using namespace std;
 
-Asset::Asset(fs::path path) {
+GameFile::GameFile(fs::path path) {
 	Path = path.string();
 	Filename = path.string().substr(path.string().find_last_of("/\\") + 1);
 }
 
-string Asset::GetFilename() {
+string GameFile::GetFilename() {
 	return Filename;
 }
 
-string Asset::GetPath() {
+string GameFile::GetPath() {
 	return Path;
 }
