@@ -99,6 +99,8 @@ public:
 	void ManageInventory(map<string, Image>);
 	void SetWeapon(Weapon);
 	void SetArmor(Armor);
+	void StatChange(char, string);
+	void AddWeaponToInv(Weapon);
 };
 
 #endif
