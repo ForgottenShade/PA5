@@ -85,6 +85,10 @@ void LoadItems(){
 
 		//Uniques: 4
 
+		//NPC Attacks
+	Weapon* Rat_Attack = new Weapon("Rat_Attack", 0, 0, 1, 1, NULL);
+	Weapon* Goblin_Attack = new Weapon("Goblin_Attack", 0, 0, 6, 1, false);
+
 	//Armors
 		//Generics
 	Armor* Clothes = new Armor("Clothes", 1, 1, 0, 999, "Not Armor");
@@ -118,6 +122,8 @@ void LoadItems(){
 		//Uniques
 
 	WEAPON_TABLE.insert(pair<string, Weapon>(Shortsword->GetName(), Shortsword[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Rat_Attack->GetName(), Rat_Attack[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Goblin_Attack->GetName(), Goblin_Attack[0]));
 
 	ARMOR_TABLE.insert(pair<string, Armor>(Clothes->GetName(), Clothes[0]));
 }
@@ -126,8 +132,11 @@ void LoadCharacters() {
 	//Enemies
 		//Sewer
 	Character* rat = new Character(false, "Beast", "Rat", IMAGES.find("Rat01.txt")->second.GetImage(), 2, 11, 9, 2, 10, 4, 1, 10, 0);
-	Character* goblin = new Character(false, "Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second.GetImage(), 8, 14, 10, 10, 8, 8, 7, 15, 1);
-	Character* stankrat = new Character(true, "Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second.GetImage(), 10, 14, 10, 10, 8, 10, 21, 17, 2);
+	Character* goblin = new Character(false, "Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second.GetImage(), 8, 14, 10, 10, 8, 8, 7, 12, 1);
+	Character* stankrat = new Character(true, "Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second.GetImage(), 10, 14, 10, 10, 8, 10, 21, 14, 2);
+
+	rat->SetWeapon(WEAPON_TABLE.find("Rat_Attack")->second);
+	goblin->SetWeapon(WEAPON_TABLE.find("Goblin_Attack")->second);
 
 		//Forest
 	Character* wolf = new Character(false, "Beast", "Wolf", IMAGES.find("Wolf01.txt")->second.GetImage(), 12, 15, 12, 3, 12, 6, 11, 13, 1);
@@ -184,7 +193,7 @@ void NewGame() {
 	//Tutorial/first combat
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
 	PC.SetWeapon(WEAPON_TABLE.find("Shortsword")->second);
-	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
+	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
 	//Sewer();
 }
 

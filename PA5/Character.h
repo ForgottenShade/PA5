@@ -78,7 +78,12 @@ public:
 	vector<Weapon> GetWeaponInv();
 	vector<Armor> GetArmorInv();
 	vector<Consumable> GetConsumableInv();
+
 	bool is_number(const string&);
+	int GetBonus(int);
+	bool IsCriticalHealth();
+	int Roll(int, int);
+	int SavingThrow(int);
 
 	void ChangeStat(string, int&, int&);
 	void TakeDamage(int);

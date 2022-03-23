@@ -242,7 +242,7 @@ int Character::GetMaxHp() {
 
 int Character::GetAC() {
 	if (AC == 0) {
-		int ac = 10 + Dex + CurrentArmor.GetACBonus();
+		int ac = 10 + GetBonus(Dex) + CurrentArmor.GetACBonus();
 		if (ac > CurrentArmor.GetBonusCeiling()) {
 			return CurrentArmor.GetBonusCeiling();
 		}
@@ -289,6 +289,36 @@ bool Character::is_number(const string& s)
 	string::const_iterator it = s.begin();
 	while (it != s.end() && std::isdigit(*it)) ++it;
 	return !s.empty() && it == s.end();
+}
+
+//Returns the stat bonus or malice for a stat
+int Character::GetBonus(int stat) {
+	return (stat - 10) / 2;
+}
+
+//Returns true if the enemy is considered at critical health, threshold is 10%
+bool Character::IsCriticalHealth() {
+	if (CurrentHp < 0.1 * MaxHp) {
+		return true;
+	}
+	return false;
+}
+
+//Roll an x sided dice, count times, returns sum of roll(s)
+int Character::Roll(int count, int x) {
+	srand(time(NULL));
+	int roll = 0;
+	for (int i = 0; i < count; i++) {
+		roll += rand() % x + 1;
+	}
+	return roll;
+}
+
+//Return saving throw for specific stat
+int Character::SavingThrow(int stat) {
+	int roll = Roll(1, 20);
+	int bonus = GetBonus(stat) * 2;
+	return roll + bonus;
 }
 
 void Character::TakeDamage(int dmg) {

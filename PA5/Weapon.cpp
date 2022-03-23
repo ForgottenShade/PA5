@@ -21,7 +21,7 @@ bool Weapon::GetDamageStat() {
 }
 
 string Weapon::Info() {
-	string stat;
+	string stat = "None";
 	if (DamageStat) {
 		stat = "Str";
 	}
@@ -29,7 +29,7 @@ string Weapon::Info() {
 		stat = "Dex";
 	}
 
-	return Item::GetName() + " (" + to_string(DamageDice) + "d" + to_string(NumberOfDice) + " " + stat + ")";
+	return Item::GetName() + " (" + to_string(NumberOfDice) + "d" + to_string(DamageDice) + " " + stat + ")";
 }
 
 string Weapon::GetName() {
