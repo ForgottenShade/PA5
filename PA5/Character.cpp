@@ -491,3 +491,7 @@ void Character::StatChange(char effect, string stat) {
 		}
 	}
 }
+
+void Character::AddWeaponToInv(Weapon weapon){
+	Weapons.push_back(weapon);
+}

@@ -10,8 +10,7 @@
 
 using namespace std;
 
-void dialog(Character PC, string text, map<string, Image> UIS, int roll, string abilityMod) {
-    int item_quality = 0;
+void dialog(Character &PC, string text, map<string, Image> UIS, int roll, string abilityMod) {
     clear();
     istringstream iss (text);
 
@@ -32,26 +31,24 @@ void dialog(Character PC, string text, map<string, Image> UIS, int roll, string 
                     cout << "You found something!" << endl;
                     if (roll <= 13){
                         if (abilityMod == "Str"){
-                            // Club?
+                            // Club, right?
+                            cout << "Adding Club to Intventory" << endl;
+                            cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
+                            Weapon Club = Weapon("Club", 10, 1, 6, 1, false);
+                            PC.AddWeaponToInv(Club);
+                            cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
                         } else if (abilityMod == "Dex") {
                             // Something else..
                         }
-                        
-                        cout << "Item Quality: " << item_quality << endl;
                     }
                     else if (roll <= 17){
-                        item_quality = 2;
-                        cout << "Item Quality: " << item_quality << endl;
 
                     }
                     else if (roll <= 20){
-                        item_quality = 3;
-                        cout << "Item Quality: " << item_quality << endl;
 
                     }
                     else if (roll > 20){
-                        item_quality = 4;
-                        cout << "Item Quality: " << item_quality << endl;
+                    
                     }
                 }
                 else{
@@ -127,7 +124,4 @@ void dialog(Character PC, string text, map<string, Image> UIS, int roll, string 
             cout << line << endl;
         }      
     }
-    cout << "Returning item_quality = " << item_quality << endl;
-    cin.ignore();
-    return item_quality;
 }

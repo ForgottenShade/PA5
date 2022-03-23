@@ -188,11 +188,15 @@ void NewGame() {
 
 	PC = Character(UIS);
 	
-	dialog(PC, DIALOGS.find("SewerToForest.txt")->second.GetImage(), UIS, 9);
+	
 	
 	//Tutorial/first combat
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
 	PC.SetWeapon(WEAPON_TABLE.find("Shortsword")->second);
+	
+	//dialog(PC, DIALOGS.find("SewerToForest.txt")->second.GetImage(), UIS, 10, "Str");
+
+	
 	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
 	//Sewer();
 }
