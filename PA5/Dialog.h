@@ -11,6 +11,6 @@
 #include "Character.h"
 #include "Clear.h"
 
-void dialog(Character, string, map<string, Image>);
+void dialog(Character, string, map<string, Image>, int, string);
 
 #endif 

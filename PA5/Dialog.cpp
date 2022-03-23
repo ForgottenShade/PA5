@@ -10,7 +10,8 @@
 
 using namespace std;
 
-void dialog(Character PC, string text, map<string, Image> UIS) {
+void dialog(Character PC, string text, map<string, Image> UIS, int roll, string abilityMod) {
+    int item_quality = 0;
     clear();
     istringstream iss (text);
 
@@ -23,10 +24,42 @@ void dialog(Character PC, string text, map<string, Image> UIS) {
             cin.ignore();
             clear();
             cout << UIS.find("Border.txt")->second.GetImage();
-            
         }
         else if (line[0] == '+'){   
-            if (line == "+ STR"){
+            if (line == "+ WEAPON") {
+                cout << "Your roll is: " << roll << endl;
+                if (roll > 9) {
+                    cout << "You found something!" << endl;
+                    if (roll <= 13){
+                        if (abilityMod == "Str"){
+                            // Club?
+                        } else if (abilityMod == "Dex") {
+                            // Something else..
+                        }
+                        
+                        cout << "Item Quality: " << item_quality << endl;
+                    }
+                    else if (roll <= 17){
+                        item_quality = 2;
+                        cout << "Item Quality: " << item_quality << endl;
+
+                    }
+                    else if (roll <= 20){
+                        item_quality = 3;
+                        cout << "Item Quality: " << item_quality << endl;
+
+                    }
+                    else if (roll > 20){
+                        item_quality = 4;
+                        cout << "Item Quality: " << item_quality << endl;
+                    }
+                }
+                else{
+                    cout << "Sadly you lack the intelligence to find anything.";
+                }
+                cin.ignore();  
+            }
+            else if (line == "+ STR"){
                 PC.StatChange('+', "Str"); 
                 cout << "You gained 1 Strength!" << endl;
                 cout << "Current Strength is " << PC.GetStr() << endl;
@@ -94,4 +127,7 @@ void dialog(Character PC, string text, map<string, Image> UIS) {
             cout << line << endl;
         }      
     }
+    cout << "Returning item_quality = " << item_quality << endl;
+    cin.ignore();
+    return item_quality;
 }

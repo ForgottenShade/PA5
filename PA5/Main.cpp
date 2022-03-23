@@ -188,7 +188,7 @@ void NewGame() {
 
 	PC = Character(UIS);
 	
-	dialog(PC, DIALOGS.find("SewerToForest.txt")->second.GetImage(), UIS);
+	dialog(PC, DIALOGS.find("SewerToForest.txt")->second.GetImage(), UIS, 9);
 	
 	//Tutorial/first combat
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
