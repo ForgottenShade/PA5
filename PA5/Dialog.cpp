@@ -10,7 +10,13 @@
 
 using namespace std;
 
-void dialog(Character &PC, string text, map<string, Image> UIS, int roll, string abilityMod) {
+void rollForWeapon(Character &PC){ // Weapons table
+    // roll
+
+    // weapon depending on roll
+}
+
+void dialog(Character &PC, string text, map<string, Image> UIS) { // Take in Weapon table
     clear();
     istringstream iss (text);
 
@@ -24,39 +30,52 @@ void dialog(Character &PC, string text, map<string, Image> UIS, int roll, string
             clear();
             cout << UIS.find("Border.txt")->second.GetImage();
         }
-        else if (line[0] == '+'){   
-            if (line == "+ WEAPON") {
-                cout << "Your roll is: " << roll << endl;
-                if (roll > 9) {
-                    cout << "You found something!" << endl;
-                    if (roll <= 13){
-                        if (abilityMod == "Str"){
-                            // Club, right?
-                            cout << "Adding Club to Intventory" << endl;
-                            cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
-                            Weapon Club = Weapon("Club", 10, 1, 6, 1, false);
-                            PC.AddWeaponToInv(Club);
-                            cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
-                        } else if (abilityMod == "Dex") {
-                            // Something else..
-                        }
-                    }
-                    else if (roll <= 17){
+        else if (line[0] == '+'){ 
+            if (line == "+ WEAPON"){
+                //call Weeapon funciton
+            }  
+            // + ARMOR 
 
-                    }
-                    else if (roll <= 20){
+            // + HEaling
 
-                    }
-                    else if (roll > 20){
+            // + Custom int
+
+            // + MISC
+
+
+
+            // if (line == "+ WEAPON") {
+            //     cout << "Your roll is: " << roll << endl;
+            //     if (roll > 9) {
+            //         cout << "You found something!" << endl;
+            //         if (roll <= 13){
+            //             if (abilityMod == "Str"){
+            //                 // Club, right?
+            //                 cout << "Adding Club to Intventory" << endl;
+            //                 cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
+            //                 Weapon Club = Weapon("Club", 10, 1, 6, 1, false);
+            //                 PC.AddWeaponToInv(Club);
+            //                 cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
+            //             } else if (abilityMod == "Dex") {
+            //                 // Something else..
+            //             }
+            //         }
+            //         else if (roll <= 17){
+
+            //         }
+            //         else if (roll <= 20){
+
+            //         }
+            //         else if (roll > 20){
                     
-                    }
-                }
-                else{
-                    cout << "Sadly you lack the intelligence to find anything.";
-                }
-                cin.ignore();  
-            }
-            else if (line == "+ STR"){
+            //         }
+            //     }
+            //     else{
+            //         cout << "Sadly you lack the intelligence to find anything.";
+            //     }
+            //     cin.ignore();  
+            // }
+            if (line == "+ STR"){
                 PC.StatChange('+', "Str"); 
                 cout << "You gained 1 Strength!" << endl;
                 cout << "Current Strength is " << PC.GetStr() << endl;
