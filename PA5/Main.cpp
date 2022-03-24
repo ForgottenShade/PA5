@@ -163,42 +163,59 @@ void GameOver() {
 
 }
 
-	//Confrontation
+	//Confrontation: stage 3
 void Dungeon() {
 	GameOver();
 }
 
-	//Self Discovery
+	//Self Discovery: stage 2
 void Town() {
 	Dungeon();
 }
 
-	//Orient yourself
-void Forest() {
+	//Escape: stage 1
+void Sewer(int stage) {
+	//**STAGE 1.1***
+	//side chamber -> exit into tunnels
+	Encounter ratEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
+	//theres another one!
+	Encounter ratEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
+	//going up in the tunnels, to intersection, find goblin traces +weapon
+	//just manage inventory, not rest screen 
+	//intersection -> tunnel -> goblins
+	Encounter goblinEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
+	//look around +armor
+	
+	//**STAGE 1.2***
+	//goblin food, rest, inventory for armor, save/load
+	Encounter stankratEncounter = Encounter(PC, ENEMIES.find("Stankrat")->second, UIS);
+	//healing potion loot, misc object
+	//emerge from the sewer
 	Town();
-}
-
-	//Escape
-void Sewer() {
-	Forest();
 }
 
 void NewGame() {
 	//Character/story intro here
-
+	
 	PC = Character(UIS);
-	
-	
-	
-	//Tutorial/first combat
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
-	PC.SetWeapon(WEAPON_TABLE.find("Shortsword")->second);
-	
-	//dialog(PC, DIALOGS.find("SewerToForest.txt")->second.GetImage(), UIS, 10, "Str");
+	PC.SetWeapon(WEAPON_TABLE.find("Fist")->second);
+	LAST_SAVE = SaveGame(PC, 1, SAVE_DIR);
+	Sewer(1);
+}
 
-	
-	Encounter tutorialEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
-	//Sewer();
+void LoadGame(SaveGame save) {
+	PC = save.GetPC();
+
+	if (save.GetStage() == 1) {
+		Sewer();
+	}
+	else if (save.GetStage() == 2) {
+		Town();
+	}
+	else if (save.GetStage() == 3) {
+		Dungeon();
+	}
 }
 
 void LoadGame() {

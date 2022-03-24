@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="GameFile.cpp" />
     <ClCompile Include="Clear.cpp" />
     <ClCompile Include="Consumable.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
+    <ClInclude Include="Dialog.h" />
     <ClInclude Include="GameFile.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Clear.h" />
