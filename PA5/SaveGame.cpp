@@ -175,6 +175,7 @@ SaveGame::SaveGame(Character pc, double stage, string SAVE_DIR) {
 	save.close();
 }
 
+
 Character SaveGame::GetPC() {
 	return PC;
 }

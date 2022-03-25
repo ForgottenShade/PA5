@@ -48,9 +48,6 @@
     <ClCompile Include="SaveGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEvents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,9 +81,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SaveGame.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dialog.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEvents.h">

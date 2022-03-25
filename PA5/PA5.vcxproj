@@ -142,7 +142,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
-    <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameFile.cpp" />
     <ClCompile Include="Clear.cpp" />
@@ -157,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
-    <ClInclude Include="Dialog.h" />
     <ClInclude Include="GameEvents.h" />
     <ClInclude Include="GameFile.h" />
     <ClInclude Include="Character.h" />

@@ -271,21 +271,16 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
         else if (line[0] == '+'){ 
             if (line == "+ WEAPON"){
                 //call Weeapon funciton
-                RollForWeapon(PC, Weapon_table);     
+                RollForWeapon(PC, Weapon_table, loot_bypass);     
             }  
             // + ARMOR 
             else if( line == "+ ARMOR"){
-                RollForArmor(PC, Armor_table);
+                RollForArmor(PC, Armor_table, loot_bypass);
             }
 
             // + CONSUMABLE
             else if (line == "+ CONSUMABLE"){
-                RollForConsumable(PC, Consumable_table);
-            }
-
-            // + Healing
-            else if( line == "+ HEALING"){
-                GetHealing(PC, Consumable_table);
+                RollForConsumable(PC, Consumable_table, loot_bypass);
             }
 
             // + CUSTOM int

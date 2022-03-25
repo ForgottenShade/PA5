@@ -16,9 +16,9 @@
 #include"Consumable.h"
 #include"Character.h"
 #include"Encounter.h"
-#include "GameEvents.h"
-#include "Clear.h"
-#include "SaveGame.h"
+#include"GameEvents.h"
+#include"Clear.h"
+#include"SaveGame.h"
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -164,6 +164,36 @@ void LoadCharacters() {
 	//NPCs
 }
 
+
+void Rest(Character& PC, double stage, map<string, Image> UIS, map<string, Image> IMAGES) {
+	string userInput;
+
+	while (true) {
+		clear();
+		cout << IMAGES.find("Campfire.txt")->second.GetImage();
+		cout << UIS.find("Border.txt")->second.GetImage();
+		cout << UIS.find("RestMenu.txt")->second.GetImage();
+		cout << UIS.find("Border.txt")->second.GetImage();
+		cin >> userInput;
+
+		//Rest
+		if (strcmp(userInput.c_str(), "1") == 0) {
+			int halfHp = (PC.GetMaxHp() / 2);
+			cout << "You heal " << halfHp << " points!" << endl;
+			PC.Heal(halfHp);
+			break;
+		}
+		//Inventory
+		else if (strcmp(userInput.c_str(), "2") == 0) {
+			PC.ManageInventory(UIS);
+		}
+		//Save Game
+		else if (strcmp(userInput.c_str(), "3") == 0) {
+			LAST_SAVE = SaveGame(PC, stage, SAVE_DIR);
+		}
+	}
+}
+
 //Game Structure
 void GameOver() {
 
@@ -186,7 +216,7 @@ void Sewer(double stage) {
 		Dialog(PC, DIALOGS.find("IntroToRats.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Encounter ratEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
 		Dialog(PC, DIALOGS.find("Rat2.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
-		Encounter ratEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
+		Encounter ratEncounter2 = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
 		Dialog(PC, DIALOGS.find("RatsToIntersection.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, true);
 		PC.ManageInventory(UIS);
 		Dialog(PC, DIALOGS.find("IntersectionToGoblins.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
@@ -208,6 +238,7 @@ void Sewer(double stage) {
 		Town();
 	}
 }
+
 
 void LoadGame(SaveGame save) {
 	PC = save.GetPC();
@@ -253,39 +284,6 @@ void LoadGameMenu() {
 					break;
 				}
 			}
-		}
-	}
-}
-
-void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> IMAGES) {
-	string userInput;
-
-	while (true) {
-		clear();
-		cout << IMAGES.find("Campfire.txt")->second.GetImage();
-		cout << UIS.find("Border.txt")->second.GetImage();
-		cout << UIS.find("RestMenu.txt")->second.GetImage();
-		cout << UIS.find("Border.txt")->second.GetImage();
-		cin >> userInput;
-
-		//Rest
-		if (strcmp(userInput.c_str(), "1") == 0) {
-			int halfHp = (PC.GetMaxHp() / 2);
-			cout << "You heal " << halfHp << " points!" << endl;
-			PC.Heal(halfHp);
-			break;
-		}
-		//Inventory
-		else if (strcmp(userInput.c_str(), "2") == 0) {
-			PC.ManageInventory(UIS);
-		}
-		//Save Game
-		else if (strcmp(userInput.c_str(), "3") == 0) {
-			LAST_SAVE = SaveGame(PC, stage, SAVE_DIR);
-		}
-		//Load Game
-		else if (strcmp(userInput.c_str(), "3") == 0) {
-			LoadGameMenu();
 		}
 	}
 }
