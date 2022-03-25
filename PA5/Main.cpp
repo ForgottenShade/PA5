@@ -111,13 +111,13 @@ void LoadItems(){
 	//Consumables
 		//Generics
 			//Common
-	Consumable* HealingSalve = new Consumable();
+	Consumable* HealingSalve = new Consumable("HealingSalve", 10, 1, 1, 0, 5);
 	
 			//Uncommon
-	Consumable* HealingPotion = new Consumable();
+	Consumable* HealingPotion = new Consumable("HealingPotion", 10, 2, 1, 0, 10); 
 
 			//Rare
-	Consumable* GreaterHealingPotion = new Consumable();
+	Consumable* GreaterHealingPotion = new Consumable("GreaterHealingPotion", 10, 3, 1, 0, 20); 
 
 		//Uniques
 
