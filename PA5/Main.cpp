@@ -63,25 +63,25 @@ void LoadItems(){
 		//Generics
 	Weapon* Fists = new Weapon();
 			//Common: 1
-	Weapon* Club = new Weapon();
-	Weapon* Axe = new Weapon();
-	Weapon* Shortbow = new Weapon();
+	Weapon* Club = new Weapon("Club", 10, 1, 4, 1, true);
+	Weapon* Axe = new Weapon("Axe", 10, 1, 6, 1, false);
+	Weapon* Shortbow = new Weapon("Shortbow", 10, 1, 6, 1, false);
 	Weapon* Shortsword = new Weapon("Shortsword", 10, 1, 6, 1, false);
-	Weapon* Dagger = new Weapon();
-	Weapon* Quarterstaff = new Weapon();
+	Weapon* Dagger = new Weapon("Dagger", 10, 1, 4, 1, false);
+	Weapon* Quarterstaff = new Weapon("Quarterstaff", 10, 1, 6, 1, true); //STR
 
 			//Uncommon: 2
-	Weapon* Crossbow = new Weapon();
-	Weapon* Longbow = new Weapon();
-	Weapon* Longsword = new Weapon();
-	Weapon* Mace = new Weapon();
-	Weapon* Spear = new Weapon();
+	Weapon* Crossbow = new Weapon("Crossbow", 10, 2, 6, 1, false);
+	Weapon* Longbow = new Weapon("Longbow", 10, 2, 8, 1, false);
+	Weapon* Longsword = new Weapon("Longsword", 10, 2, 8, 1, true);
+	Weapon* Mace = new Weapon("Mace", 10, 2, 6, 1, true);
+	Weapon* Spear = new Weapon("Spear", 10, 2, 6, 1, false);
 
 			//Rare: 3
-	Weapon* Greatsword = new Weapon();
-	Weapon* Greataxe = new Weapon();
-	Weapon* Greathammer = new Weapon();
-	Weapon* Rapier = new Weapon();
+	Weapon* Greatsword = new Weapon("Greatsword", 10, 3, 6, 2, true);
+	Weapon* Greataxe = new Weapon("Greataxe", 10, 3, 12, 1, true);
+	Weapon* Warhammer = new Weapon("Warhammer", 10, 3, 12, 1, true);
+	Weapon* Rapier = new Weapon("Rapier", 10, 3, 8, 1, false);
 
 		//Uniques: 4
 
