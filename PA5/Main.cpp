@@ -7,6 +7,8 @@
 #include<filesystem>
 #include<map>
 #include<stdlib.h>
+#include <stdio.h>
+#include <windows.h>
 
 #include"Image.h"
 #include"Weapon.h"
@@ -67,25 +69,25 @@ void LoadItems(){
 		//Generics
 	Weapon* Fists = new Weapon();
 			//Common: 1
-	Weapon* Club = new Weapon();
-	Weapon* Axe = new Weapon();
-	Weapon* Shortbow = new Weapon();
+	Weapon* Club = new Weapon("Club", 10, 1, 4, 1, true);
+	Weapon* Axe = new Weapon("Axe", 10, 1, 6, 1, false);
+	Weapon* Shortbow = new Weapon("Shortbow", 10, 1, 6, 1, false);
 	Weapon* Shortsword = new Weapon("Shortsword", 10, 1, 6, 1, false);
-	Weapon* Dagger = new Weapon();
-	Weapon* Quarterstaff = new Weapon();
+	Weapon* Dagger = new Weapon("Dagger", 10, 1, 4, 1, false);
+	Weapon* Quarterstaff = new Weapon("Quarterstaff", 10, 1, 6, 1, true); //STR
 
 			//Uncommon: 2
-	Weapon* Crossbow = new Weapon();
-	Weapon* Longbow = new Weapon();
-	Weapon* Longsword = new Weapon();
-	Weapon* Mace = new Weapon();
-	Weapon* Spear = new Weapon();
+	Weapon* Crossbow = new Weapon("Crossbow", 10, 2, 6, 1, false);
+	Weapon* Longbow = new Weapon("Longbow", 10, 2, 8, 1, false);
+	Weapon* Longsword = new Weapon("Longsword", 10, 2, 8, 1, true);
+	Weapon* Mace = new Weapon("Mace", 10, 2, 6, 1, true);
+	Weapon* Spear = new Weapon("Spear", 10, 2, 6, 1, false);
 
 			//Rare: 3
-	Weapon* Greatsword = new Weapon();
-	Weapon* Greataxe = new Weapon();
-	Weapon* Greathammer = new Weapon();
-	Weapon* Rapier = new Weapon();
+	Weapon* Greatsword = new Weapon("Greatsword", 10, 3, 6, 2, true);
+	Weapon* Greataxe = new Weapon("Greataxe", 10, 3, 12, 1, true);
+	Weapon* Warhammer = new Weapon("Warhammer", 10, 3, 12, 1, true);
+	Weapon* Rapier = new Weapon("Rapier", 10, 3, 8, 1, false);
 
 		//Uniques: 4
 
@@ -115,13 +117,13 @@ void LoadItems(){
 	//Consumables
 		//Generics
 			//Common
-	Consumable* HealingSalve = new Consumable();
+	Consumable* HealingSalve = new Consumable("HealingSalve", 10, 1, 1, 0, 5);
 	
 			//Uncommon
-	Consumable* HealingPotion = new Consumable();
+	Consumable* HealingPotion = new Consumable("HealingPotion", 10, 2, 1, 0, 10); 
 
 			//Rare
-	Consumable* GreaterHealingPotion = new Consumable();
+	Consumable* GreaterHealingPotion = new Consumable("GreaterHealingPotion", 10, 3, 1, 0, 20); 
 
 		//Uniques
 
@@ -326,7 +328,26 @@ void StartMenu() {
 	}
 }
 
+void ResizeWindow(){
+	HANDLE wHnd;    // Handle to write to the console.
+	HANDLE rHnd;    // Handle to read from the console.
+
+    // Set up the handles for reading/writing:
+    wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+    rHnd = GetStdHandle(STD_INPUT_HANDLE);
+    // Change the window title:
+    SetConsoleTitle(L"Chains of Content");
+    // Set up the required window size:
+    SMALL_RECT windowSize = {0, 0, 1000, 600};
+    SetConsoleWindowInfo(wHnd, 1, &windowSize);
+    // Change the console window size:
+        // Create a COORD to hold the buffer size:
+    COORD bufferSize = {10, 10};
+    SetConsoleScreenBufferSize(wHnd, bufferSize);
+}
+
 int main() {
+	//ResizeWindow();
 	LoadAssets();
 	LoadItems();
 	LoadCharacters();
