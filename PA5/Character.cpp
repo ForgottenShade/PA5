@@ -411,6 +411,7 @@ void Character::ManageInventory(map<string, Image> UIS) {
 		PrintCharacterStats(UIS);
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cout << "1. Manage Weapons \t2. Manage Armors \n3. Show Consumables" << endl;
+		cout << "4. Exit" << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cin >> userInput;
 		clear();
@@ -487,6 +488,9 @@ void Character::ManageInventory(map<string, Image> UIS) {
 			cout << UIS.find("Border.txt")->second.GetImage();
 			cin >> userInput;
 		}
+		else if (strcmp(userInput.c_str(), "4") == 0) {
+			break;
+		}
 	}
 }
 
@@ -533,4 +537,12 @@ void Character::StatChange(char effect, string stat) {
 
 void Character::AddWeaponToInv(Weapon weapon){
 	Weapons.push_back(weapon);
+}
+
+void Character::AddArmorToInv(Armor armor) {
+	Armors.push_back(armor);
+}
+
+void Character::AddConsumableToInv(Consumable consumable) {
+	Consumables.push_back(consumable);
 }

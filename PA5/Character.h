@@ -101,6 +101,8 @@ public:
 	void SetArmor(Armor);
 	void StatChange(char, string);
 	void AddWeaponToInv(Weapon);
+	void AddArmorToInv(Armor);
+	void AddConsumableToInv(Consumable);
 };
 
 #endif

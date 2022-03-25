@@ -5,6 +5,8 @@
 #include <map>
 #include <iostream>
 #include <sstream>
+#include <random>
+#include <time.h>
 #include <map>
 
 #include "Image.h"
@@ -14,13 +16,21 @@
 #include "Armor.h"
 #include "Consumable.h"
 
-void rollForWeapon(Character&, map<string, Weapon>);
-void rollForArmor(Character&, map<string, Armor>);
-void rollForConsumable(Character&, map<string, Consumable>);
-void getHealing(Character&, map<string, Consumable>);
-void getCustomItem(Character&, int);
-void getMiscItem();
-void changeStat();
-void dialog(Character&, string, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>); // Weapons table
+bool is_number(const string& );
+
+Consumable GetConsumableByQuality(int, map<string, Consumable>);
+Armor GetArmorByQuality(int, map<string, Armor>);
+Weapon GetWeaponByQuality(int, map<string, Weapon>);
+
+void RollForWeapon(Character&, map<string, Weapon>, bool);
+void RollForArmor(Character&, map<string, Armor>, bool);
+void RollForConsumable(Character&, map<string, Consumable>, bool);
+
+void GetHealing(Character&, map<string, Consumable>);
+void GetCustomItem(Character&, int);
+void GetMiscItem();
+void ChangeStat();
+
+void Dialog(Character&, string, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>, bool); // Weapons table
 
 #endif 

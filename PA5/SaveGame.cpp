@@ -51,7 +51,7 @@ SaveGame::SaveGame(fs::path path, map<string, Image> IMAGES, map<string, Weapon>
 
 			//hardcoding reading from the file
 			if (lineCount == 0) {
-				Stage = atoi(currentLine.c_str());
+				Stage = stod(currentLine);
 			}
 			else if (lineCount == 1) {
 				art_file = currentLine;
@@ -128,7 +128,7 @@ SaveGame::SaveGame(fs::path path, map<string, Image> IMAGES, map<string, Weapon>
 }
 
 //Saves the game to file
-SaveGame::SaveGame(Character pc, int stage, string SAVE_DIR) {
+SaveGame::SaveGame(Character pc, double stage, string SAVE_DIR) {
 	PC = pc;
 	Stage = stage;
 	string userInput;

@@ -2,6 +2,8 @@
 #include <map>
 #include <iostream>
 #include <sstream>
+#include<random>
+#include<time.h>
 
 #include "GameEvents.h"
 #include "Image.h"
@@ -10,71 +12,180 @@
 
 using namespace std;
 
-void rollForWeapon(Character &PC, map<string, Weapon> Weapon_table){ 
-    // // roll
-    // int roll = PC.roll();
+//Check if string is number
+bool is_number(const string& s)
+{
+    string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
 
-    // // weapon depending on roll
-    
-    //     cout << "Your roll is: " << roll << endl;
-    //     if (roll > 9) {
-    //         cout << "You found something!" << endl;
-    //         if (roll <= 13){
-    //             if (abilityMod == "Str"){
-    //                 // Club, right?
-    //                 cout << "Adding Club to Intventory" << endl;
-    //                 cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
-    //                 Weapon Club = Weapon("Club", 10, 1, 6, 1, false);
-    //                 PC.AddWeaponToInv(Club);
-    //                 cout << "Current Items in Inventory" << PC.GetWeaponInv().size() << endl;
-    //             } else if (abilityMod == "Dex") {
-    //                 // Something else..
-    //             }
-    //         }
-    //         else if (roll <= 17){
+Consumable GetConsumableByQuality(int quality, map<string, Consumable> Table) {
+    int count = 0;
+    vector<Consumable> qualityTable;
+    srand(time(NULL));
 
-    //         }
-    //         else if (roll <= 20){
+    for (auto& entry : Table) {
+        if (entry.second.GetQuality() == quality) {
+            qualityTable.push_back(entry.second);
+            count++;
+        }
+    }
 
-    //         }
-    //         else if (roll > 20){
-            
-    //         }
-    //     }
-    //     else{
-    //         cout << "Sadly you lack the intelligence to find anything.";
-    //     }
-    //     cin.ignore();  
+    return qualityTable[rand() % count];
+}
+
+Armor GetArmorByQuality(int quality, map<string, Armor> Table) {
+    int count = 0;
+    vector<Armor> qualityTable;
+    srand(time(NULL));
+
+    for (auto& entry : Table) {
+        if (entry.second.GetQuality() == quality) {
+            qualityTable.push_back(entry.second);
+            count++;
+        }
+    }
+
+    return qualityTable[rand() % count];
+}
+
+Weapon GetWeaponByQuality(int quality, map<string, Weapon> Table) {
+    int count = 0;
+    vector<Weapon> qualityTable;
+    srand(time(NULL));
+
+    for (auto& entry : Table) {
+        if (entry.second.GetQuality() == quality) {
+            qualityTable.push_back(entry.second);
+            count++;
+        }
+    }
+
+    return qualityTable[rand() % count];
+}
+
+void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_bypass){
+     // roll
+     int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
+
+     // weapon depending on roll
+
+         cout << "Your investigation (int) roll is: " << roll << endl;
+         if (roll > 9) {
+             cout << "you found something!" << endl;
+             if (roll <= 13){
+                 PC.AddWeaponToInv(GetWeaponByQuality(1, Weapon_table));
+             }
+             else if (roll <= 17){
+                 PC.AddWeaponToInv(GetWeaponByQuality(2, Weapon_table));
+             }
+             else if (roll <= 20){
+                 PC.AddWeaponToInv(GetWeaponByQuality(3, Weapon_table));
+             }
+             else if (roll > 20){
+                 PC.AddWeaponToInv(GetWeaponByQuality(4, Weapon_table));
+             }
+         }
+         else{
+             if (loot_bypass) {
+                 cout << "you found something!" << endl;
+                 PC.AddWeaponToInv(GetWeaponByQuality(1, Weapon_table));
+             }
+             else {
+                 cout << "sadly you lack the intelligence to find anything.";
+             }
+         }
+         cin.ignore();  
 }
 
 
-void rollForArmor(Character &PC, map<string, Armor> Armor_table){
+void RollForArmor(Character &PC, map<string, Armor> Armor_table, bool loot_bypass){
+    // roll
+    int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
+
+    // weapon depending on roll
+
+    cout << "Your investigation (int) roll is: " << roll << endl;
+    if (roll > 9) {
+        cout << "you found something!" << endl;
+        if (roll <= 13) {
+            PC.AddArmorToInv(GetArmorByQuality(1, Armor_table));
+        }
+        else if (roll <= 17) {
+            PC.AddArmorToInv(GetArmorByQuality(2, Armor_table));
+        }
+        else if (roll <= 20) {
+            PC.AddArmorToInv(GetArmorByQuality(3, Armor_table));
+        }
+        else if (roll > 20) {
+            PC.AddArmorToInv(GetArmorByQuality(4, Armor_table));
+        }
+    }
+    else {
+        if (loot_bypass) {
+            cout << "you found something!" << endl;
+            PC.AddArmorToInv(GetArmorByQuality(1, Armor_table));
+        }
+        else {
+            cout << "sadly you lack the intelligence to find anything.";
+        }
+    }
+    cin.ignore();
+}
+
+
+void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, bool loot_bypass){
+    // roll
+    int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
+
+    // weapon depending on roll
+
+    cout << "Your investigation (int) roll is: " << roll << endl;
+    if (roll > 9) {
+        cout << "you found something!" << endl;
+        if (roll <= 13) {
+            PC.AddConsumableToInv(GetConsumableByQuality(1, Consumable_Table));
+        }
+        else if (roll <= 17) {
+            PC.AddConsumableToInv(GetConsumableByQuality(2, Consumable_Table));
+        }
+        else if (roll <= 20) {
+            PC.AddConsumableToInv(GetConsumableByQuality(3, Consumable_Table));
+        }
+        else if (roll > 20) {
+            PC.AddConsumableToInv(GetConsumableByQuality(4, Consumable_Table));
+        }
+    }
+    else {
+        if (loot_bypass) {
+            cout << "you found something!" << endl;
+            PC.AddConsumableToInv(GetConsumableByQuality(1, Consumable_Table));
+        }
+        else {
+            cout << "sadly you lack the intelligence to find anything.";
+        }
+    }
+    cin.ignore();
+}
+
+
+void GetHealing(Character &PC, map<string, Consumable> Consumable_Table) {
 
 }
 
 
-void rollForConsumable(Character &PC, map<string, Consumable> Consumable_Table){
-
-
-}
-
-
-void getHealing(Character &PC, map<string, Consumable> Consumable_Table) {
+void GetCustomItem(Character &PC, int){
 
 }
 
 
-void getCustomItem(Character &PC, int){
+void GetMiscItem(){
 
 }
 
 
-void getMiscItem(){
-
-}
-
-
-void changeStat(Character &PC, char effect, string stat) {
+void ChangeStat(Character &PC, char effect, string stat) {
     if ( effect == '+'){
         if (stat == "STR"){
             PC.StatChange('+', "Str"); 
@@ -143,8 +254,7 @@ void changeStat(Character &PC, char effect, string stat) {
     }
 }
 
-
-void dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weapon> Weapon_table, map<string, Armor> Armor_table, map<string, Consumable> Consumable_table) { // Take in Weapon table
+void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weapon> Weapon_table, map<string, Armor> Armor_table, map<string, Consumable> Consumable_table, bool loot_bypass) { // Take in Weapon table
     clear();
     istringstream iss (text);
 
@@ -161,28 +271,28 @@ void dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
         else if (line[0] == '+'){ 
             if (line == "+ WEAPON"){
                 //call Weeapon funciton
-                rollForWeapon(PC, Weapon_table);     
+                RollForWeapon(PC, Weapon_table);     
             }  
             // + ARMOR 
             else if( line == "+ ARMOR"){
-                rollForArmor(PC, Armor_table);
+                RollForArmor(PC, Armor_table);
             }
 
             // + CONSUMABLE
             else if (line == "+ CONSUMABLE"){
-                rollForConsumable(PC, Consumable_table);
+                RollForConsumable(PC, Consumable_table);
             }
 
             // + Healing
             else if( line == "+ HEALING"){
-                getHealing(PC, Consumable_table);
+                GetHealing(PC, Consumable_table);
             }
 
             // + CUSTOM int
 
             else if (line.substr(0, 8) == "+ CUSTOM"){
                 int number = atoi(line.substr (9, 1).c_str());
-                getCustomItem(PC, number);
+                GetCustomItem(PC, number);
             }
 
             // + MISC
