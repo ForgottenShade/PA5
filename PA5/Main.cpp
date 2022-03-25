@@ -14,7 +14,7 @@
 #include"Consumable.h"
 #include"Character.h"
 #include"Encounter.h"
-#include "Dialog.h"
+#include "GameEvents.h"
 #include "Clear.h"
 
 namespace fs = std::filesystem;
