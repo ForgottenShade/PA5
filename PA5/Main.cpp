@@ -7,6 +7,8 @@
 #include<filesystem>
 #include<map>
 #include<stdlib.h>
+#include <stdio.h>
+#include <windows.h>
 
 #include"Image.h"
 #include"Weapon.h"
@@ -251,7 +253,26 @@ void StartMenu() {
 	}
 }
 
+void ResizeWindow(){
+	HANDLE wHnd;    // Handle to write to the console.
+	HANDLE rHnd;    // Handle to read from the console.
+
+    // Set up the handles for reading/writing:
+    wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+    rHnd = GetStdHandle(STD_INPUT_HANDLE);
+    // Change the window title:
+    SetConsoleTitle(L"Chains of Content");
+    // Set up the required window size:
+    SMALL_RECT windowSize = {0, 0, 1000, 600};
+    SetConsoleWindowInfo(wHnd, 1, &windowSize);
+    // Change the console window size:
+        // Create a COORD to hold the buffer size:
+    COORD bufferSize = {10, 10};
+    SetConsoleScreenBufferSize(wHnd, bufferSize);
+}
+
 int main() {
+	//ResizeWindow();
 	LoadAssets();
 	LoadItems();
 	LoadCharacters();
