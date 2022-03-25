@@ -67,7 +67,7 @@ void LoadAssets() {
 void LoadItems(){
 	//Weapons
 		//Generics
-	Weapon* Fists = new Weapon();
+	Weapon* Fists = new Weapon("Fists", 0, 0, 4, 1, true);
 			//Common: 1
 	Weapon* Club = new Weapon("Club", 10, 1, 4, 1, true);
 	Weapon* Axe = new Weapon("Axe", 10, 1, 6, 1, false);
@@ -90,6 +90,8 @@ void LoadItems(){
 	Weapon* Rapier = new Weapon("Rapier", 10, 3, 8, 1, false);
 
 		//Uniques: 4
+	Weapon* ShortswordP1 = new Weapon("Shortsword +1", 10, 4, 9, 1, false);
+
 
 		//NPC Attacks
 	Weapon* Rat_Attack = new Weapon("Rat_Attack", 0, 0, 1, 1, NULL);
@@ -97,36 +99,40 @@ void LoadItems(){
 
 	//Armors
 		//Generics
-	Armor* Clothes = new Armor("Clothes", 1, 1, 0, 999, "Not Armor");
+	Armor* Clothes = new Armor("Clothes", 1, 0, 0, 999, "Not Armor");
 			//Common
-	Armor* Leather = new Armor();
-	Armor* Hide = new Armor();
-	Armor* RingMail = new Armor();
+	Armor* Leather = new Armor("Leather", 20, 1, 1, 999, "Light");
+	Armor* Hide = new Armor("Hide", 30, 1, 2, 14, "Medium");
+	Armor* RingMail = new Armor("RingMail", 50, 1, 4, 14, "Heavy");
 			
 			//Uncommon
-	Armor* StuddedLeather = new Armor();
-	Armor* ScaleMail = new Armor();
-	Armor* ChainMail = new Armor();
+	Armor* StuddedLeather = new Armor("Studded Leather", 100, 2, 2, 999, "Light");
+	Armor* ScaleMail = new Armor("Scale Mail", 150, 2, 4, 16, "Medium");
+	Armor* ChainMail = new Armor("Chain Mail", 300, 2, 6, 16, "Heavy");
 
 			//Rare
-	Armor* HalfPlate = new Armor();
-	Armor* Plate = new Armor();
+	Armor* HalfPlate = new Armor("Half Plate", 500, 3, 5, 17, "Medium");
+	Armor* Plate = new Armor("Plate", 1000, 3, 8, 18, "Heavy");
 
 		//Uniques
+	Armor* StuddedLeatherP1 = new Armor("Studded Leather +1", 3000, 4, 3, 999, "Light");
 
 	//Consumables
 		//Generics
 			//Common
-	Consumable* HealingSalve = new Consumable("HealingSalve", 10, 1, 1, 0, 5);
+	Consumable* HealingSalve = new Consumable("Healing Salve", 10, 1, 1, 0, 5);
 	
 			//Uncommon
-	Consumable* HealingPotion = new Consumable("HealingPotion", 10, 2, 1, 0, 10); 
+	Consumable* HealingPotion = new Consumable("Healing Potion", 10, 2, 1, 0, 10); 
 
 			//Rare
-	Consumable* GreaterHealingPotion = new Consumable("GreaterHealingPotion", 10, 3, 1, 0, 20); 
+	Consumable* GreaterHealingPotion = new Consumable("Greater Healing Potion", 10, 3, 1, 0, 20); 
 
 		//Uniques
+	Consumable* MajorHealingPotion = new Consumable("Major Healing Potion", 10, 4, 1, 0, 50);
 
+
+	WEAPON_TABLE.insert(pair<string, Weapon>(Fists->GetName(), Fists[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Shortsword->GetName(), Shortsword[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Rat_Attack->GetName(), Rat_Attack[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Goblin_Attack->GetName(), Goblin_Attack[0]));
@@ -292,7 +298,7 @@ void NewGame() {
 	Dialog(PC, DIALOGS.find("Intro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 	PC = Character(UIS);
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
-	PC.SetWeapon(WEAPON_TABLE.find("Fist")->second);
+	PC.SetWeapon(WEAPON_TABLE.find("Fists")->second);
 	LAST_SAVE = SaveGame(PC, 1.1, SAVE_DIR);
 	Sewer(1.1);
 }
