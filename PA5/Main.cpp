@@ -133,11 +133,43 @@ void LoadItems(){
 
 
 	WEAPON_TABLE.insert(pair<string, Weapon>(Fists->GetName(), Fists[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Club->GetName(), Club[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Axe->GetName(), Axe[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Shortbow->GetName(), Shortbow[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Shortsword->GetName(), Shortsword[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Dagger->GetName(), Dagger[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Quarterstaff->GetName(), Quarterstaff[0]));
+
+	WEAPON_TABLE.insert(pair<string, Weapon>(Crossbow->GetName(), Crossbow[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Longbow->GetName(), Longbow[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Longsword->GetName(), Longsword[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Mace->GetName(), Mace[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Spear->GetName(), Spear[0]));
+
+	WEAPON_TABLE.insert(pair<string, Weapon>(Greatsword->GetName(),Greatsword[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Greataxe->GetName(),Greataxe[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Warhammer->GetName(), Warhammer[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Rapier->GetName(), Rapier[0]));
+
+	WEAPON_TABLE.insert(pair<string, Weapon>(ShortswordP1->GetName(), ShortswordP1[0]));
+
 	WEAPON_TABLE.insert(pair<string, Weapon>(Rat_Attack->GetName(), Rat_Attack[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Goblin_Attack->GetName(), Goblin_Attack[0]));
 
 	ARMOR_TABLE.insert(pair<string, Armor>(Clothes->GetName(), Clothes[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(Leather->GetName(), Leather[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(Hide->GetName(), Hide[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(RingMail->GetName(), RingMail[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(StuddedLeather->GetName(), StuddedLeather[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(ChainMail->GetName(), ChainMail[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(HalfPlate->GetName(), HalfPlate[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(Plate->GetName(), Plate[0]));
+	ARMOR_TABLE.insert(pair<string, Armor>(StuddedLeatherP1->GetName(), StuddedLeatherP1[0]));
+
+	CONSUMABLE_TABLE.insert(pair<string, Consumable>(HealingSalve->GetName(), HealingSalve[0]));
+	CONSUMABLE_TABLE.insert(pair<string, Consumable>(HealingPotion->GetName(), HealingPotion[0]));
+	CONSUMABLE_TABLE.insert(pair<string, Consumable>(GreaterHealingPotion->GetName(), GreaterHealingPotion[0]));
+	CONSUMABLE_TABLE.insert(pair<string, Consumable>(MajorHealingPotion->GetName(), MajorHealingPotion[0]));
 }
 
 void LoadCharacters() {
