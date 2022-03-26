@@ -201,14 +201,16 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 				enemy.TakeDamage(dmg);
 			}
 			player_turn = false;
-			cin >> userInput;
+			cout << "Hit Enter to continue.";
+			cin.ignore();
 		}
 			//Defend
 		else if (strcmp(userInput.c_str(), "2") == 0) {
 			cout << "You stand ready for the next attack." << endl;
 			enemy.GiveDisAdv();
 			player_turn = false;
-			cin >> userInput;
+			cout << "Hit Enter to continue.";
+			cin.ignore();
 		}
 			//Use Item
 		else if (strcmp(userInput.c_str(), "3") == 0) {
@@ -219,20 +221,23 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 				//Success
 			if (Flee(pc, enemy)) {
 				cout << "You evade " << enemy.GetName() << "!" << endl;
-				cin >> userInput;
+				cout << "Hit Enter to continue.";
+				cin.ignore();
 				break;
 			}
 				//Fail
 			else {
 				cout << "You fail to escape." << endl;
-				cin >> userInput;
+				cout << "Hit Enter to continue.";
+				cin.ignore();
 			}
 			player_turn = false;
 		}
 			//Inventory
 		else if (strcmp(userInput.c_str(), "5") == 0) {
 			pc.ManageInventory(UIS);
-			cin >> userInput;
+			cout << "Hit Enter to continue.";
+			cin.ignore();
 		}
 
 
@@ -242,7 +247,8 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 			//Check if the enemy is dead to end the encounter
 			if (!enemy.IsAlive()) {
 				cout << enemy.GetName() << " has been defeated!" << endl;
-				cin >> userInput;
+				cout << "Hit Enter to continue.";
+				cin.ignore();
 				break;
 			}
 
@@ -251,12 +257,14 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 			if (!enemy.IsUnique() && enemy.IsCriticalHealth()) {
 				if (Flee(enemy, pc)) {
 					cout << enemy.GetName() << " fled!" << endl;
-					cin >> userInput;
+					cout << "Hit Enter to continue.";
+					cin.ignore();
 					break;
 				}
 				else {
 					cout << enemy.GetName() << " tries to escape and fails!" << endl;
-					cin >> userInput;
+					cout << "Hit Enter to continue.";
+					cin.ignore();
 					player_turn = true;
 				}
 			}
@@ -284,7 +292,8 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 					pc.GiveDisAdv();
 					player_turn = true;
 				}
-				cin >> userInput;
+				cout << "Hit Enter to continue.";
+				cin.ignore();
 			}
 		}
 	}
