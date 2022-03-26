@@ -372,7 +372,7 @@ void ResizeWindow(){
     wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
     rHnd = GetStdHandle(STD_INPUT_HANDLE);
     // Change the window title:
-    SetConsoleTitle(L"Chains of Content");
+    SetConsoleTitle("Chains of Content");
     // Set up the required window size:
     SMALL_RECT windowSize = {0, 0, 1000, 600};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
