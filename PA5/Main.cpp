@@ -70,27 +70,27 @@ void LoadItems(){
 	Weapon* Fists = new Weapon("Fists", 0, 0, 4, 1, true);
 			//Common: 1
 	Weapon* Club = new Weapon("Club", 10, 1, 4, 1, true);
-	Weapon* Axe = new Weapon("Axe", 10, 1, 6, 1, false);
-	Weapon* Shortbow = new Weapon("Shortbow", 10, 1, 6, 1, false);
-	Weapon* Shortsword = new Weapon("Shortsword", 10, 1, 6, 1, false);
-	Weapon* Dagger = new Weapon("Dagger", 10, 1, 4, 1, false);
-	Weapon* Quarterstaff = new Weapon("Quarterstaff", 10, 1, 6, 1, true); //STR
+	Weapon* Axe = new Weapon("Axe", 20, 1, 6, 1, false);
+	Weapon* Shortbow = new Weapon("Shortbow", 20, 1, 6, 1, false);
+	Weapon* Shortsword = new Weapon("Shortsword", 20, 1, 6, 1, false);
+	Weapon* Dagger = new Weapon("Dagger", 15, 1, 4, 1, false);
+	Weapon* Quarterstaff = new Weapon("Quarterstaff", 15, 1, 6, 1, true); //STR
 
 			//Uncommon: 2
-	Weapon* Crossbow = new Weapon("Crossbow", 10, 2, 6, 1, false);
-	Weapon* Longbow = new Weapon("Longbow", 10, 2, 8, 1, false);
-	Weapon* Longsword = new Weapon("Longsword", 10, 2, 8, 1, true);
-	Weapon* Mace = new Weapon("Mace", 10, 2, 6, 1, true);
-	Weapon* Spear = new Weapon("Spear", 10, 2, 6, 1, false);
+	Weapon* Crossbow = new Weapon("Crossbow", 50, 2, 6, 1, false);
+	Weapon* Longbow = new Weapon("Longbow", 70, 2, 8, 1, false);
+	Weapon* Longsword = new Weapon("Longsword", 90, 2, 8, 1, true);
+	Weapon* Mace = new Weapon("Mace", 70, 2, 6, 1, true);
+	Weapon* Spear = new Weapon("Spear", 65, 2, 6, 1, false);
 
 			//Rare: 3
-	Weapon* Greatsword = new Weapon("Greatsword", 10, 3, 6, 2, true);
-	Weapon* Greataxe = new Weapon("Greataxe", 10, 3, 12, 1, true);
-	Weapon* Warhammer = new Weapon("Warhammer", 10, 3, 12, 1, true);
-	Weapon* Rapier = new Weapon("Rapier", 10, 3, 8, 1, false);
+	Weapon* Greatsword = new Weapon("Greatsword", 120, 3, 6, 2, true);
+	Weapon* Greataxe = new Weapon("Greataxe", 115, 3, 12, 1, true);
+	Weapon* Warhammer = new Weapon("Warhammer", 95, 3, 12, 1, true);
+	Weapon* Rapier = new Weapon("Rapier", 105, 3, 8, 1, false);
 
 		//Uniques: 4
-	Weapon* ShortswordP1 = new Weapon("Shortsword +1", 10, 4, 9, 1, false);
+	Weapon* ShortswordP1 = new Weapon("Shortsword +1", 200, 4, 9, 1, false);
 
 
 		//NPC Attacks
@@ -120,16 +120,16 @@ void LoadItems(){
 	//Consumables
 		//Generics
 			//Common
-	Consumable* HealingSalve = new Consumable("Healing Salve", 10, 1, 1, 0, 5);
+	Consumable* HealingSalve = new Consumable("Healing Salve", 30, 1, 1, 0, 5);
 	
 			//Uncommon
-	Consumable* HealingPotion = new Consumable("Healing Potion", 10, 2, 1, 0, 10); 
+	Consumable* HealingPotion = new Consumable("Healing Potion", 50, 2, 1, 0, 10); 
 
 			//Rare
-	Consumable* GreaterHealingPotion = new Consumable("Greater Healing Potion", 10, 3, 1, 0, 20); 
+	Consumable* GreaterHealingPotion = new Consumable("Greater Healing Potion", 100, 3, 1, 0, 20); 
 
 		//Uniques
-	Consumable* MajorHealingPotion = new Consumable("Major Healing Potion", 10, 4, 1, 0, 50);
+	Consumable* MajorHealingPotion = new Consumable("Major Healing Potion", 200, 4, 1, 0, 50);
 
 
 	WEAPON_TABLE.insert(pair<string, Weapon>(Fists->GetName(), Fists[0]));
@@ -171,7 +171,7 @@ void LoadCharacters() {
 }
 
 
-void Rest(Character& PC, double stage, map<string, Image> UIS, map<string, Image> IMAGES) {
+void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> IMAGES) {
 	string userInput;
 
 	while (true) {
@@ -216,9 +216,9 @@ void Town() {
 }
 
 //Escape: stage 1
-void Sewer(double stage) {
-	//**STAGE 1.1***
-	if (stage == 1.1) {
+void Sewer(int stage) {
+	//**STAGE 110***
+	if (stage == 110) {
 		Dialog(PC, DIALOGS.find("IntroToRats.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Encounter ratEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
 		Dialog(PC, DIALOGS.find("Rat2.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
@@ -229,15 +229,15 @@ void Sewer(double stage) {
 		Encounter goblinEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
 		Dialog(PC, DIALOGS.find("GoblinsToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 
-		//**STAGE 1.2***
-		Rest(PC, stage, UIS, IMAGES);
+		//**STAGE 120***
+		Rest(PC, 120, UIS, IMAGES);
 		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Encounter stankratEncounter = Encounter(PC, ENEMIES.find("Stankrat")->second, UIS);
 		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Town();
 	}
-	else if (stage == 1.2) {
-		Rest(PC, stage, UIS, IMAGES);
+	else if (stage == 120) {
+		Rest(PC, 120, UIS, IMAGES);
 		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Encounter stankratEncounter = Encounter(PC, ENEMIES.find("Stankrat")->second, UIS);
 		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
@@ -249,13 +249,13 @@ void Sewer(double stage) {
 void LoadGame(SaveGame save) {
 	PC = save.GetPC();
 
-	if (save.GetStage() == 1.1 || save.GetStage() == 1.2) {
+	if (save.GetStage() == 110 || save.GetStage() == 120) {
 		Sewer(save.GetStage());
 	}
-	else if (save.GetStage() == 2) {
+	else if (save.GetStage() == 200) {
 		Town();
 	}
-	else if (save.GetStage() == 3) {
+	else if (save.GetStage() == 300) {
 		Dungeon();
 	}
 }
@@ -280,15 +280,13 @@ void LoadGameMenu() {
 		cin >> userInput;
 		if (is_number(userInput)) {
 			int index = atoi(userInput.c_str()) - 1;
-			if (-1 < index < fileCount) {
-				if (index == fileCount) {
-					break;
-				}
-				else {
-					LAST_SAVE = SaveGame(filePaths[index], IMAGES, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-					LoadGame(LAST_SAVE);
-					break;
-				}
+			if (index == fileCount) {
+				break;
+			}
+			else {
+				LAST_SAVE = SaveGame(filePaths[index], IMAGES, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				LoadGame(LAST_SAVE);
+				break;
 			}
 		}
 	}
@@ -299,8 +297,8 @@ void NewGame() {
 	PC = Character(UIS);
 	PC.SetArmor(ARMOR_TABLE.find("Clothes")->second);
 	PC.SetWeapon(WEAPON_TABLE.find("Fists")->second);
-	LAST_SAVE = SaveGame(PC, 1.1, SAVE_DIR);
-	Sewer(1.1);
+	LAST_SAVE = SaveGame(PC, 110, SAVE_DIR);
+	Sewer(110);
 }
 
 void StartMenu() {
@@ -323,12 +321,14 @@ void StartMenu() {
 
 		if (strcmp(userInput.c_str(), "1") == 0) {
 			NewGame();
-			break;
 		}
 		else if (strcmp(userInput.c_str(), "2") == 0) {
 			LoadGameMenu();
+		}
+		else if (strcmp(userInput.c_str(), "3") == 0) {
 			break;
 		}
+
 	}
 }
 
