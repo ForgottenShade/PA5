@@ -106,8 +106,7 @@ void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_by
         else {
             cout << "sadly you lack the intelligence to find anything.";
         }
-    }
-    cin.ignore();  
+    }  
 }
 
 
