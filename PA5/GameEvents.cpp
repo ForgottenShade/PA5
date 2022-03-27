@@ -66,37 +66,48 @@ Weapon GetWeaponByQuality(int quality, map<string, Weapon> Table) {
 }
 
 void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_bypass){
-     // roll
-     int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
+    // roll
+    int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
 
-     // weapon depending on roll
+    // weapon depending on roll
 
-         cout << "Your investigation (int) roll is: " << roll << endl;
-         if (roll > 9) {
-             cout << "you found something!" << endl;
-             if (roll <= 13){
-                 PC.AddWeaponToInv(GetWeaponByQuality(1, Weapon_table));
-             }
-             else if (roll <= 17){
-                 PC.AddWeaponToInv(GetWeaponByQuality(2, Weapon_table));
-             }
-             else if (roll <= 20){
-                 PC.AddWeaponToInv(GetWeaponByQuality(3, Weapon_table));
-             }
-             else if (roll > 20){
-                 PC.AddWeaponToInv(GetWeaponByQuality(4, Weapon_table));
-             }
-         }
-         else{
-             if (loot_bypass) {
-                 cout << "you found something!" << endl;
-                 PC.AddWeaponToInv(GetWeaponByQuality(1, Weapon_table));
-             }
-             else {
-                 cout << "sadly you lack the intelligence to find anything.";
-             }
-         }
-         cin.ignore();  
+    cout << "Your investigation (int) roll is: " << roll << endl;
+    Weapon found_weapon;
+    if (roll > 9) {
+        cout << "You found something!" << endl;
+        cin.ignore();
+        if (roll <= 13){
+            found_weapon = GetWeaponByQuality(1, Weapon_table);
+            cout << "You found " << found_weapon.GetName() << "!" << endl;
+            PC.AddWeaponToInv(found_weapon);
+        }
+        else if (roll <= 17){
+            found_weapon = GetWeaponByQuality(2, Weapon_table);
+            cout << "You found " << found_weapon.GetName() << "!" << endl;
+            PC.AddWeaponToInv(found_weapon);
+        }
+        else if (roll <= 20){
+            found_weapon = GetWeaponByQuality(3, Weapon_table);
+            cout << "You found " << found_weapon.GetName() << "!" << endl;
+            PC.AddWeaponToInv(found_weapon);
+        }
+        else if (roll > 20){
+            found_weapon = GetWeaponByQuality(4, Weapon_table);
+            cout << "You found " << found_weapon.GetName() << "!" << endl;
+            PC.AddWeaponToInv(found_weapon);
+        }
+    }
+    else{
+        if (loot_bypass) {
+            found_weapon = GetWeaponByQuality(1, Weapon_table);
+            cout << "You found " << found_weapon.GetName() << "!" << endl;
+            PC.AddWeaponToInv(found_weapon);
+        }
+        else {
+            cout << "sadly you lack the intelligence to find anything.";
+        }
+    }
+    cin.ignore();  
 }
 
 
@@ -259,18 +270,19 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
     istringstream iss (text);
 
     string line;
-    cout << UIS.find("Border.txt")->second.GetImage();
+    cout << UIS.find("Border.txt")->second.GetImage() << endl;
     while (getline(iss, line, '\n')) {
         if (line.empty()) {
-            cout << UIS.find("Border.txt")->second.GetImage();
+            cout << endl;
+            cout << UIS.find("Border.txt")->second.GetImage() << endl; 
             cout << "Hit Enter to continue.";
             cin.ignore();
             clear();
-            cout << UIS.find("Border.txt")->second.GetImage();
+            cout << UIS.find("Border.txt")->second.GetImage() << endl;
         }
         else if (line[0] == '+'){ 
             if (line == "+ WEAPON"){
-                //call Weeapon funciton
+                //call Weeapo funciton
                 RollForWeapon(PC, Weapon_table, loot_bypass);     
             }  
             // + ARMOR 
@@ -285,10 +297,10 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
 
             // + CUSTOM int
 
-            else if (line.substr(0, 8) == "+ CUSTOM"){
-                int number = atoi(line.substr (9, 1).c_str());
-                GetCustomItem(PC, number);
-            }
+            // else if (line.substr(0, 8) == "+ CUSTOM"){
+            //     int number = atoi(line.substr (9, 1).c_str());
+            //     GetCustomItem(PC, number);
+            // }
 
             // + MISC
             // Leaving this empty for now
