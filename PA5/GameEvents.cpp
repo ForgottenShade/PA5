@@ -75,7 +75,6 @@ void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_by
     Weapon found_weapon;
     if (roll > 9) {
         cout << "You found something!" << endl;
-        cin.ignore();
         if (roll <= 13){
             found_weapon = GetWeaponByQuality(1, Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
@@ -104,7 +103,7 @@ void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_by
             PC.AddWeaponToInv(found_weapon);
         }
         else {
-            cout << "sadly you lack the intelligence to find anything.";
+            cout << "Sadly you lack the intelligence to find anything.";
         }
     }  
 }
@@ -117,24 +116,34 @@ void RollForArmor(Character &PC, map<string, Armor> Armor_table, bool loot_bypas
     // weapon depending on roll
 
     cout << "Your investigation (int) roll is: " << roll << endl;
+    Armor found_armor;
     if (roll > 9) {
-        cout << "you found something!" << endl;
+        cout << "You found something!" << endl;
         if (roll <= 13) {
-            PC.AddArmorToInv(GetArmorByQuality(1, Armor_table));
+            found_armor = GetArmorByQuality(1, Armor_table);
+            cout << "You found " << found_armor.GetName() << "!" << endl;
+            PC.AddArmorToInv(found_armor);
         }
         else if (roll <= 17) {
+            found_armor = GetArmorByQuality(2, Armor_table);
+            cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(GetArmorByQuality(2, Armor_table));
         }
         else if (roll <= 20) {
+            found_armor = GetArmorByQuality(3, Armor_table);
+            cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(GetArmorByQuality(3, Armor_table));
         }
         else if (roll > 20) {
+            found_armor = GetArmorByQuality(4, Armor_table);
+            cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(GetArmorByQuality(4, Armor_table));
         }
     }
     else {
         if (loot_bypass) {
-            cout << "you found something!" << endl;
+            found_armor = GetArmorByQuality(1, Armor_table);
+            cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(GetArmorByQuality(1, Armor_table));
         }
         else {
@@ -152,25 +161,35 @@ void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, 
     // weapon depending on roll
 
     cout << "Your investigation (int) roll is: " << roll << endl;
+    Consumable found_consum;
     if (roll > 9) {
-        cout << "you found something!" << endl;
+        cout << "You found something!" << endl;
         if (roll <= 13) {
-            PC.AddConsumableToInv(GetConsumableByQuality(1, Consumable_Table));
+            found_consum = GetConsumableByQuality(1, Consumable_Table);
+            cout << "You found " << found_consum.GetName() << "!" << endl;
+            PC.AddConsumableToInv(found_consum);
         }
         else if (roll <= 17) {
-            PC.AddConsumableToInv(GetConsumableByQuality(2, Consumable_Table));
+            found_consum = GetConsumableByQuality(2, Consumable_Table);
+            cout << "You found " << found_consum.GetName() << "!" << endl;
+            PC.AddConsumableToInv(found_consum);
         }
         else if (roll <= 20) {
-            PC.AddConsumableToInv(GetConsumableByQuality(3, Consumable_Table));
+            found_consum = GetConsumableByQuality(3, Consumable_Table);
+            cout << "You found " << found_consum.GetName() << "!" << endl;
+            PC.AddConsumableToInv(found_consum);
         }
         else if (roll > 20) {
-            PC.AddConsumableToInv(GetConsumableByQuality(4, Consumable_Table));
+            found_consum = GetConsumableByQuality(4, Consumable_Table);
+            cout << "You found " << found_consum.GetName() << "!" << endl;
+            PC.AddConsumableToInv(found_consum);
         }
     }
     else {
         if (loot_bypass) {
-            cout << "you found something!" << endl;
-            PC.AddConsumableToInv(GetConsumableByQuality(1, Consumable_Table));
+            found_consum = GetConsumableByQuality(1, Consumable_Table);
+            cout << "You found " << found_consum.GetName() << "!" << endl;
+            PC.AddConsumableToInv(found_consum);
         }
         else {
             cout << "sadly you lack the intelligence to find anything.";
@@ -286,11 +305,15 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
             }  
             // + ARMOR 
             else if( line == "+ ARMOR"){
+                cout << "Calling + ARMOR" << endl;
+                cin.ignore();
                 RollForArmor(PC, Armor_table, loot_bypass);
             }
 
             // + CONSUMABLE
             else if (line == "+ CONSUMABLE"){
+                cout << "Calling + CONSUMABLE" << endl;
+                cin.ignore();
                 RollForConsumable(PC, Consumable_table, loot_bypass);
             }
 

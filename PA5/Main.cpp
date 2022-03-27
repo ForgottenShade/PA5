@@ -259,7 +259,7 @@ void Sewer(int stage) {
 		PC.ManageInventory(UIS);
 		Dialog(PC, DIALOGS.find("IntersectionToGoblins.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Encounter goblinEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
-		Dialog(PC, DIALOGS.find("GoblinsToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		Dialog(PC, DIALOGS.find("GoblinToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 
 		//**STAGE 120***
 		Rest(PC, 120, UIS, IMAGES);
