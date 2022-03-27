@@ -270,14 +270,15 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
     istringstream iss (text);
 
     string line;
-    cout << UIS.find("Border.txt")->second.GetImage();
+    cout << UIS.find("Border.txt")->second.GetImage() << endl;
     while (getline(iss, line, '\n')) {
         if (line.empty()) {
-            cout << UIS.find("Border.txt")->second.GetImage();
+            cout << endl;
+            cout << UIS.find("Border.txt")->second.GetImage() << endl; 
             cout << "Hit Enter to continue.";
             cin.ignore();
             clear();
-            cout << UIS.find("Border.txt")->second.GetImage();
+            cout << UIS.find("Border.txt")->second.GetImage() << endl;
         }
         else if (line[0] == '+'){ 
             if (line == "+ WEAPON"){
