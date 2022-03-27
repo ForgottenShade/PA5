@@ -95,14 +95,18 @@ public:
 	void GiveAdv();
 	void GiveDisAdv();
 	void ResetAdv();
+
 	void PrintCharacterStats(map<string, Image>);
 	void ManageInventory(map<string, Image>);
 	void SetWeapon(Weapon);
 	void SetArmor(Armor);
+
 	void StatChange(char, string);
 	void AddWeaponToInv(Weapon);
 	void AddArmorToInv(Armor);
 	void AddConsumableToInv(Consumable);
+
+	void LevelUp(map<string, Image>);
 };
 
 #endif

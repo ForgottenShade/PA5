@@ -67,7 +67,7 @@ void LoadAssets() {
 void LoadItems(){
 	//Weapons
 		//Generics
-	Weapon* Fists = new Weapon("Fists", 0, 0, 4, 1, true);
+	Weapon* Fists = new Weapon("Fists", 0, 0, 2, 1, true);
 			//Common: 1
 	Weapon* Club = new Weapon("Club", 10, 1, 4, 1, true);
 	Weapon* Axe = new Weapon("Axe", 20, 1, 6, 1, true);
@@ -228,9 +228,12 @@ void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> I
 
 		//Rest
 		if (strcmp(userInput.c_str(), "1") == 0) {
+			clear();
 			int halfHp = (PC.GetMaxHp() / 2);
 			cout << "You heal " << halfHp << " points!" << endl;
 			PC.Heal(halfHp);
+			cin.ignore();
+			cin.ignore();
 			break;
 		}
 		//Inventory
@@ -317,6 +320,7 @@ void Sewer(int stage) {
 		if (!PC.IsAlive()) {
 			return;
 		}
+		PC.LevelUp(UIS);
 		Dialog(PC, DIALOGS.find("GoblinToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, 2, true);
 		Dialog(PC, DIALOGS.find("Rest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 

@@ -1,0 +1,21 @@
+120
+Default.txt
+Human
+Nym
+12
+16
+12
+14
+11
+10
+19
+22
+1
+Shortsword
+Hide Armor
+147
+WeaponInv:
+Fists
+ArmorInv:
+Clothes
+ConsInv:
