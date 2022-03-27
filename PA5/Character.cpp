@@ -361,7 +361,7 @@ int Character::SavingThrow(int stat) {
 }
 
 void Character::TakeDamage(int dmg) {
-	if (dmg > CurrentHp) {
+	if (dmg >= CurrentHp) {
 		Alive = false;
 	}
 	else {
