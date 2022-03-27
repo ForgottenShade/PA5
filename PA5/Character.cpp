@@ -432,7 +432,7 @@ void Character::ManageInventory(map<string, Image> UIS) {
 				if (is_number(userInput)) {
 					int index = atoi(userInput.c_str()) - 1;
 
-					if (index == Weapons.size() + 1) {
+					if (index == Weapons.size()) {
 						break;
 					}
 
@@ -461,7 +461,7 @@ void Character::ManageInventory(map<string, Image> UIS) {
 				if (is_number(userInput)) {
 					int index = atoi(userInput.c_str()) - 1;
 
-					if (index == Armors.size() + 1) {
+					if (index == Armors.size()) {
 						break;
 					}
 

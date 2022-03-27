@@ -259,7 +259,7 @@ void Sewer(int stage) {
 		PC.ManageInventory(UIS);
 		Dialog(PC, DIALOGS.find("IntersectionToGoblins.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 		Encounter goblinEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
-		Dialog(PC, DIALOGS.find("GoblinsToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		Dialog(PC, DIALOGS.find("GoblinToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
 
 		//**STAGE 120***
 		Rest(PC, 120, UIS, IMAGES);
@@ -372,7 +372,7 @@ void ResizeWindow(){
     wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
     rHnd = GetStdHandle(STD_INPUT_HANDLE);
     // Change the window title:
-    SetConsoleTitle("Chains of Content");
+    //SetConsoleTitle("Chains of Content");
     // Set up the required window size:
     SMALL_RECT windowSize = {0, 0, 1000, 600};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
