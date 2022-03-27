@@ -8,3 +8,5 @@ the corner with what looks like bits of old clothing drapped over it. This might
 After that particularly morbid thought, it seems time to gather myself. Then I notice something out of the corner of my eye...
 
 + ARMOR
+
+You now have the opportunity to recover from the battles you have faced thus far, manage your inventory, and equip the new armor you found!

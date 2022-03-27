@@ -4,6 +4,7 @@
 #include <sstream>
 #include<random>
 #include<time.h>
+#include<algorithm>
 
 #include "GameEvents.h"
 #include "Image.h"
@@ -65,7 +66,7 @@ Weapon GetWeaponByQuality(int quality, map<string, Weapon> Table) {
     return qualityTable[rand() % count];
 }
 
-void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_bypass){
+void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, int quality_cap, bool loot_bypass){
     // roll
     int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
 
@@ -81,17 +82,17 @@ void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_by
             PC.AddWeaponToInv(found_weapon);
         }
         else if (roll <= 17){
-            found_weapon = GetWeaponByQuality(2, Weapon_table);
+            found_weapon = GetWeaponByQuality(max(2, quality_cap), Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
             PC.AddWeaponToInv(found_weapon);
         }
         else if (roll <= 20){
-            found_weapon = GetWeaponByQuality(3, Weapon_table);
+            found_weapon = GetWeaponByQuality(max(3, quality_cap), Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
             PC.AddWeaponToInv(found_weapon);
         }
         else if (roll > 20){
-            found_weapon = GetWeaponByQuality(4, Weapon_table);
+            found_weapon = GetWeaponByQuality(max(4, quality_cap), Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
             PC.AddWeaponToInv(found_weapon);
         }
@@ -109,7 +110,7 @@ void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, bool loot_by
 }
 
 
-void RollForArmor(Character &PC, map<string, Armor> Armor_table, bool loot_bypass){
+void RollForArmor(Character &PC, map<string, Armor> Armor_table, int quality_cap, bool loot_bypass){
     // roll
     int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
 
@@ -125,26 +126,26 @@ void RollForArmor(Character &PC, map<string, Armor> Armor_table, bool loot_bypas
             PC.AddArmorToInv(found_armor);
         }
         else if (roll <= 17) {
-            found_armor = GetArmorByQuality(2, Armor_table);
+            found_armor = GetArmorByQuality(max(2, quality_cap), Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
-            PC.AddArmorToInv(GetArmorByQuality(2, Armor_table));
+            PC.AddArmorToInv(found_armor);
         }
         else if (roll <= 20) {
-            found_armor = GetArmorByQuality(3, Armor_table);
+            found_armor = GetArmorByQuality(max(3, quality_cap), Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
-            PC.AddArmorToInv(GetArmorByQuality(3, Armor_table));
+            PC.AddArmorToInv(found_armor);
         }
         else if (roll > 20) {
-            found_armor = GetArmorByQuality(4, Armor_table);
+            found_armor = GetArmorByQuality(max(4, quality_cap), Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
-            PC.AddArmorToInv(GetArmorByQuality(4, Armor_table));
+            PC.AddArmorToInv(found_armor);
         }
     }
     else {
         if (loot_bypass) {
             found_armor = GetArmorByQuality(1, Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
-            PC.AddArmorToInv(GetArmorByQuality(1, Armor_table));
+            PC.AddArmorToInv(found_armor);
         }
         else {
             cout << "sadly you lack the intelligence to find anything.";
@@ -154,7 +155,7 @@ void RollForArmor(Character &PC, map<string, Armor> Armor_table, bool loot_bypas
 }
 
 
-void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, bool loot_bypass){
+void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, int quality_cap, bool loot_bypass){
     // roll
     int roll = PC.Roll(1, 20) + PC.GetBonus(PC.GetInt());
 
@@ -170,17 +171,17 @@ void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, 
             PC.AddConsumableToInv(found_consum);
         }
         else if (roll <= 17) {
-            found_consum = GetConsumableByQuality(2, Consumable_Table);
+            found_consum = GetConsumableByQuality(max(2, quality_cap), Consumable_Table);
             cout << "You found " << found_consum.GetName() << "!" << endl;
             PC.AddConsumableToInv(found_consum);
         }
         else if (roll <= 20) {
-            found_consum = GetConsumableByQuality(3, Consumable_Table);
+            found_consum = GetConsumableByQuality(max(3, quality_cap), Consumable_Table);
             cout << "You found " << found_consum.GetName() << "!" << endl;
             PC.AddConsumableToInv(found_consum);
         }
         else if (roll > 20) {
-            found_consum = GetConsumableByQuality(4, Consumable_Table);
+            found_consum = GetConsumableByQuality(max(4, quality_cap), Consumable_Table);
             cout << "You found " << found_consum.GetName() << "!" << endl;
             PC.AddConsumableToInv(found_consum);
         }
@@ -196,6 +197,44 @@ void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, 
         }
     }
     cin.ignore();
+}
+
+int RollSkill(Character &PC, string skill, string stat, int dc) {
+    int roll = PC.Roll(1, 20);
+    int bonus = 0;
+
+    if (stat == "STR") {
+        bonus = PC.GetBonus(PC.GetStr());
+    }
+    else if (stat == "DEX") {
+        bonus = PC.GetBonus(PC.GetDex());
+    }
+    else if (stat == "CON") {
+        bonus = PC.GetBonus(PC.GetCon());
+    }
+    else if (stat == "INT") {
+        bonus = PC.GetBonus(PC.GetInt());
+    }
+    else if (stat == "WIS") {
+        bonus = PC.GetBonus(PC.GetWis());
+    }
+    else if (stat == "CHA") {
+        bonus = PC.GetBonus(PC.GetCha());
+    }
+
+    roll = roll + bonus;
+    cout << PC.GetName() << " rolled: " << roll << " against a DC of " << dc << endl;
+
+    if (roll >= dc) {
+        cout << "You succeed the " << skill << " check!" << endl;
+        cin.ignore();
+        return 1;
+    }
+    else {
+        cout << "You fail the " << skill << " check!" << endl;
+        cin.ignore();
+        return 0;
+    }
 }
 
 
@@ -283,9 +322,10 @@ void ChangeStat(Character &PC, char effect, string stat) {
     }
 }
 
-void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weapon> Weapon_table, map<string, Armor> Armor_table, map<string, Consumable> Consumable_table, bool loot_bypass) { // Take in Weapon table
+int Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weapon> Weapon_table, map<string, Armor> Armor_table, map<string, Consumable> Consumable_table, int quality_cap, bool loot_bypass) { // Take in Weapon table
     clear();
     istringstream iss (text);
+    bool outcome = true;
 
     string line;
     cout << UIS.find("Border.txt")->second.GetImage() << endl;
@@ -301,20 +341,61 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
         else if (line[0] == '+'){ 
             if (line == "+ WEAPON"){
                 //call Weeapo funciton
-                RollForWeapon(PC, Weapon_table, loot_bypass);     
+                RollForWeapon(PC, Weapon_table, quality_cap, loot_bypass);
             }  
             // + ARMOR 
             else if( line == "+ ARMOR"){
                 cout << "Calling + ARMOR" << endl;
                 cin.ignore();
-                RollForArmor(PC, Armor_table, loot_bypass);
+                RollForArmor(PC, Armor_table, quality_cap, loot_bypass);
             }
 
             // + CONSUMABLE
             else if (line == "+ CONSUMABLE"){
                 cout << "Calling + CONSUMABLE" << endl;
                 cin.ignore();
-                RollForConsumable(PC, Consumable_table, loot_bypass);
+                RollForConsumable(PC, Consumable_table, quality_cap, loot_bypass);
+            }
+
+            // + CHECK SKILL STAT DC
+            else if (line.substr(0, 7) == "+ CHECK") {
+                string space_delimiter = " ";
+                vector<string> words{};
+
+                size_t pos = 0;
+                while ((pos = line.find(space_delimiter)) != string::npos) {
+                    words.push_back(line.substr(0, pos));
+                    line.erase(0, pos + space_delimiter.length());
+                }
+
+                outcome = RollSkill(PC, words[2], words[3], stoi(line));
+            }
+
+            else if (line.substr(0, 8) == "+ CHOICE") {
+                string userInput;
+                string space_delimiter = " ";
+                vector<string> words{};
+
+                size_t pos = 0;
+                while ((pos = line.find(space_delimiter)) != string::npos) {
+                    words.push_back(line.substr(0, pos));
+                    line.erase(0, pos + space_delimiter.length());
+                }
+
+                int choiceCount = stoi(line);
+                text.erase(0, 12);
+                cout << text << endl;
+                cout << UIS.find("Border.txt")->second.GetImage() << endl;
+
+                while (true) {
+                    cin >> userInput;
+
+                    for (int i = 1; i <= choiceCount; i++) {
+                        if (strcmp(userInput.c_str(), to_string(i).c_str()) == 0) {
+                            return i;
+                        }
+                    }
+                }
             }
 
             // + CUSTOM int
@@ -328,6 +409,8 @@ void Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weap
             // Leaving this empty for now
         } else {
             cout << line << endl;
-        }      
+        }
     }
+
+    return outcome;
 }

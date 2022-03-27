@@ -96,6 +96,10 @@ void LoadItems(){
 		//NPC Attacks
 	Weapon* Rat_Attack = new Weapon("Rat_Attack", 0, 0, 1, 1, NULL);
 	Weapon* Goblin_Attack = new Weapon("Goblin_Attack", 0, 0, 6, 1, false);
+	Weapon* Stankrat_Attack = new Weapon("Stankrat_Attack", 0, 0, 10, 1, false);
+
+	Weapon* Guard_Attack = new Weapon("Guard_Attack", 0, 0, 10, 2, false);
+	Weapon* Golem_Attack = new Weapon("Golem_Attack", 0, 0, 8, 3, true);
 
 	//Armors
 		//Generics
@@ -155,6 +159,10 @@ void LoadItems(){
 
 	WEAPON_TABLE.insert(pair<string, Weapon>(Rat_Attack->GetName(), Rat_Attack[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Goblin_Attack->GetName(), Goblin_Attack[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Stankrat_Attack->GetName(), Stankrat_Attack[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Guard_Attack->GetName(), Guard_Attack[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Golem_Attack->GetName(), Golem_Attack[0]));
+
 
 	ARMOR_TABLE.insert(pair<string, Armor>(Clothes->GetName(), Clothes[0]));
 	ARMOR_TABLE.insert(pair<string, Armor>(Leather->GetName(), Leather[0]));
@@ -176,8 +184,8 @@ void LoadCharacters() {
 	//Enemies
 		//Sewer
 	Character* rat = new Character(false, "Beast", "Rat", IMAGES.find("Rat01.txt")->second, 2, 11, 9, 2, 10, 4, 1, 10, 0);
-	Character* goblin = new Character(false, "Goblin", "Goblin", IMAGES.find("Goblin01.txt")->second, 8, 14, 10, 10, 8, 8, 7, 12, 1);
-	Character* stankrat = new Character(true, "Goblin", "Stankrat", IMAGES.find("Stankrat01.txt")->second, 10, 14, 10, 10, 8, 10, 21, 14, 2);
+	Character* goblin = new Character(false, "Humanoid", "Goblin", IMAGES.find("Goblin01.txt")->second, 8, 14, 10, 10, 8, 8, 7, 12, 1);
+	Character* stankrat = new Character(true, "Humanoid", "Stankrat", IMAGES.find("Stankrat01.txt")->second, 10, 14, 10, 10, 8, 10, 21, 14, 2);
 
 	rat->SetWeapon(WEAPON_TABLE.find("Rat_Attack")->second);
 	goblin->SetWeapon(WEAPON_TABLE.find("Goblin_Attack")->second);
@@ -188,15 +196,18 @@ void LoadCharacters() {
 	Character* awakened_tree = new Character(true, "Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second, 19, 6, 15, 10, 10, 7, 30, 13, 3);
 	
 		//Town
-	Character* theif = new Character();
-	Character* guard = new Character();
+	Character* guard = new Character(false, "Abberation", "Creature", IMAGES.find("Default.txt")->second, 11, 12, 12, 19, 17, 17, 70, 15, 5);
+	Character* golem = new Character(false, "Construct", "Golem", IMAGES.find("Default.txt")->second, 19, 9, 18, 6, 10, 5, 90, 10, 5);
+
+	guard->SetWeapon(WEAPON_TABLE.find("Guard_Attack")->second);
+	golem->SetWeapon(WEAPON_TABLE.find("Golem_Attack")->second);
 
 	ENEMIES.insert(pair<string, Character>(rat->GetName(), rat[0]));
 	ENEMIES.insert(pair<string, Character>(goblin->GetName(), goblin[0]));
 	ENEMIES.insert(pair<string, Character>(stankrat->GetName(), stankrat[0]));
 
-	ENEMIES.insert(pair<string, Character>(wolf->GetName(), wolf[0]));
-	ENEMIES.insert(pair<string, Character>(crab->GetName(), crab[0]));
+	ENEMIES.insert(pair<string, Character>(guard->GetName(), guard[0]));
+	ENEMIES.insert(pair<string, Character>(golem->GetName(), golem[0]));
 	ENEMIES.insert(pair<string, Character>(awakened_tree->GetName(), awakened_tree[0]));
 
 	//NPCs
@@ -244,6 +255,40 @@ void Dungeon() {
 
 //Self Discovery: stage 2
 void Town() {
+	//Intro
+	Dialog(PC, DIALOGS.find("TownIntro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
+	//Gaurd choice
+	int choice = Dialog(PC, DIALOGS.find("GuardChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//passive
+	if (choice == 1) {
+		Dialog(PC, DIALOGS.find("GuardChoicePassive.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+	}
+		//aggro
+	else if (choice == 2) {
+		Dialog(PC, DIALOGS.find("GuardChoiceAggro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		Encounter guardEncounter = Encounter(PC, ENEMIES.find("Creature")->second, UIS);
+		if (!PC.IsAlive()) {
+			return;
+		}
+
+		Dialog(PC, DIALOGS.find("GuardChoicePostAggro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+	}
+
+	//New Savior?
+	Dialog(PC, DIALOGS.find("Respite.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
+	//Contracts
+
+	//Sneaking through the city
+
+	//Breaking into the Manor
+	//Challenge 1 - Puzzle
+	//Challenge 2 - Golems
+	//Challenge 3 - 
+
+	//The Grey Lady Intro
+	//New Contracts
 	Dungeon();
 }
 
@@ -251,28 +296,46 @@ void Town() {
 void Sewer(int stage) {
 	//**STAGE 110***
 	if (stage == 110) {
-		Dialog(PC, DIALOGS.find("IntroToRats.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+
+
+		Dialog(PC, DIALOGS.find("IntroToRats.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Encounter ratEncounter = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
-		Dialog(PC, DIALOGS.find("Rat2.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		if (!PC.IsAlive()) {
+			return;
+		}
+		Dialog(PC, DIALOGS.find("Rat2.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Encounter ratEncounter2 = Encounter(PC, ENEMIES.find("Rat")->second, UIS);
-		Dialog(PC, DIALOGS.find("RatsToIntersection.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, true);
+		if (!PC.IsAlive()) {
+			return;
+		}
+
+		Dialog(PC, DIALOGS.find("RatsToIntersection.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, 1, true);
 		PC.ManageInventory(UIS);
-		Dialog(PC, DIALOGS.find("IntersectionToGoblins.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		Dialog(PC, DIALOGS.find("IntersectionToGoblins.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Encounter goblinEncounter = Encounter(PC, ENEMIES.find("Goblin")->second, UIS);
-		Dialog(PC, DIALOGS.find("GoblinToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		if (!PC.IsAlive()) {
+			return;
+		}
+		Dialog(PC, DIALOGS.find("GoblinToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, 2, true);
 
 		//**STAGE 120***
 		Rest(PC, 120, UIS, IMAGES);
-		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Encounter stankratEncounter = Encounter(PC, ENEMIES.find("Stankrat")->second, UIS);
-		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		if (!PC.IsAlive()) {
+			return;
+		}
+		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Town();
 	}
 	else if (stage == 120) {
 		Rest(PC, 120, UIS, IMAGES);
-		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Encounter stankratEncounter = Encounter(PC, ENEMIES.find("Stankrat")->second, UIS);
-		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, false);
+		if (!PC.IsAlive()) {
+			return;
+		}
+		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, 2);
 		Town();
 	}
 }

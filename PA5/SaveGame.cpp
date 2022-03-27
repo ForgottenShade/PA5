@@ -141,7 +141,7 @@ SaveGame::SaveGame(Character pc, int stage, string SAVE_DIR) {
 	ofstream save(SAVE_DIR + "\\" + userInput + ".txt");
 	save << stage << endl;
 	if (strcmp(pc.GetArtFilename().c_str(), "") == 0) {
-		save << "DefaultCharacter01.txt" << endl;
+		save << "Default.txt" << endl;
 	}
 	else {
 		save << pc.GetArtFilename() << endl;

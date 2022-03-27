@@ -8,6 +8,7 @@
 #include <random>
 #include <time.h>
 #include <map>
+#include<algorithm>
 
 #include "Image.h"
 #include "Character.h"
@@ -22,15 +23,16 @@ Consumable GetConsumableByQuality(int, map<string, Consumable>);
 Armor GetArmorByQuality(int, map<string, Armor>);
 Weapon GetWeaponByQuality(int, map<string, Weapon>);
 
-void RollForWeapon(Character&, map<string, Weapon>, bool);
-void RollForArmor(Character&, map<string, Armor>, bool);
-void RollForConsumable(Character&, map<string, Consumable>, bool);
+void RollForWeapon(Character&, map<string, Weapon>, int, bool);
+void RollForArmor(Character&, map<string, Armor>, int, bool);
+void RollForConsumable(Character&, map<string, Consumable>, int, bool);
+int RollSkill(Character&, string, string, int);
 
 void GetHealing(Character&, map<string, Consumable>);
 void GetCustomItem(Character&, int);
 void GetMiscItem();
 void ChangeStat();
 
-void Dialog(Character&, string, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>, bool); // Weapons table
+int Dialog(Character&, string, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>, int = 0, bool = false); // Weapons table
 
 #endif 

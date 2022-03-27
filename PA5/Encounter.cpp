@@ -277,6 +277,12 @@ Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
 					else {
 						pc.TakeDamage(dmg);
 						cout << enemy.GetName() << " attacks for " << dmg << " damage!" << endl;
+
+						if (!pc.IsAlive()) {
+							cout << "You have been defeated!" << endl;
+							cin.ignore();
+							return;
+						}
 					}
 					player_turn = true;
 				}
