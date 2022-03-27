@@ -1,0 +1,21 @@
+120
+GreyLady01.txt
+Human
+Evelyn
+10
+14
+12
+14
+12
+12
+10
+10
+1
+Shortsword
+Clothes
+22
+WeaponInv:
+Club
+ArmorInv:
+Studded Leather
+ConsInv:

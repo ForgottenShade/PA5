@@ -32,7 +32,7 @@ private:
 public:
 	Encounter() = default;
 	~Encounter() = default;
-	Encounter(Character, Character, map<string, Image>);
+	Encounter(Character&, Character, map<string, Image>);
 
 	bool is_number(const string&);
 	int Attack(Character, Character);

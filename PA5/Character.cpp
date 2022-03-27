@@ -393,7 +393,7 @@ void Character::ResetAdv() {
 void Character::PrintCharacterStats(map<string, Image> UIS) {
 	clear();
 	cout << UIS.find("Border.txt")->second.GetImage();
-	cout << "Name: " << Name << "\tHP: " << CurrentHp << "/" << MaxHp << "\tArmor Class: " << AC << "\tLevel: " << Level << "\t" << endl;
+	cout << "Name: " << Name << "\tHP: " << CurrentHp << "/" << MaxHp << "\tArmor Class: " << GetAC() << "\tLevel: " << Level << "\t" << endl;
 	cout << UIS.find("Border.txt")->second.GetImage();
 	cout << "Strength: " << Str << endl;
 	cout << "Dexterity: " << Dex << endl;
@@ -410,8 +410,8 @@ void Character::ManageInventory(map<string, Image> UIS) {
 	while (true) {
 		PrintCharacterStats(UIS);
 		cout << UIS.find("Border.txt")->second.GetImage();
-		cout << "1. Manage Weapons \t2. Manage Armors \n3. Show Consumables" << endl;
-		cout << "4. Exit" << endl;
+		cout << "1. Manage Weapons \t2. Manage Armors" << endl;
+		cout << "3. Show Consumables \t4. Exit" << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cin >> userInput;
 		clear();
@@ -421,6 +421,7 @@ void Character::ManageInventory(map<string, Image> UIS) {
 			while (true) {
 				cout << UIS.find("Border.txt")->second.GetImage();
 				cout << "Select a weapon to equip." << endl;
+				cout << "Current Weapon: " << CurrentWeapon.Info() << endl;
 				cout << UIS.find("Border.txt")->second.GetImage();
 				for (int i = 0; i < Weapons.size(); i++) {
 					cout << i + 1 << ". " << Weapons[i].Info() << endl;
@@ -450,6 +451,7 @@ void Character::ManageInventory(map<string, Image> UIS) {
 			while (true) {
 				cout << UIS.find("Border.txt")->second.GetImage();
 				cout << "Select an armor to equip." << endl;
+				cout << "Current Armor: " << CurrentArmor.Info() << endl;
 				cout << UIS.find("Border.txt")->second.GetImage();
 				for (int i = 0; i < Armors.size(); i++) {
 					cout << i + 1 << ". " << Armors[i].Info() << endl;

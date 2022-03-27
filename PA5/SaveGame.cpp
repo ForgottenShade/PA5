@@ -116,7 +116,7 @@ SaveGame::SaveGame(fs::path path, map<string, Image> IMAGES, map<string, Weapon>
 			else if (readingArm) {
 				armors.push_back(ARMOR_TABLE.find(currentLine)->second);
 			}
-			else if (readingCon) {
+			else if (readingCon && currentLine != "") {
 				consumables.push_back(CONSUMABLE_TABLE.find(currentLine)->second);
 			}
 

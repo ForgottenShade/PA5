@@ -70,7 +70,7 @@ void LoadItems(){
 	Weapon* Fists = new Weapon("Fists", 0, 0, 4, 1, true);
 			//Common: 1
 	Weapon* Club = new Weapon("Club", 10, 1, 4, 1, true);
-	Weapon* Axe = new Weapon("Axe", 20, 1, 6, 1, false);
+	Weapon* Axe = new Weapon("Axe", 20, 1, 6, 1, true);
 	Weapon* Shortbow = new Weapon("Shortbow", 20, 1, 6, 1, false);
 	Weapon* Shortsword = new Weapon("Shortsword", 20, 1, 6, 1, false);
 	Weapon* Dagger = new Weapon("Dagger", 15, 1, 4, 1, false);
@@ -81,7 +81,7 @@ void LoadItems(){
 	Weapon* Longbow = new Weapon("Longbow", 70, 2, 8, 1, false);
 	Weapon* Longsword = new Weapon("Longsword", 90, 2, 8, 1, true);
 	Weapon* Mace = new Weapon("Mace", 70, 2, 6, 1, true);
-	Weapon* Spear = new Weapon("Spear", 65, 2, 6, 1, false);
+	Weapon* Spear = new Weapon("Spear", 65, 2, 7, 1, false);
 
 			//Rare: 3
 	Weapon* Greatsword = new Weapon("Greatsword", 120, 3, 6, 2, true);
@@ -105,9 +105,9 @@ void LoadItems(){
 		//Generics
 	Armor* Clothes = new Armor("Clothes", 1, 0, 0, 999, "Not Armor");
 			//Common
-	Armor* Leather = new Armor("Leather", 20, 1, 1, 999, "Light");
-	Armor* Hide = new Armor("Hide", 30, 1, 2, 14, "Medium");
-	Armor* RingMail = new Armor("RingMail", 50, 1, 4, 14, "Heavy");
+	Armor* Leather = new Armor("Leather Armor", 20, 1, 1, 999, "Light");
+	Armor* Hide = new Armor("Hide Armor", 30, 1, 2, 14, "Medium");
+	Armor* RingMail = new Armor("Ring Mail", 50, 1, 4, 14, "Heavy");
 			
 			//Uncommon
 	Armor* StuddedLeather = new Armor("Studded Leather", 100, 2, 2, 999, "Light");
@@ -116,7 +116,7 @@ void LoadItems(){
 
 			//Rare
 	Armor* HalfPlate = new Armor("Half Plate", 500, 3, 5, 17, "Medium");
-	Armor* Plate = new Armor("Plate", 1000, 3, 8, 18, "Heavy");
+	Armor* Plate = new Armor("Plate Armor", 1000, 3, 8, 18, "Heavy");
 
 		//Uniques
 	Armor* StuddedLeatherP1 = new Armor("Studded Leather +1", 3000, 4, 3, 999, "Light");
@@ -189,6 +189,7 @@ void LoadCharacters() {
 
 	rat->SetWeapon(WEAPON_TABLE.find("Rat_Attack")->second);
 	goblin->SetWeapon(WEAPON_TABLE.find("Goblin_Attack")->second);
+	stankrat->SetWeapon(WEAPON_TABLE.find("Stankrat_Attack")->second);
 
 		//Forest
 	Character* wolf = new Character(false, "Beast", "Wolf", IMAGES.find("Wolf01.txt")->second, 12, 15, 12, 3, 12, 6, 11, 13, 1);
@@ -317,6 +318,8 @@ void Sewer(int stage) {
 			return;
 		}
 		Dialog(PC, DIALOGS.find("GoblinToRest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, 2, true);
+		Dialog(PC, DIALOGS.find("Rest.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
 
 		//**STAGE 120***
 		Rest(PC, 120, UIS, IMAGES);
@@ -450,6 +453,6 @@ int main() {
 	LoadAssets();
 	LoadItems();
 	LoadCharacters();
-	StartMenu();
+	atexit(StartMenu);
 	return 1;
 }

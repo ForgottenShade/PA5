@@ -55,7 +55,7 @@ int Encounter::Attack(Character a, Character b) {
 		}
 
 		//check if hit
-		if (roll > defenderAC) {
+		if (roll >= defenderAC) {
 			dmg = a.Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice());
 		}
 	}
@@ -75,7 +75,7 @@ int Encounter::Attack(Character a, Character b) {
 		}
 		
 		//check if hit
-		if (roll > defenderAC) {
+		if (roll >= defenderAC) {
 			dmg = a.Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice()) + bonus;
 		}
 	}
@@ -96,7 +96,7 @@ int Encounter::Attack(Character a, Character b) {
 		}
 
 		//check if hit
-		if (roll > defenderAC) {
+		if (roll >= defenderAC) {
 			dmg = a.Roll(attackerWeapon.GetNumberOfDice(), attackerWeapon.GetDamageDice()) + bonus;
 		}
 	}
@@ -167,7 +167,7 @@ bool Encounter::Flee(Character a, Character b) {
 }
 
 //1v1
-Encounter::Encounter(Character pc, Character enemy, map<string, Image> UIS) {
+Encounter::Encounter(Character& pc, Character enemy, map<string, Image> UIS) {
 	PC = pc;
 	Enemy = enemy;
 	string userInput;

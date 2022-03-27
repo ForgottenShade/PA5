@@ -82,17 +82,17 @@ void RollForWeapon(Character &PC, map<string, Weapon> Weapon_table, int quality_
             PC.AddWeaponToInv(found_weapon);
         }
         else if (roll <= 17){
-            found_weapon = GetWeaponByQuality(max(2, quality_cap), Weapon_table);
+            found_weapon = GetWeaponByQuality(min(2, quality_cap), Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
             PC.AddWeaponToInv(found_weapon);
         }
         else if (roll <= 20){
-            found_weapon = GetWeaponByQuality(max(3, quality_cap), Weapon_table);
+            found_weapon = GetWeaponByQuality(min(3, quality_cap), Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
             PC.AddWeaponToInv(found_weapon);
         }
         else if (roll > 20){
-            found_weapon = GetWeaponByQuality(max(4, quality_cap), Weapon_table);
+            found_weapon = GetWeaponByQuality(min(4, quality_cap), Weapon_table);
             cout << "You found " << found_weapon.GetName() << "!" << endl;
             PC.AddWeaponToInv(found_weapon);
         }
@@ -126,17 +126,17 @@ void RollForArmor(Character &PC, map<string, Armor> Armor_table, int quality_cap
             PC.AddArmorToInv(found_armor);
         }
         else if (roll <= 17) {
-            found_armor = GetArmorByQuality(max(2, quality_cap), Armor_table);
+            found_armor = GetArmorByQuality(min(2, quality_cap), Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(found_armor);
         }
         else if (roll <= 20) {
-            found_armor = GetArmorByQuality(max(3, quality_cap), Armor_table);
+            found_armor = GetArmorByQuality(min(3, quality_cap), Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(found_armor);
         }
         else if (roll > 20) {
-            found_armor = GetArmorByQuality(max(4, quality_cap), Armor_table);
+            found_armor = GetArmorByQuality(min(4, quality_cap), Armor_table);
             cout << "You found " << found_armor.GetName() << "!" << endl;
             PC.AddArmorToInv(found_armor);
         }
@@ -171,17 +171,17 @@ void RollForConsumable(Character &PC, map<string, Consumable> Consumable_Table, 
             PC.AddConsumableToInv(found_consum);
         }
         else if (roll <= 17) {
-            found_consum = GetConsumableByQuality(max(2, quality_cap), Consumable_Table);
+            found_consum = GetConsumableByQuality(min(2, quality_cap), Consumable_Table);
             cout << "You found " << found_consum.GetName() << "!" << endl;
             PC.AddConsumableToInv(found_consum);
         }
         else if (roll <= 20) {
-            found_consum = GetConsumableByQuality(max(3, quality_cap), Consumable_Table);
+            found_consum = GetConsumableByQuality(min(3, quality_cap), Consumable_Table);
             cout << "You found " << found_consum.GetName() << "!" << endl;
             PC.AddConsumableToInv(found_consum);
         }
         else if (roll > 20) {
-            found_consum = GetConsumableByQuality(max(4, quality_cap), Consumable_Table);
+            found_consum = GetConsumableByQuality(min(4, quality_cap), Consumable_Table);
             cout << "You found " << found_consum.GetName() << "!" << endl;
             PC.AddConsumableToInv(found_consum);
         }
@@ -340,20 +340,15 @@ int Dialog(Character& PC, string text, map<string, Image> UIS, map<string, Weapo
         }
         else if (line[0] == '+'){ 
             if (line == "+ WEAPON"){
-                //call Weeapo funciton
                 RollForWeapon(PC, Weapon_table, quality_cap, loot_bypass);
             }  
             // + ARMOR 
             else if( line == "+ ARMOR"){
-                cout << "Calling + ARMOR" << endl;
-                cin.ignore();
                 RollForArmor(PC, Armor_table, quality_cap, loot_bypass);
             }
 
             // + CONSUMABLE
             else if (line == "+ CONSUMABLE"){
-                cout << "Calling + CONSUMABLE" << endl;
-                cin.ignore();
                 RollForConsumable(PC, Consumable_table, quality_cap, loot_bypass);
             }
 
