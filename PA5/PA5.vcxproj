@@ -167,6 +167,30 @@
     <ClInclude Include="SaveGame.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Dialogs\CityStealth.txt" />
+    <Text Include="Assets\Dialogs\Contracts.txt" />
+    <Text Include="Assets\Dialogs\GoblinToRest.txt" />
+    <Text Include="Assets\Dialogs\GuardChoice.txt" />
+    <Text Include="Assets\Dialogs\GuardChoiceAggro.txt" />
+    <Text Include="Assets\Dialogs\GuardChoicePassive.txt" />
+    <Text Include="Assets\Dialogs\GuardChoicePostAggro.txt" />
+    <Text Include="Assets\Dialogs\IntersectionToGoblins.txt" />
+    <Text Include="Assets\Dialogs\Intro.txt" />
+    <Text Include="Assets\Dialogs\IntroToRats.txt" />
+    <Text Include="Assets\Dialogs\ManorEntry.txt" />
+    <Text Include="Assets\Dialogs\ManorGolems.txt" />
+    <Text Include="Assets\Dialogs\ManorPuzzle.txt" />
+    <Text Include="Assets\Dialogs\Rat2.txt" />
+    <Text Include="Assets\Dialogs\RatsToIntersection.txt" />
+    <Text Include="Assets\Dialogs\Respite.txt" />
+    <Text Include="Assets\Dialogs\Rest.txt" />
+    <Text Include="Assets\Dialogs\RestToStankrat.txt" />
+    <Text Include="Assets\Dialogs\SewerToTown.txt" />
+    <Text Include="Assets\Dialogs\Test.txt" />
+    <Text Include="Assets\Dialogs\TheGreyLady.txt" />
+    <Text Include="Assets\Dialogs\TownIntro.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

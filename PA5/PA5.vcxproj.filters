@@ -9,9 +9,8 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="DIALOGS">
+      <UniqueIdentifier>{d4ccbb5e-fbac-4858-a53c-4ee9150eb9e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,5 +85,73 @@
     <ClInclude Include="GameEvents.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Dialogs\CityStealth.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\Contracts.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\GoblinToRest.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\GuardChoice.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\GuardChoiceAggro.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\GuardChoicePassive.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\GuardChoicePostAggro.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\IntersectionToGoblins.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\Intro.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\IntroToRats.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\ManorEntry.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\ManorGolems.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\ManorPuzzle.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\Rat2.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\RatsToIntersection.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\Respite.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\Rest.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\RestToStankrat.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\SewerToTown.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\Test.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\TheGreyLady.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="Assets\Dialogs\TownIntro.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
   </ItemGroup>
 </Project>
