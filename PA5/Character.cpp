@@ -565,6 +565,13 @@ void Character::LevelUp(map<string, Image> UIS) {
 	string userInput;
 	int currentPoints = 2;
 
+	int initStr = Str;
+	int initDex = Dex;
+	int initCon = Con;
+	int initInt = Int;
+	int initWis = Wis;
+	int initCha = Cha;
+
 	while (true) {
 		clear();
 		cout << UIS.find("Border.txt")->second.GetImage();
@@ -578,6 +585,8 @@ void Character::LevelUp(map<string, Image> UIS) {
 		cout << "5. Wis: " << Wis << endl;
 		cout << "6. Cha: " << Cha << endl;
 		cout << "7. Done" << endl;
+		cout << UIS.find("Border.txt")->second.GetImage();
+		cout << "You may only add to your base stats." << endl;
 		cout << UIS.find("Border.txt")->second.GetImage();
 		cin >> userInput;
 
@@ -597,7 +606,7 @@ void Character::LevelUp(map<string, Image> UIS) {
 				currentPoints -= 1;
 				Character::StatChange('+', "Str");
 			}
-			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2) {
+			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2 && Str > initStr) {
 				currentPoints += 1;
 				Character::StatChange('-', "Str");
 			}
@@ -617,7 +626,7 @@ void Character::LevelUp(map<string, Image> UIS) {
 				currentPoints -= 1;
 				Character::StatChange('+', "Dex");
 			}
-			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2) {
+			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2 && Dex > initDex) {
 				currentPoints += 1;
 				Character::StatChange('-', "Dex");
 			}
@@ -638,7 +647,7 @@ void Character::LevelUp(map<string, Image> UIS) {
 				currentPoints -= 1;
 				Character::StatChange('+', "Con");
 			}
-			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2) {
+			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2 && Con > initCon) {
 				currentPoints += 1;
 				Character::StatChange('-', "Con");
 			}
@@ -658,7 +667,7 @@ void Character::LevelUp(map<string, Image> UIS) {
 				currentPoints -= 1;
 				Character::StatChange('+', "Int");
 			}
-			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2) {
+			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2 && Int > initInt) {
 				currentPoints += 1;
 				Character::StatChange('-', "Int");
 			}
@@ -678,7 +687,7 @@ void Character::LevelUp(map<string, Image> UIS) {
 				currentPoints -= 1;
 				Character::StatChange('+', "Wis");
 			}
-			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2) {
+			else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2 && Wis > initWis) {
 				currentPoints += 1;
 				Character::StatChange('-', "Wis");
 			}
@@ -698,7 +707,7 @@ void Character::LevelUp(map<string, Image> UIS) {
 			currentPoints -= 1;
 			Character::StatChange('+', "Cha");
 		}
-		else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2) {
+		else if (strcmp(userInput.c_str(), "2") == 0 && currentPoints < 2 && Cha > initCha) {
 			currentPoints += 1;
 			Character::StatChange('-', "Cha");
 		}
