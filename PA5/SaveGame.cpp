@@ -128,14 +128,19 @@ SaveGame::SaveGame(fs::path path, map<string, Image> IMAGES, map<string, Weapon>
 }
 
 //Saves the game to file
-SaveGame::SaveGame(Character pc, int stage, string SAVE_DIR) {
+SaveGame::SaveGame(Character pc, int stage, string SAVE_DIR, bool autosave) {
 	PC = pc;
 	Stage = stage;
 	string userInput;
 
-	clear();
-	cout << "Enter a name for the save: " << endl;
-	cin >> userInput;
+	if (autosave) {
+		userInput = "AUTOSAVE";
+	}
+	else {
+		clear();
+		cout << "Enter a name for the save: " << endl;
+		cin >> userInput;
+	}
 
 	//build the file
 	ofstream save(SAVE_DIR + "\\" + userInput + ".txt");

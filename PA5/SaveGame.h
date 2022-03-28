@@ -19,7 +19,7 @@ private:
 	int Stage;
 public:
 	SaveGame(fs::path, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>);
-	SaveGame(Character, int, string);
+	SaveGame(Character, int, string, bool=false);
 	SaveGame() = default;
 	~SaveGame() = default;
 

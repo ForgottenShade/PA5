@@ -217,6 +217,7 @@ void LoadCharacters() {
 
 void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> IMAGES) {
 	string userInput;
+	LAST_SAVE = SaveGame(PC, stage, SAVE_DIR, true);
 
 	while (true) {
 		clear();
@@ -258,42 +259,69 @@ void Dungeon() {
 }
 
 //Self Discovery: stage 2
-void Town() {
-	//Intro
-	Dialog(PC, DIALOGS.find("TownIntro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+void Town(int stage) {
+	if (stage == 210) {
+		LAST_SAVE = SaveGame(PC, 210, SAVE_DIR, true);
 
-	//Gaurd choice
-	int choice = Dialog(PC, DIALOGS.find("GuardChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//Intro
+		Dialog(PC, DIALOGS.find("TownIntro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
+		//Gaurd choice
+		int choice = Dialog(PC, DIALOGS.find("GuardChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		//passive
-	if (choice == 1) {
-		Dialog(PC, DIALOGS.find("GuardChoicePassive.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-	}
+		if (choice == 1) {
+			Dialog(PC, DIALOGS.find("GuardChoicePassive.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		}
 		//aggro
-	else if (choice == 2) {
-		Dialog(PC, DIALOGS.find("GuardChoiceAggro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-		Encounter guardEncounter = Encounter(PC, ENEMIES.find("Creature")->second, UIS);
-		if (!PC.IsAlive()) {
-			return;
+		else if (choice == 2) {
+			Dialog(PC, DIALOGS.find("GuardChoiceAggro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			Encounter guardEncounter = Encounter(PC, ENEMIES.find("Creature")->second, UIS);
+			if (!PC.IsAlive()) {
+				return;
+			}
+
+			Dialog(PC, DIALOGS.find("GuardChoicePostAggro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		}
 
-		Dialog(PC, DIALOGS.find("GuardChoicePostAggro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//New Savior?
+		Dialog(PC, DIALOGS.find("Respite.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		Rest(PC, 220, UIS, IMAGES);
+
+		//Contracts
+		Dialog(PC, DIALOGS.find("Contracts.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
+		//Sneaking through the city
+		Dialog(PC, DIALOGS.find("CityStealth.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
+		//Breaking into the Manor
+		Dialog(PC, DIALOGS.find("ManorEntry.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//Challenge 1 - Puzzle
+		Dialog(PC, DIALOGS.find("ManorPuzzle.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//Challenge 2 - Golems
+		Dialog(PC, DIALOGS.find("ManorGolems.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//Challenge 3 - 
+
+		//The Grey Lady Intro
+		Dialog(PC, DIALOGS.find("TheGreyLady.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//New Contracts
+		Dungeon();
 	}
+	else if (stage == 220) {
+		Rest(PC, 220, UIS, IMAGES);
 
-	//New Savior?
-	Dialog(PC, DIALOGS.find("Respite.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//Contracts
 
-	//Contracts
+		//Sneaking through the city
 
-	//Sneaking through the city
+		//Breaking into the Manor
+		//Challenge 1 - Puzzle
+		//Challenge 2 - Golems
+		//Challenge 3 - 
 
-	//Breaking into the Manor
-	//Challenge 1 - Puzzle
-	//Challenge 2 - Golems
-	//Challenge 3 - 
-
-	//The Grey Lady Intro
-	//New Contracts
-	Dungeon();
+		//The Grey Lady Intro
+		//New Contracts
+		Dungeon();
+	}
 }
 
 //Escape: stage 1
@@ -333,7 +361,7 @@ void Sewer(int stage) {
 			return;
 		}
 		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-		Town();
+		Town(210);
 	}
 	else if (stage == 120) {
 		Rest(PC, 120, UIS, IMAGES);
@@ -343,7 +371,7 @@ void Sewer(int stage) {
 			return;
 		}
 		Dialog(PC, DIALOGS.find("SewerToTown.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE, 2);
-		Town();
+		Town(210);
 	}
 }
 
@@ -354,8 +382,8 @@ void LoadGame(SaveGame save) {
 	if (save.GetStage() == 110 || save.GetStage() == 120) {
 		Sewer(save.GetStage());
 	}
-	else if (save.GetStage() == 200) {
-		Town();
+	else if (save.GetStage() == 210 || save.GetStage() == 220) {
+		Town(save.GetStage());
 	}
 	else if (save.GetStage() == 300) {
 		Dungeon();
