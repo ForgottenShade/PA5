@@ -142,6 +142,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="CityChoiceFigure.txt" />
+    <ClCompile Include="CityFigureChoice.txt" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameFile.cpp" />
     <ClCompile Include="Clear.cpp" />
@@ -168,7 +170,7 @@
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\Dialogs\CityStealth.txt" />
+    <Text Include="Assets\Dialogs\CityJourney.txt" />
     <Text Include="Assets\Dialogs\Contracts.txt" />
     <Text Include="Assets\Dialogs\GoblinToRest.txt" />
     <Text Include="Assets\Dialogs\GuardChoice.txt" />
@@ -190,6 +192,15 @@
     <Text Include="Assets\Dialogs\Test.txt" />
     <Text Include="Assets\Dialogs\TheGreyLady.txt" />
     <Text Include="Assets\Dialogs\TownIntro.txt" />
+    <Text Include="CityCharismaFight.txt" />
+    <Text Include="CityChoice.txt" />
+    <Text Include="CityFigureCharisma.txt" />
+    <Text Include="CityFigureCharismaFight.txt" />
+    <Text Include="CityFigureCharismaIntim.txt" />
+    <Text Include="CityFigureCharismaIntimPass.txt" />
+    <Text Include="CityFigureCharismaKiss.txt" />
+    <Text Include="CityFigureCharismaPass.txt" />
+    <Text Include="CityFigurePostFight.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

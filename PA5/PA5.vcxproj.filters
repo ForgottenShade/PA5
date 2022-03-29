@@ -50,6 +50,12 @@
     <ClCompile Include="GameEvents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CityChoiceFigure.txt">
+      <Filter>DIALOGS</Filter>
+    </ClCompile>
+    <ClCompile Include="CityFigureChoice.txt">
+      <Filter>DIALOGS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -87,7 +93,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\Dialogs\CityStealth.txt">
+    <Text Include="Assets\Dialogs\CityJourney.txt">
       <Filter>DIALOGS</Filter>
     </Text>
     <Text Include="Assets\Dialogs\Contracts.txt">
@@ -151,6 +157,33 @@
       <Filter>DIALOGS</Filter>
     </Text>
     <Text Include="Assets\Dialogs\TownIntro.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoice.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigureCharisma.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigureCharismaPass.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigureCharismaKiss.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigureCharismaIntim.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigureCharismaIntimPass.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigureCharismaFight.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityCharismaFight.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityFigurePostFight.txt">
       <Filter>DIALOGS</Filter>
     </Text>
   </ItemGroup>

@@ -98,8 +98,8 @@ void LoadItems(){
 	Weapon* Goblin_Attack = new Weapon("Goblin_Attack", 0, 0, 6, 1, false);
 	Weapon* Stankrat_Attack = new Weapon("Stankrat_Attack", 0, 0, 10, 1, false);
 
-	Weapon* Guard_Attack = new Weapon("Guard_Attack", 0, 0, 10, 2, false);
-	Weapon* Golem_Attack = new Weapon("Golem_Attack", 0, 0, 8, 3, true);
+	Weapon* Guard_Attack = new Weapon("Guard_Attack", 0, 0, 12, 1, false);
+	Weapon* Mercenary_Attack = new Weapon("Mercenary_Attack", 0, 0, 6, 2, true);
 
 	//Armors
 		//Generics
@@ -161,7 +161,7 @@ void LoadItems(){
 	WEAPON_TABLE.insert(pair<string, Weapon>(Goblin_Attack->GetName(), Goblin_Attack[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Stankrat_Attack->GetName(), Stankrat_Attack[0]));
 	WEAPON_TABLE.insert(pair<string, Weapon>(Guard_Attack->GetName(), Guard_Attack[0]));
-	WEAPON_TABLE.insert(pair<string, Weapon>(Golem_Attack->GetName(), Golem_Attack[0]));
+	WEAPON_TABLE.insert(pair<string, Weapon>(Mercenary_Attack->GetName(), Mercenary_Attack[0]));
 
 
 	ARMOR_TABLE.insert(pair<string, Armor>(Clothes->GetName(), Clothes[0]));
@@ -197,18 +197,18 @@ void LoadCharacters() {
 	Character* awakened_tree = new Character(true, "Plant", "Awakened Tree", IMAGES.find("Tree01.txt")->second, 19, 6, 15, 10, 10, 7, 30, 13, 3);
 	
 		//Town
-	Character* guard = new Character(false, "Abberation", "Creature", IMAGES.find("Default.txt")->second, 11, 12, 12, 19, 17, 17, 70, 15, 5);
-	Character* golem = new Character(false, "Construct", "Golem", IMAGES.find("Default.txt")->second, 19, 9, 18, 6, 10, 5, 90, 10, 5);
+	Character* guard = new Character(false, "Abberation", "Creature", IMAGES.find("Default.txt")->second, 11, 12, 12, 19, 17, 17, 35, 15, 5);
+	Character* mercenary = new Character(false, "Humanoid", "Mercenary Captain", IMAGES.find("Default.txt")->second, 16, 14, 14, 12, 14, 18, 40, 14, 5);
 
 	guard->SetWeapon(WEAPON_TABLE.find("Guard_Attack")->second);
-	golem->SetWeapon(WEAPON_TABLE.find("Golem_Attack")->second);
+	mercenary->SetWeapon(WEAPON_TABLE.find("Mercenary_Attack")->second);
 
 	ENEMIES.insert(pair<string, Character>(rat->GetName(), rat[0]));
 	ENEMIES.insert(pair<string, Character>(goblin->GetName(), goblin[0]));
 	ENEMIES.insert(pair<string, Character>(stankrat->GetName(), stankrat[0]));
 
 	ENEMIES.insert(pair<string, Character>(guard->GetName(), guard[0]));
-	ENEMIES.insert(pair<string, Character>(golem->GetName(), golem[0]));
+	ENEMIES.insert(pair<string, Character>(mercenary->GetName(), mercenary[0]));
 	ENEMIES.insert(pair<string, Character>(awakened_tree->GetName(), awakened_tree[0]));
 
 	//NPCs
@@ -290,16 +290,60 @@ void Town(int stage) {
 		//Contracts
 		Dialog(PC, DIALOGS.find("Contracts.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 
-		//Sneaking through the city
-		Dialog(PC, DIALOGS.find("CityStealth.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//Journey through the city
+		Dialog(PC, DIALOGS.find("CityJourney.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		choice = Dialog(PC, DIALOGS.find("CityChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		if (choice == 1) {
+			Dialog(PC, DIALOGS.find("CityChoiceFigure.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			choice = Dialog(PC, DIALOGS.find("CityFigureChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (choice == 1) {
+				int check = Dialog(PC, DIALOGS.find("CityFigureCharisma.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				//success
+				if (check == 1) {
+					choice = Dialog(PC, DIALOGS.find("CityFigureCharismaPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					if (choice == 1) {
+						Dialog(PC, DIALOGS.find("CityFigureCharismaKiss.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					}
+					else if (choice == 2) {
+						check = Dialog(PC, DIALOGS.find("CityFigureCharismaIntim.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+						if (check == 1) {
+							Dialog(PC, DIALOGS.find("CityFigureCharismaIntimPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+						}
+						else if (check == 0) {
+							Dialog(PC, DIALOGS.find("CityFigureCharismaFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+							Encounter mercenary = Encounter(PC, ENEMIES.find("Mercenary Captain")->second, UIS);
+							Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+						}
+					}
+				}
+				//fail
+				else if (check == 0) {
+					Dialog(PC, DIALOGS.find("CityFigureCharismaFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					Encounter mercenary = Encounter(PC, ENEMIES.find("Mercenary Captain")->second, UIS);
+					Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				}
+			}
+			else if (choice == 2) {
+				Dialog(PC, DIALOGS.find("CityCharismaFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				Encounter mercenary = Encounter(PC, ENEMIES.find("Mercenary Captain")->second, UIS);
+				Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);			}
+		}
+		else if (choice == 2) {
+			Dialog(PC, DIALOGS.find("CityChoiceCon.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		}
+		else if (choice == 3) {
+			Dialog(PC, DIALOGS.find("CityChoiceSneak.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		}
+		else if (choice == 4) {
+			Dialog(PC, DIALOGS.find("CityChoicePerception.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		}
+		else if (choice == 5) {
+			Dialog(PC, DIALOGS.find("CityChoiceBlend.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		}
+		Dialog(PC, DIALOGS.find("CityJourneyManor.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 
 		//Breaking into the Manor
 		Dialog(PC, DIALOGS.find("ManorEntry.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-		//Challenge 1 - Puzzle
-		Dialog(PC, DIALOGS.find("ManorPuzzle.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-		//Challenge 2 - Golems
-		Dialog(PC, DIALOGS.find("ManorGolems.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-		//Challenge 3 - 
 
 		//The Grey Lady Intro
 		Dialog(PC, DIALOGS.find("TheGreyLady.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
