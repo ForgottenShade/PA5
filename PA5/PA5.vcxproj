@@ -195,8 +195,18 @@
     <Text Include="Assets\Dialogs\TownIntro.txt" />
     <Text Include="CityCharismaFight.txt" />
     <Text Include="CityChoice.txt" />
+    <Text Include="CityChoiceBlend.txt" />
+    <Text Include="CityChoiceBlendFail.txt" />
+    <Text Include="CityChoiceBlendPass.txt" />
     <Text Include="CityChoiceCon.txt" />
     <Text Include="CityChoiceConPass.txt" />
+    <Text Include="CityChoicePerception.txt" />
+    <Text Include="CityChoicePerceptionFail.txt" />
+    <Text Include="CityChoicePerceptionPass.txt" />
+    <Text Include="CityChoiceSneak.txt" />
+    <Text Include="CityChoiceSneakFail.txt" />
+    <Text Include="CityChoiceSneakFailRecovery.txt" />
+    <Text Include="CityChoiceSneakPass.txt" />
     <Text Include="CityFigureCharisma.txt" />
     <Text Include="CityFigureCharismaFight.txt" />
     <Text Include="CityFigureCharismaIntim.txt" />
@@ -204,6 +214,7 @@
     <Text Include="CityFigureCharismaKiss.txt" />
     <Text Include="CityFigureCharismaPass.txt" />
     <Text Include="CityFigurePostFight.txt" />
+    <Text Include="TheGreyLady.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

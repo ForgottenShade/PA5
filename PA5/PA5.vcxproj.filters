@@ -195,5 +195,38 @@
     <Text Include="CityChoiceConPass.txt">
       <Filter>DIALOGS</Filter>
     </Text>
+    <Text Include="CityChoiceSneak.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoicePerception.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceBlend.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceSneakFail.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceSneakPass.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceSneakFailRecovery.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoicePerceptionPass.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoicePerceptionFail.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceBlendFail.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceBlendPass.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="TheGreyLady.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
   </ItemGroup>
 </Project>

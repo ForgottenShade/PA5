@@ -1,0 +1,12 @@
+
+Resolving to find a disguise I venture through the neighboring alleyways,
+trying to find a target. Eventually I spot it, a tall and elegant house of
+3 stories. A pair of double windows flank a metal door, each place in an 
+ornate sill of tiered stone. On window seems to have been left slightly ajar.
+
+Creeping up to the window I peep inside, a fine kitchen with polished countertops
+with an island table are placed around a fine, yet not that large, hearth.
+Through a doorway I spot a staircase leading further into the house. I predict 
+the bedrooms are probably on the second floor. Now just to get in.
+
++ CHECK Stealth DEX 14

@@ -256,7 +256,9 @@ void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> I
 
 //Game Structure
 void GameOver() {
-
+	cout << UIS.find("Border.txt")->second.GetImage();
+	cout << "END OF CHAPTER 1 & CURRENT CONTENT" << endl;
+	cout << UIS.find("Border.txt")->second.GetImage();
 }
 
 //Confrontation: stage 3
@@ -348,18 +350,38 @@ void Town(int stage) {
 			}
 		}
 		else if (choice == 3) {
-			Dialog(PC, DIALOGS.find("CityChoiceSneak.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			check = Dialog(PC, DIALOGS.find("CityChoiceSneak.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoiceSneakPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+			else {
+				Dialog(PC, DIALOGS.find("CityChoiceSneakFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				Encounter guardEncounter = Encounter(PC, ENEMIES.find("Creature")->second, UIS);
+				Dialog(PC, DIALOGS.find("CityChoiceSneakFailRecovery.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
 		}
 		else if (choice == 4) {
-			Dialog(PC, DIALOGS.find("CityChoicePerception.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			check = Dialog(PC, DIALOGS.find("CityChoicePerception.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoicePerceptionPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+			else {
+				Dialog(PC, DIALOGS.find("CityChoicePerceptionFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				return;
+			}
 		}
 		else if (choice == 5) {
-			Dialog(PC, DIALOGS.find("CityChoiceBlend.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			check = Dialog(PC, DIALOGS.find("CityChoiceBlend.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoiceBlendPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+			else {
+				Dialog(PC, DIALOGS.find("CityChoiceBlendFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				return;
+			}
 		}
-		Dialog(PC, DIALOGS.find("CityJourneyManor.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 
-		//Breaking into the Manor
-		Dialog(PC, DIALOGS.find("ManorEntry.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		Rest(PC, 230, UIS, IMAGES);
 
 		//The Grey Lady Intro
 		Dialog(PC, DIALOGS.find("TheGreyLady.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
@@ -370,15 +392,101 @@ void Town(int stage) {
 		Rest(PC, 220, UIS, IMAGES, true);
 
 		//Contracts
+		Dialog(PC, DIALOGS.find("Contracts.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 
-		//Sneaking through the city
+		//Journey through the city
+		Dialog(PC, DIALOGS.find("CityJourney.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		choice = Dialog(PC, DIALOGS.find("CityChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		if (choice == 1) {
+			Dialog(PC, DIALOGS.find("CityChoiceFigure.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			choice = Dialog(PC, DIALOGS.find("CityFigureChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (choice == 1) {
+				check = Dialog(PC, DIALOGS.find("CityFigureCharisma.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				//success
+				if (check == 1) {
+					choice = Dialog(PC, DIALOGS.find("CityFigureCharismaPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					if (choice == 1) {
+						Dialog(PC, DIALOGS.find("CityFigureCharismaKiss.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					}
+					else if (choice == 2) {
+						check = Dialog(PC, DIALOGS.find("CityFigureCharismaIntim.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+						if (check == 1) {
+							Dialog(PC, DIALOGS.find("CityFigureCharismaIntimPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+						}
+						else if (check == 0) {
+							Dialog(PC, DIALOGS.find("CityFigureCharismaFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+							Encounter mercenary = Encounter(PC, ENEMIES.find("Mercenary Captain")->second, UIS);
+							Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+						}
+					}
+				}
+				//fail
+				else if (check == 0) {
+					Dialog(PC, DIALOGS.find("CityFigureCharismaFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+					Encounter mercenary = Encounter(PC, ENEMIES.find("Mercenary Captain")->second, UIS);
+					Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				}
+			}
+			else if (choice == 2) {
+				Dialog(PC, DIALOGS.find("CityCharismaFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				Encounter mercenary = Encounter(PC, ENEMIES.find("Mercenary Captain")->second, UIS);
+				Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+		}
+		else if (choice == 2) {
+			check = Dialog(PC, DIALOGS.find("CityChoiceCon.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoiceConPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				PC.TakeDamage(5);
+			}
+			else if (check == 0) {
+				Dialog(PC, DIALOGS.find("CityChoiceConFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				PC.TakeDamage(15);
+			}
+		}
+		else if (choice == 3) {
+			check = Dialog(PC, DIALOGS.find("CityChoiceSneak.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoiceSneakPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+			else {
+				Dialog(PC, DIALOGS.find("CityChoiceSneakFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				Encounter guardEncounter = Encounter(PC, ENEMIES.find("Creature")->second, UIS);
+				Dialog(PC, DIALOGS.find("CityChoiceSneakFailRecovery.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+		}
+		else if (choice == 4) {
+			check = Dialog(PC, DIALOGS.find("CityChoicePerception.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoicePerceptionPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+			else {
+				Dialog(PC, DIALOGS.find("CityChoicePerceptionFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				return;
+			}
+		}
+		else if (choice == 5) {
+			check = Dialog(PC, DIALOGS.find("CityChoiceBlend.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoiceBlendPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			}
+			else {
+				Dialog(PC, DIALOGS.find("CityChoiceBlendFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				return;
+			}
+		}
 
-		//Breaking into the Manor
-		//Challenge 1 - Puzzle
-		//Challenge 2 - Golems
-		//Challenge 3 - 
+		Rest(PC, 230, UIS, IMAGES);
 
 		//The Grey Lady Intro
+		Dialog(PC, DIALOGS.find("TheGreyLady.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		//New Contracts
+		Dungeon();
+	}
+	else if (stage == 230) {
+		Rest(PC, 230, UIS, IMAGES);
+		//The Grey Lady Intro
+		Dialog(PC, DIALOGS.find("TheGreyLady.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		//New Contracts
 		Dungeon();
 	}
@@ -442,7 +550,7 @@ void LoadGame(SaveGame save) {
 	if (save.GetStage() == 110 || save.GetStage() == 120) {
 		Sewer(save.GetStage());
 	}
-	else if (save.GetStage() == 210 || save.GetStage() == 220) {
+	else if (save.GetStage() == 210 || save.GetStage() == 220 || save.GetStage() == 230) {
 		Town(save.GetStage());
 	}
 	else if (save.GetStage() == 300) {
