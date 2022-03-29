@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="CityChoiceConFail.txt" />
     <ClCompile Include="CityChoiceFigure.txt" />
     <ClCompile Include="CityFigureChoice.txt" />
     <ClCompile Include="GameEvents.cpp" />
@@ -194,6 +195,8 @@
     <Text Include="Assets\Dialogs\TownIntro.txt" />
     <Text Include="CityCharismaFight.txt" />
     <Text Include="CityChoice.txt" />
+    <Text Include="CityChoiceCon.txt" />
+    <Text Include="CityChoiceConPass.txt" />
     <Text Include="CityFigureCharisma.txt" />
     <Text Include="CityFigureCharismaFight.txt" />
     <Text Include="CityFigureCharismaIntim.txt" />

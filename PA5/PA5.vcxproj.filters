@@ -56,6 +56,9 @@
     <ClCompile Include="CityFigureChoice.txt">
       <Filter>DIALOGS</Filter>
     </ClCompile>
+    <ClCompile Include="CityChoiceConFail.txt">
+      <Filter>DIALOGS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -184,6 +187,12 @@
       <Filter>DIALOGS</Filter>
     </Text>
     <Text Include="CityFigurePostFight.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceCon.txt">
+      <Filter>DIALOGS</Filter>
+    </Text>
+    <Text Include="CityChoiceConPass.txt">
       <Filter>DIALOGS</Filter>
     </Text>
   </ItemGroup>

@@ -215,7 +215,7 @@ void LoadCharacters() {
 }
 
 
-void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> IMAGES) {
+void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> IMAGES, bool longrest = false) {
 	string userInput;
 	LAST_SAVE = SaveGame(PC, stage, SAVE_DIR, true);
 
@@ -230,9 +230,15 @@ void Rest(Character& PC, int stage, map<string, Image> UIS, map<string, Image> I
 		//Rest
 		if (strcmp(userInput.c_str(), "1") == 0) {
 			clear();
-			int halfHp = (PC.GetMaxHp() / 2);
-			cout << "You heal " << halfHp << " points!" << endl;
-			PC.Heal(halfHp);
+			if (longrest) {
+				cout << "You heal " << PC.GetMaxHp() << " points!" << endl;
+				PC.Heal(PC.GetMaxHp());
+			}
+			else {
+				int halfHp = (PC.GetMaxHp() / 2);
+				cout << "You heal " << halfHp << " points!" << endl;
+				PC.Heal(halfHp);
+			}
 			cin.ignore();
 			cin.ignore();
 			break;
@@ -260,6 +266,8 @@ void Dungeon() {
 
 //Self Discovery: stage 2
 void Town(int stage) {
+	int check;
+	int choice;
 	if (stage == 210) {
 		LAST_SAVE = SaveGame(PC, 210, SAVE_DIR, true);
 
@@ -267,7 +275,7 @@ void Town(int stage) {
 		Dialog(PC, DIALOGS.find("TownIntro.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 
 		//Gaurd choice
-		int choice = Dialog(PC, DIALOGS.find("GuardChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+		choice = Dialog(PC, DIALOGS.find("GuardChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		//passive
 		if (choice == 1) {
 			Dialog(PC, DIALOGS.find("GuardChoicePassive.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
@@ -285,7 +293,7 @@ void Town(int stage) {
 
 		//New Savior?
 		Dialog(PC, DIALOGS.find("Respite.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
-		Rest(PC, 220, UIS, IMAGES);
+		Rest(PC, 220, UIS, IMAGES, true);
 
 		//Contracts
 		Dialog(PC, DIALOGS.find("Contracts.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
@@ -297,7 +305,7 @@ void Town(int stage) {
 			Dialog(PC, DIALOGS.find("CityChoiceFigure.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 			choice = Dialog(PC, DIALOGS.find("CityFigureChoice.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 			if (choice == 1) {
-				int check = Dialog(PC, DIALOGS.find("CityFigureCharisma.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				check = Dialog(PC, DIALOGS.find("CityFigureCharisma.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 				//success
 				if (check == 1) {
 					choice = Dialog(PC, DIALOGS.find("CityFigureCharismaPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
@@ -329,7 +337,15 @@ void Town(int stage) {
 				Dialog(PC, DIALOGS.find("CityFigurePostFight.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);			}
 		}
 		else if (choice == 2) {
-			Dialog(PC, DIALOGS.find("CityChoiceCon.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			check = Dialog(PC, DIALOGS.find("CityChoiceCon.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+			if (check == 1) {
+				Dialog(PC, DIALOGS.find("CityChoiceConPass.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				PC.TakeDamage(5);
+			}
+			else if (check == 0) {
+				Dialog(PC, DIALOGS.find("CityChoiceConFail.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+				PC.TakeDamage(15);
+			}
 		}
 		else if (choice == 3) {
 			Dialog(PC, DIALOGS.find("CityChoiceSneak.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
@@ -351,7 +367,7 @@ void Town(int stage) {
 		Dungeon();
 	}
 	else if (stage == 220) {
-		Rest(PC, 220, UIS, IMAGES);
+		Rest(PC, 220, UIS, IMAGES, true);
 
 		//Contracts
 
