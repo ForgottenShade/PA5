@@ -219,11 +219,13 @@ Encounter::Encounter(Character& pc, Character enemy, map<string, Image> UIS) {
 			if (Flee(pc, enemy)) {
 				cout << "You evade " << enemy.GetName() << "!" << endl;
 				Fled = true;
+				cin.ignore();
 				break;
 			}
 				//Fail
 			else {
 				cout << "You fail to escape." << endl;
+				cin.ignore();
 			}
 			player_turn = false;
 		}

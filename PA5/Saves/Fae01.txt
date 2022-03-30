@@ -1,12 +1,12 @@
 110
 Default.txt
-Elf
-Lily
+Fae
+Fae
 10
 14
-13
 12
-10
+14
+8
 14
 11
 11

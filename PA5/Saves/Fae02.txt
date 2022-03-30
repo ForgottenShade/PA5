@@ -1,4 +1,4 @@
-230
+120
 Default.txt
 Fae
 Fae
@@ -8,15 +8,14 @@ Fae
 14
 8
 14
-7
+21
 22
 1
 Quarterstaff
 Leather Armor
-105
+0
 WeaponInv:
 Fists
 ArmorInv:
 Clothes
 ConsInv:
-Healing Salve

@@ -1,21 +1,22 @@
-120
+230
 Default.txt
-Human
-Nym
-12
-16
+Fae
+Fae
 12
 14
-11
-10
-19
+12
+14
+8
+14
+7
 22
 1
-Shortsword
-Hide Armor
-147
+Quarterstaff
+Leather Armor
+0
 WeaponInv:
 Fists
 ArmorInv:
 Clothes
 ConsInv:
+Healing Salve

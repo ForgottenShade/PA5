@@ -33,6 +33,6 @@ void GetCustomItem(Character&, int);
 void GetMiscItem();
 void ChangeStat();
 
-int Dialog(Character&, string, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>, int = 0, bool = false); // Weapons table
+int Dialog(Character&, string, map<string, Image>, map<string, Weapon>, map<string, Armor>, map<string, Consumable>, int = 1, bool = false); // Weapons table
 
 #endif 

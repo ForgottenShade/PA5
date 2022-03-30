@@ -427,8 +427,14 @@ void Town(int stage) {
 
 	if (stage == 210) {
 		Town_210();
+		if (!PC.IsAlive()) {
+			return;
+		}
 		Rest(PC, 220, UIS, IMAGES, true);
 		Town_220();
+		if (!PC.IsAlive()) {
+			return;
+		}
 		Rest(PC, 230, UIS, IMAGES);
 
 		//The Grey Lady Intro
@@ -439,6 +445,9 @@ void Town(int stage) {
 	else if (stage == 220) {
 		Rest(PC, 220, UIS, IMAGES, true);
 		Town_220();
+		if (!PC.IsAlive()) {
+			return;
+		}
 		Rest(PC, 230, UIS, IMAGES);
 
 		//The Grey Lady Intro
@@ -495,6 +504,8 @@ void Sewer(int stage) {
 		Town(210);
 	}
 	else if (stage == 120) {
+		Dialog(PC, DIALOGS.find("Test.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
+
 		Rest(PC, 120, UIS, IMAGES);
 		Dialog(PC, DIALOGS.find("RestToStankrat.txt")->second.GetImage(), UIS, WEAPON_TABLE, ARMOR_TABLE, CONSUMABLE_TABLE);
 		Encounter stankratEncounter = Encounter(PC, ENEMIES.find("Stankrat")->second, UIS);
