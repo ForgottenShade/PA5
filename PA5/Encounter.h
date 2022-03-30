@@ -29,6 +29,7 @@ class Encounter {
 private:
 	Character PC;
 	Character Enemy;
+	bool Fled;
 public:
 	Encounter() = default;
 	~Encounter() = default;
@@ -39,6 +40,7 @@ public:
 	void UseItem(Character, Character, Consumable);
 	bool CombatItemMenu(Character, Character, map<string, Image>);
 	bool Flee(Character, Character);
+	bool GetFled();
 };
 
 

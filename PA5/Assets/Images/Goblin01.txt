@@ -1,15 +1,33 @@
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢀⣀⣀⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
-⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣠⠤⢶⣿⣿⣿⡿⠋⠛⢻⣷⣤⡀⠄⠄⠄⠄⠄⠄⠄
-⠄⠄⠄⠄⠄⠄⠄⠄⣠⠶⣏⣀⣼⣿⣿⣿⣷⣄⣀⣈⣿⡿⢷⡀⠄⠄⠄⠄⠄⠄
-⠄⠄⢠⠤⠤⠤⠠⠾⠷⠾⠿⣿⣿⠿⠛⠛⠛⠛⣛⣋⣉⣁⡀⢳⡀⠄⠄⠄⠄⠄
-⠄⠄⢸⡀⢰⡆⢀⡤⠄⢰⡂⠉⠛⠁⢹⣿⠿⠛⢩⣥⣶⣿⠃⢸⣧⠄⠄⠄⠄⡄
-⠄⠄⠄⣧⡄⡇⢸⠁⣶⣧⠄⣤⣿⣧⠈⠁⣶⣷⠄⢸⣿⣿⠄⣿⣿⠄⠄⠄⣼⡇
-⠄⠄⢶⣌⡁⠉⠘⠄⠈⢁⣔⠉⢹⣿⢆⢠⣬⣥⣤⣤⣤⣤⣤⣿⠟⣠⠶⢋⡽⠁
-⠄⠄⢠⠛⠃⣤⢾⣿⠃⣎⣹⣿⣿⣷⠿⢆⣿⠿⠿⠟⣛⡛⠿⣿⣼⠃⣶⡞⠃⠄
-⠄⠄⠄⢠⣼⢱⠖⡀⡀⢿⣿⠿⠛⣁⣋⣭⠖⣌⠻⢿⣿⠟⡆⣹⣥⡏⣀⡄⠄⠄
-⠄⠄⢿⡈⢹⡎⣾⡇⠱⠈⡁⠄⣶⠉⣉⢁⢸⣿⡀⠈⠁⣆⣰⣿⠏⣰⣿⡇⠄⠄
-⠄⠄⠄⢀⣀⣓⠘⠃⢛⣠⣥⣤⣶⡶⣶⣶⣦⣤⣤⣴⠾⢋⣌⠻⠂⣉⣉⠄⠄⠄
-⠄⣴⡃⣿⡿⢡⣆⢉⣛⣩⣭⣤⣶⣶⣦⣬⣭⣥⣶⡶⠇⣿⡟⢰⣷⡌⣿⣷⡀⠄
-⢀⠻⡇⠛⢃⡟⣿⢰⣌⢙⠻⠿⢿⣿⡿⢻⠟⣁⠉⢡⡆⠋⠞⣸⠟⡁⠉⣿⣧⠄
-⠘⢧⡄⣤⣤⢠⡟⣸⣿⣿⣧⣀⣠⣜⣠⣤⣼⣿⡇⠸⢃⣼⡄⢃⣼⠃⣤⣿⣿⠄
-⠄⠄⠁⠄⠄⠄⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠛⠁⠄⠄⠄⠄⠄
+ 					 
+               /\                      /|
+              /   \                  /   |
+             |      \              /      |
+             \   \  |Oo          o|     /  |  
+            ` \   \  |OOOo......oOO|   /   /    
+             ` \  \\OOOOOOOOOOOOOOO\//    /   
+               \ _o\OOOOOOOOOOOOOOOO//. _/
+           ______OOOOOOOOOOOOOOOOOOOOOOOo.___
+            --- OO'@ `OOOOOOOOOO'@  `OOOOO--
+                OO.   OOOOOOOOO'    .OOOOO o
+                `OOOooOOOOOOOOOooooOOOOOO'OOOo
+              .OO "OOOOOOOOOOOOOOOOOOOO"OOOOOOOo
+          __ OOOOOO`OOOOOOOOOOOOOOOO"OOOOOOOOOOOOo
+         ___OOOOOOOO_"\   /OO\   /"_OOOOOOOOOOOOOOOO
+           OOOOO^OOOO0`| |0000| | OOOOOOOOOOOO^OOOOOO
+           OOOOO OO00000\/00000\/00000OOOOOOOO OOOOOO
+           OOOOO O0000000000000000 ppppoooooOOOOOO
+           `OOOOO 0000000000000000 QQQQ "OOOOOOO"
+            o"OOOO 000000000000000oooooOOoooooooO'
+            OOo"OOOO.00000000000000000000OOOOOOOO'
+           OOOOOO QQQQ 0000000000000000000OOOOOOO
+          OOOOOO00eeee00000000000000000000OOOOOOOO.
+         OOOOOOOO000000000000000000000000OOOOOOOOOO
+         OOOOOOOOO00000000000000000000000OOOOOOOOOO
+         `OOOOOOOOO000000000000000000000OOOOOOOOOOO
+           "OOOOOOOO0000000000000000000OOOOOOOOOOO'
+             "OOOOOOO00000000000000000OOOOOOOOOO"
+              "OOOOOOO000000000000OOOOOOOOOOO"
+               .oOOOOOOOOOOOOOOOOOOOOOOOOOOOOo
+            QQQQO"'                     `"QQQQ
+
+

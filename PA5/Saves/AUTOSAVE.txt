@@ -1,0 +1,21 @@
+230
+Default.txt
+Elf
+Lily
+10
+16
+13
+12
+10
+14
+22
+22
+1
+Shortbow
+Clothes
+140
+WeaponInv:
+Fists
+ArmorInv:
+Studded Leather
+ConsInv:

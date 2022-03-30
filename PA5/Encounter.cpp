@@ -170,6 +170,7 @@ bool Encounter::Flee(Character a, Character b) {
 Encounter::Encounter(Character& pc, Character enemy, map<string, Image> UIS) {
 	PC = pc;
 	Enemy = enemy;
+	Fled = false;
 	string userInput;
 	bool player_turn = true;
 
@@ -217,6 +218,7 @@ Encounter::Encounter(Character& pc, Character enemy, map<string, Image> UIS) {
 				//Success
 			if (Flee(pc, enemy)) {
 				cout << "You evade " << enemy.GetName() << "!" << endl;
+				Fled = true;
 				break;
 			}
 				//Fail
@@ -297,4 +299,8 @@ Encounter::Encounter(Character& pc, Character enemy, map<string, Image> UIS) {
 			}
 		}
 	}
+}
+
+bool Encounter::GetFled() {
+	return Fled;
 }

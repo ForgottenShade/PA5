@@ -142,9 +142,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Armor.cpp" />
-    <ClCompile Include="CityChoiceConFail.txt" />
-    <ClCompile Include="CityChoiceFigure.txt" />
-    <ClCompile Include="CityFigureChoice.txt" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameFile.cpp" />
     <ClCompile Include="Clear.cpp" />
@@ -191,7 +188,6 @@
     <Text Include="Assets\Dialogs\RestToStankrat.txt" />
     <Text Include="Assets\Dialogs\SewerToTown.txt" />
     <Text Include="Assets\Dialogs\Test.txt" />
-    <Text Include="Assets\Dialogs\TheGreyLady.txt" />
     <Text Include="Assets\Dialogs\TownIntro.txt" />
     <Text Include="CityCharismaFight.txt" />
     <Text Include="CityChoice.txt" />

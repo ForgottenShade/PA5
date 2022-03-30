@@ -50,15 +50,6 @@
     <ClCompile Include="GameEvents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CityChoiceFigure.txt">
-      <Filter>DIALOGS</Filter>
-    </ClCompile>
-    <ClCompile Include="CityFigureChoice.txt">
-      <Filter>DIALOGS</Filter>
-    </ClCompile>
-    <ClCompile Include="CityChoiceConFail.txt">
-      <Filter>DIALOGS</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -154,9 +145,6 @@
       <Filter>DIALOGS</Filter>
     </Text>
     <Text Include="Assets\Dialogs\Test.txt">
-      <Filter>DIALOGS</Filter>
-    </Text>
-    <Text Include="Assets\Dialogs\TheGreyLady.txt">
       <Filter>DIALOGS</Filter>
     </Text>
     <Text Include="Assets\Dialogs\TownIntro.txt">
